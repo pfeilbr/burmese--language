@@ -60,11 +60,25 @@ let rafId = null;
 
 const trackFor = target => (target <= SLOW_TRACK_CUTOFF ? 'slow' : 'natural');
 
+/** Where a clip's speech ends, in seconds.
+ *
+ *  Measured from the rendered audio at build time, not inferred from the last
+ *  syllable's timing. The TTS under-reports its own word durations -- badly at
+ *  the slow rate, and worst on the stacked clusters -- so deriving the end from
+ *  the timing data cut the final syllable off a quarter of the library. `end`
+ *  is the authoritative value; the fallback is only for data built before it
+ *  existed. */
+const endOf = (phrase, track) => {
+  if (phrase.end && phrase.end[track] != null) return phrase.end[track];
+  const t = phrase.timing[track];
+  const last = t[t.length - 1];
+  return last.t + last.d + 0.25;
+};
+
 /** How fast a track speaks relative to the natural rendering, measured from
  *  its own timing data rather than assumed from the requested TTS percentage. */
 function pace(phrase, track) {
-  const end = t => { const a = phrase.timing[t]; const l = a[a.length - 1]; return l.t + l.d; };
-  return track === 'natural' ? 1 : end('natural') / end(track);
+  return track === 'natural' ? 1 : endOf(phrase, 'natural') / endOf(phrase, track);
 }
 
 function playbackPlan(phrase, targetPct) {
@@ -185,8 +199,7 @@ async function playOnce(phrase, plan, gen) {
     highlight(-1);
     return true;
   }
-  const end = timing[timing.length - 1];
-  const ok = await playRange(0, end.t + end.d + 0.25, gen, t => {
+  const ok = await playRange(0, endOf(phrase, plan.track), gen, t => {
     let idx = -1;
     for (let i = 0; i < timing.length; i++) if (t >= timing[i].t - 0.02) idx = i;
     highlight(idx);
@@ -214,9 +227,7 @@ async function play(phrase) {
 
       if (modes.shadow) {
         // Silence roughly as long as the phrase, so you can say it back.
-        const timing = phrase.timing[plan.track];
-        const last = timing[timing.length - 1];
-        const spoken = ((last.t + last.d) / plan.rate) * 1000;
+        const spoken = (endOf(phrase, plan.track) / plan.rate) * 1000;
         if (!(await sleep(Math.max(900, spoken * 1.15), gen))) return;
       } else if (modes.loop) {
         if (!(await sleep(700, gen))) return;
@@ -657,9 +668,7 @@ async function playDrillPhrase() {
   const plan = playbackPlan(drill.phrase, speed);
   if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
   audio.playbackRate = plan.rate;
-  const timing = drill.phrase.timing[plan.track];
-  const last = timing[timing.length - 1];
-  await playRange(0, last.t + last.d + 0.2, gen);
+  await playRange(0, endOf(drill.phrase, plan.track), gen);
 }
 
 function answerDrill(tone) {
@@ -900,8 +909,7 @@ async function playComparison(includeNative) {
       if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
       audio.playbackRate = plan.rate;
       const timing = current.timing[plan.track];
-      const last = timing[timing.length - 1];
-      const ok = await playRange(0, last.t + last.d + 0.2, gen, t => {
+      const ok = await playRange(0, endOf(current, plan.track), gen, t => {
         let idx = -1;
         for (let i = 0; i < timing.length; i++) if (t >= timing[i].t - 0.02) idx = i;
         highlight(idx);

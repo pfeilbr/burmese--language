@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --with edge-tts --script
+#!/usr/bin/env -S uv run --with edge-tts --with miniaudio --script
 """
 Renders every phrase in data/phrases.json to MP3 at two speaking rates using
 Microsoft's neural Burmese voices (via edge-tts -- free, no API key), captures
@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 
 import edge_tts
+import miniaudio
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "data" / "phrases.json"
@@ -188,6 +189,64 @@ async def render(text: str, voice: str, rate: str, out_path: Path) -> list[dict]
     return words
 
 
+# ── Where the speech actually is ─────────────────────────────────────────
+#
+# The TTS reports word boundaries, and its durations are not to be trusted:
+# they run short, by a variable amount, and much worse at the slow rate than
+# the natural one. On မင်္ဂလာပါ it claims the phrase ends at 1.05s when the
+# voice is still talking until 1.61s.
+#
+# Believing it truncates the last syllable, and it does so on the slow track --
+# the one a learner actually uses -- on about a quarter of the library. So the
+# rendered audio is measured instead, and the reported timeline is stretched
+# onto what was measured. That keeps whatever real structure the boundaries
+# carry (which words came in which order, and their relative lengths) while
+# taking the start and end of the speech from the only source that knows.
+
+SILENCE_FLOOR = 300          # 16-bit amplitude; below this is encoder noise
+SILENCE_FRACTION = 0.02      # ...or 2% of the clip's own peak, whichever is higher
+TAIL_PAD = 0.06              # let a final consonant finish releasing
+
+
+def speech_extent(mp3_path: Path) -> tuple[float, float]:
+    """First and last moment of actual speech in a clip, in seconds."""
+    decoded = miniaudio.decode_file(
+        str(mp3_path), output_format=miniaudio.SampleFormat.SIGNED16, nchannels=1
+    )
+    samples = decoded.samples
+    rate = decoded.sample_rate
+    threshold = max(SILENCE_FLOOR, int(max(abs(v) for v in samples) * SILENCE_FRACTION))
+    first = last = None
+    for i, v in enumerate(samples):
+        if abs(v) > threshold:
+            if first is None:
+                first = i
+            last = i
+    if first is None:                      # silent clip; caller validates this
+        return 0.0, len(samples) / rate
+    return first / rate, min(last / rate + TAIL_PAD, len(samples) / rate)
+
+
+def fit_to_audio(words: list[dict], start: float, end: float) -> list[dict]:
+    """Stretch the TTS timeline onto the measured one, affinely."""
+    if not words:
+        return words
+    tts_start = words[0]["t"]
+    tts_end = words[-1]["t"] + words[-1]["d"]
+    span = tts_end - tts_start
+    if span <= 0 or end <= start:
+        return words
+    scale = (end - start) / span
+    return [
+        {
+            "t": round(start + (w["t"] - tts_start) * scale, 3),
+            "d": round(w["d"] * scale, 3),
+            "text": w["text"],
+        }
+        for w in words
+    ]
+
+
 def map_words_to_syllables(words: list[dict], n_syllables: int) -> list[dict]:
     """Burmese is written without word spaces, so the TTS segmenter usually
     hands back whole words -- and often the whole phrase as a single span.
@@ -240,6 +299,7 @@ async def process(phrase: dict, cfg: dict, force: bool, sem: asyncio.Semaphore) 
         "phon": phrase.get("phon", ""),
         "syllables": syllables,
         "timing": {},
+        "end": {},
     }
     if phrase.get("note"):
         out["note"] = phrase["note"]
@@ -256,7 +316,16 @@ async def process(phrase: dict, cfg: dict, force: bool, sem: asyncio.Semaphore) 
                 words = await render(phrase["my"], cfg["voice"], rate, mp3)
                 cache.write_text(json.dumps(words, ensure_ascii=False))
                 print(f"  ✓ {phrase['id']}.{track}", flush=True)
-            out["timing"][track] = map_words_to_syllables(words, len(syllables))
+            # The cache holds the TTS response as given; the correction is
+            # applied here so re-running the build fixes the timings of
+            # already-rendered clips without going back to the network.
+            start, end = speech_extent(mp3)
+            if end <= start:
+                raise RuntimeError(f"{mp3.name} contains no audible speech")
+            out["timing"][track] = map_words_to_syllables(
+                fit_to_audio(words, start, end), len(syllables)
+            )
+            out["end"][track] = round(end, 3)
     return out
 
 

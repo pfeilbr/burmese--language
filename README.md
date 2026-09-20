@@ -170,6 +170,13 @@ The Web Speech API is the obvious shortcut, but it has no Burmese voice at all
 on iOS, and shipping audio files also means correct AirPods routing, real
 lock-screen controls, and genuine offline use.
 
+The build measures each rendered clip to find where the speech actually starts
+and stops, and stretches the TTS's reported word timings onto that. This is not
+a refinement — the TTS under-reports its own durations, much worse at the slow
+rate, and worst on the stacked clusters: it claims မင်္ဂလာပါ ends at 1.05s when
+the voice is still going at 1.61s. Trusting it cut the last syllable off 56 of
+the 208 clips, on the track a learner actually uses.
+
 The **slow** track is synthesised at `-45%`, so the voice genuinely enunciates more
 carefully rather than just being stretched. The speed slider picks whichever track
 is closer to the requested pace and covers the remainder with `playbackRate`, with
