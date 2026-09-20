@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>Say It In Burmese</title>
+
+<!-- Rewritten by the deploy workflow with the commit SHA. -->
+<meta name="app-build" content="__BUILD__">
+
+<meta name="description" content="Pick an English phrase, hear it spoken in Burmese at any speed, and say it back.">
+<meta name="theme-color" content="#0e1116">
+
+<!-- Home-screen install. iOS reads the apple-* tags and ignores the manifest
+     icons, so apple-touch-icon must be a square, fully opaque PNG. -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Say It">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+
+<!-- Burmese script is shipped with the app rather than left to the device.
+     Windows has no Myanmar font at all, older Androids render Burmese as
+     boxes, and plenty of phones still have a Zawgyi font that maps the same
+     bytes to different letters — so "just use the system font" means the one
+     line the other person is supposed to read comes out as gibberish. -->
+<link rel="preload" href="fonts/NotoSansMyanmar-subset.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Versioned by build id. HTML and its scripts are cached independently by the
+     browser (GitHub Pages serves max-age=600), so without this a visitor can end
+     up running yesterday's app.js against today's markup — which breaks the app
+     outright the moment an element is renamed. -->
+<link rel="stylesheet" href="styles.css?v=__BUILD__">
+</head>
+<body>
+
+<div id="app">
+
+  <header class="topbar">
+    <div class="topbar-row">
+      <h1>Say It In Burmese</h1>
+      <button id="ear-btn" class="pill-btn ear-btn">Train ear</button>
+      <button id="menu-btn" class="icon-btn menu-btn" aria-label="Menu">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="search" type="search" placeholder="Search English or Burmese…" autocomplete="off" autocorrect="off" spellcheck="false">
+    </div>
+    <nav id="chips" class="chips" aria-label="Categories"></nav>
+  </header>
+
+  <main id="list" class="list"></main>
+
+  <p id="empty" class="empty" hidden>No phrases match that.</p>
+
+</div>
+
+<!-- Phrase detail / practice sheet -->
+<section id="detail" class="sheet" hidden aria-modal="true" role="dialog" aria-label="Phrase">
+  <div class="sheet-inner">
+
+    <div class="sheet-head">
+      <button class="icon-btn close-btn" aria-label="Back">
+        <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <div class="sheet-head-right">
+        <button id="show-btn" class="pill-btn">Show her</button>
+        <button id="fav-btn" class="icon-btn star" aria-label="Save to favourites">
+          <svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8L3.5 9.7l5.9-.9z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <p id="d-en" class="d-en"></p>
+    <p id="d-note" class="d-note" hidden></p>
+
+    <div id="d-script" class="script-row" aria-label="Tap a syllable to hear it"></div>
+
+    <p id="d-phon" class="d-phon"></p>
+    <p id="d-voicing" class="d-voicing" hidden></p>
+
+    <div class="player">
+      <button id="play-btn" class="play-btn" aria-label="Play">
+        <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+        <svg class="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>
+      </button>
+
+      <div class="speed">
+        <div class="speed-head">
+          <label for="speed">Speed</label>
+          <output id="speed-val">55%</output>
+        </div>
+        <input id="speed" type="range" min="40" max="110" step="5" value="55">
+        <div class="speed-ticks"><span>slowest</span><span>native</span></div>
+      </div>
+    </div>
+
+    <div class="modes">
+      <button id="mode-step" class="mode-btn" aria-pressed="false">
+        <span class="mode-title">Syllable</span>
+        <span class="mode-sub">one at a time</span>
+      </button>
+      <button id="mode-loop" class="mode-btn" aria-pressed="false">
+        <span class="mode-title">Loop</span>
+        <span class="mode-sub">over and over</span>
+      </button>
+      <button id="mode-shadow" class="mode-btn" aria-pressed="false">
+        <span class="mode-title">Shadow</span>
+        <span class="mode-sub">gap to repeat</span>
+      </button>
+    </div>
+
+    <p id="shadow-hint" class="hint" hidden>
+      Plays, then leaves you a silent gap to say it out loud, then plays again. Put your AirPods in and let it run.
+    </p>
+
+    <!-- Record yourself and hear it back against the native clip -->
+    <section id="compare" class="compare" hidden>
+      <button id="rec-btn" class="rec-btn">
+        <span class="rec-dot" aria-hidden="true"></span>
+        <span id="rec-label">Record yourself</span>
+      </button>
+      <div id="cmp-actions" class="cmp-actions" hidden>
+        <button id="cmp-both" class="cmp-btn accent">Hear both</button>
+        <button id="cmp-mine" class="cmp-btn">Just me</button>
+        <button id="cmp-redo" class="cmp-btn">Redo</button>
+      </div>
+      <p id="cmp-hint" class="hint" hidden>
+        Listen to the <b>length and the ending</b> of each syllable — whether it sits level, falls away,
+        snaps off short, or stops dead. That, more than the consonants, is what decides whether you're understood.
+      </p>
+    </section>
+
+    <div class="tone-key">
+      <span class="tone-key-label">Tones</span>
+      <span class="tk t1"><i></i>1 level</span>
+      <span class="tk t2"><i></i>2 falling</span>
+      <span class="tk t3"><i></i>3 sharp</span>
+      <span class="tk t4"><i></i>4 stopped</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- Settings -->
+<section id="settings" class="sheet" hidden aria-modal="true" role="dialog" aria-label="Settings">
+  <div class="sheet-inner">
+
+    <div class="sheet-head">
+      <button class="icon-btn close-btn" aria-label="Back">
+        <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+    </div>
+
+    <h2 class="sheet-title">Settings</h2>
+
+    <!-- Install -->
+    <section id="install-group" class="group" hidden>
+      <h3 class="group-head">Install</h3>
+      <div class="group-body">
+        <div id="ios-install" class="row block" hidden>
+          <p class="row-title">Add to your Home Screen</p>
+          <p class="row-sub">
+            Tap the Share button
+            <svg class="inline-ico" viewBox="0 0 24 24"><path d="M12 15V4M8.5 7.5L12 4l3.5 3.5"/><path d="M6 12v6.5h12V12"/></svg>
+            at the bottom of Safari, then choose <b>Add to Home Screen</b>.
+          </p>
+          <p class="row-sub">It opens full screen, works offline, and keeps your favourites.</p>
+        </div>
+        <button id="install-btn" class="row action" hidden>
+          <span class="row-text">
+            <span class="row-title">Install app</span>
+            <span class="row-sub">Add it to your device</span>
+          </span>
+          <span class="pill">Install</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Updates -->
+    <section class="group">
+      <h3 class="group-head">Updates</h3>
+      <div class="group-body">
+        <button id="check-btn" class="row action">
+          <span class="row-text">
+            <span class="row-title">Check for updates</span>
+            <span class="row-sub" id="update-status">Checked on launch</span>
+          </span>
+          <span class="pill" id="check-pill">Check</span>
+        </button>
+        <label class="row toggle">
+          <span class="row-text">
+            <span class="row-title">Check on launch</span>
+            <span class="row-sub">Look for a new version each time you open the app</span>
+          </span>
+          <input type="checkbox" id="opt-autocheck" checked>
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Offline -->
+    <section class="group">
+      <h3 class="group-head">Offline audio</h3>
+      <div class="group-body">
+        <button id="offline-btn" class="row action">
+          <span class="row-text">
+            <span class="row-title">Save all audio</span>
+            <span class="row-sub" id="offline-sub">Works with no signal once saved</span>
+          </span>
+          <span class="pill" id="offline-pill">Save</span>
+        </button>
+        <button id="clear-audio-btn" class="row action">
+          <span class="row-text">
+            <span class="row-title">Clear saved audio</span>
+            <span class="row-sub">Frees space; clips re-download when played</span>
+          </span>
+          <span class="pill danger">Clear</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Display -->
+    <section class="group">
+      <h3 class="group-head">Display</h3>
+      <div class="group-body">
+        <label class="row toggle">
+          <span class="row-text">
+            <span class="row-title">Tone colours</span>
+            <span class="row-sub">Colour each syllable by its tone</span>
+          </span>
+          <input type="checkbox" id="opt-tones" checked>
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+        <label class="row toggle">
+          <span class="row-text">
+            <span class="row-title">Burmese script</span>
+            <span class="row-sub">Show မြန်မာစာ under each syllable — handy for showing someone your phone</span>
+          </span>
+          <input type="checkbox" id="opt-script">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+        <label class="row toggle">
+          <span class="row-text">
+            <span class="row-title">Transcription</span>
+            <span class="row-sub">The linguists' spelling, with tone marks</span>
+          </span>
+          <input type="checkbox" id="opt-rom">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Data -->
+    <section class="group">
+      <h3 class="group-head">Data</h3>
+      <div class="group-body">
+        <button id="clear-favs-btn" class="row action">
+          <span class="row-text">
+            <span class="row-title">Clear favourites</span>
+            <span class="row-sub" id="favs-sub">No favourites saved</span>
+          </span>
+          <span class="pill danger">Clear</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="group">
+      <h3 class="group-head">About</h3>
+      <div class="group-body">
+        <div class="row block">
+          <p class="row-sub">
+            Version <b id="about-build">dev</b><br>
+            Voice <b id="about-voice">—</b><br>
+            <b id="about-count">0</b> phrases
+          </p>
+          <p class="row-sub">
+            <a id="repo-link" href="https://github.com/pfeilbr/burmese--language" target="_blank" rel="noopener">Source on GitHub</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+<!-- Ear training. Listening-only tone identification: the best-evidenced way to
+     get a non-tonal-language speaker's ear working, and it transfers to speaking
+     without any speaking practice. -->
+<section id="drill" class="sheet" hidden aria-modal="true" role="dialog" aria-label="Ear training">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <button class="icon-btn close-btn" aria-label="Back">
+        <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <span id="drill-score" class="drill-score"></span>
+    </div>
+
+    <h2 class="sheet-title">Which tone?</h2>
+    <p class="drill-lead">Listen to the whole phrase, then pick the tone of the highlighted sound.</p>
+
+    <div class="drill-card">
+      <p id="drill-meaning" class="drill-meaning"></p>
+      <p id="drill-syl" class="drill-syl"></p>
+      <p id="drill-where" class="drill-where"></p>
+      <button id="drill-replay" class="cmp-btn">Play again</button>
+    </div>
+
+    <div id="drill-choices" class="drill-choices"></div>
+
+    <p id="drill-feedback" class="drill-feedback" hidden></p>
+    <button id="drill-next" class="cmp-btn accent drill-next" hidden>Next</button>
+  </div>
+</section>
+
+<!-- Present mode: hand the phone over so they can read it themselves.
+     The Burmese script is the whole point here — it's what the other person
+     reads, and the one part of the phrase this app otherwise hides. -->
+<section id="present" class="present" hidden aria-modal="true" role="dialog" aria-label="Show this phrase">
+  <div class="present-body">
+    <p id="present-en" class="present-en"></p>
+    <p id="present-my" class="present-my"></p>
+    <p id="present-rom" class="present-rom"></p>
+  </div>
+  <div class="present-bar">
+    <button id="present-close" class="cmp-btn">Done</button>
+    <button id="present-play" class="cmp-btn">Play it</button>
+    <button id="present-flip" class="cmp-btn" aria-pressed="false">Flip</button>
+  </div>
+</section>
+
+<!-- Quick strip: the handful of phrases actually used day to day, parked in
+     the thumb's reach instead of behind a scroll and a tap. -->
+<nav id="quickbar" class="quickbar" hidden aria-label="Quick access">
+  <div id="quick-tiles" class="quick-tiles"></div>
+</nav>
+
+<!-- Update prompt -->
+<div id="update-bar" class="update-bar" hidden role="alertdialog" aria-labelledby="update-title">
+  <div class="update-text">
+    <strong id="update-title">Update available</strong>
+    <span>A newer version is ready to install.</span>
+  </div>
+  <div class="update-actions">
+    <button id="update-later" class="ghost-btn">Later</button>
+    <button id="update-now" class="primary-btn">Update</button>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="data/phrases.js?v=__BUILD__"></script>
+<script src="app.js?v=__BUILD__"></script>
+</body>
+</html>
