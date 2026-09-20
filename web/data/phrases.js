@@ -17,6 +17,26 @@ window.PHRASE_DATA = {
    "emoji": "💐"
   },
   {
+   "id": "dating",
+   "name": "Dating & Flirting",
+   "emoji": "💫"
+  },
+  {
+   "id": "serious",
+   "name": "Getting Serious",
+   "emoji": "💍"
+  },
+  {
+   "id": "comfort",
+   "name": "When She's Low",
+   "emoji": "🤍"
+  },
+  {
+   "id": "messages",
+   "name": "Texts & Voice Notes",
+   "emoji": "💬"
+  },
+  {
    "id": "family",
    "name": "Meeting Family",
    "emoji": "👪"
@@ -1079,6 +1099,516 @@ window.PHRASE_DATA = {
     "slow": 1.927
    },
    "note": "လိုက်တာ on the end is the Burmese \"...how very!\" — it turns a statement into a marvel."
+  },
+  {
+   "id": "darling-loan",
+   "cat": "affection",
+   "en": "Darling",
+   "my": "ဒါလင်",
+   "rom": "da lin",
+   "phon": "DAH lin",
+   "syllables": [
+    {
+     "my": "ဒါ",
+     "rom": "da",
+     "tone": 1,
+     "say": "DAH"
+    },
+    {
+     "my": "လင်",
+     "rom": "lin",
+     "tone": 1,
+     "say": "lin"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.204,
+      "d": 0.301,
+      "word": 0
+     },
+     {
+      "t": 0.505,
+      "d": 0.301,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.331,
+      "d": 0.524,
+      "word": 0
+     },
+     {
+      "t": 0.855,
+      "d": 0.524,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.807,
+    "slow": 1.38
+   },
+   "note": "The English word, borrowed and completely at home. Extremely common between couples in Yangon."
+  },
+  {
+   "id": "chit-ye",
+   "cat": "affection",
+   "en": "Darling (calling her)",
+   "my": "ချစ်ရေ့",
+   "rom": "chiq ye.",
+   "phon": "CHIT yé",
+   "syllables": [
+    {
+     "my": "ချစ်",
+     "rom": "chiq",
+     "tone": 4,
+     "say": "CHIT"
+    },
+    {
+     "my": "ရေ့",
+     "rom": "ye.",
+     "tone": 3,
+     "say": "yé"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.22,
+      "d": 0.302,
+      "word": 0
+     },
+     {
+      "t": 0.522,
+      "d": 0.302,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.36,
+      "d": 0.525,
+      "word": 0
+     },
+     {
+      "t": 0.885,
+      "d": 0.525,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.824,
+    "slow": 1.411
+   },
+   "note": "ရေ့ is the calling particle. This is what you say to get her attention — not what you call her when talking about her."
+  },
+  {
+   "id": "my-sweetheart",
+   "cat": "affection",
+   "en": "My sweetheart",
+   "my": "ကျွန်တော့်ချစ်သူ",
+   "rom": "kyun taw. chiq thu",
+   "phon": "chun dáw chit THOO",
+   "syllables": [
+    {
+     "my": "ကျွန်",
+     "rom": "kyun",
+     "tone": 1,
+     "say": "chun"
+    },
+    {
+     "my": "တော့်",
+     "rom": "taw.",
+     "tone": 3,
+     "say": "dáw",
+     "say_rom": "daw.",
+     "voiced": true
+    },
+    {
+     "my": "ချစ်",
+     "rom": "chiq",
+     "tone": 4,
+     "say": "chit"
+    },
+    {
+     "my": "သူ",
+     "rom": "thu",
+     "tone": 1,
+     "say": "THOO"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.205,
+      "d": 0.214,
+      "word": 0
+     },
+     {
+      "t": 0.419,
+      "d": 0.214,
+      "word": 0
+     },
+     {
+      "t": 0.634,
+      "d": 0.214,
+      "word": 0
+     },
+     {
+      "t": 0.848,
+      "d": 0.214,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.337,
+      "d": 0.378,
+      "word": 0
+     },
+     {
+      "t": 0.715,
+      "d": 0.378,
+      "word": 0
+     },
+     {
+      "t": 1.092,
+      "d": 0.378,
+      "word": 0
+     },
+     {
+      "t": 1.47,
+      "d": 0.378,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.063,
+    "slow": 1.847
+   }
+  },
+  {
+   "id": "cant-do-without",
+   "cat": "affection",
+   "en": "I can't do without you",
+   "my": "မင်းမရှိလို့မဖြစ်ဘူး",
+   "rom": "min: ma. shi. lo. ma. hpyiq bu:",
+   "phon": "min má shí lóh má PYIT boo",
+   "syllables": [
+    {
+     "my": "မင်း",
+     "rom": "min:",
+     "tone": 2,
+     "say": "min"
+    },
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "ရှိ",
+     "rom": "shi.",
+     "tone": 3,
+     "say": "shí"
+    },
+    {
+     "my": "လို့",
+     "rom": "lo.",
+     "tone": 3,
+     "say": "lóh"
+    },
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "ဖြစ်",
+     "rom": "hpyiq",
+     "tone": 4,
+     "say": "PYIT"
+    },
+    {
+     "my": "ဘူး",
+     "rom": "bu:",
+     "tone": 2,
+     "say": "boo"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.186,
+      "d": 0.186,
+      "word": 0
+     },
+     {
+      "t": 0.372,
+      "d": 0.186,
+      "word": 0
+     },
+     {
+      "t": 0.559,
+      "d": 0.186,
+      "word": 0
+     },
+     {
+      "t": 0.745,
+      "d": 0.186,
+      "word": 0
+     },
+     {
+      "t": 0.932,
+      "d": 0.186,
+      "word": 0
+     },
+     {
+      "t": 1.118,
+      "d": 0.186,
+      "word": 0
+     },
+     {
+      "t": 1.305,
+      "d": 0.186,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.3,
+      "d": 0.333,
+      "word": 0
+     },
+     {
+      "t": 0.633,
+      "d": 0.333,
+      "word": 0
+     },
+     {
+      "t": 0.965,
+      "d": 0.333,
+      "word": 0
+     },
+     {
+      "t": 1.298,
+      "d": 0.333,
+      "word": 0
+     },
+     {
+      "t": 1.631,
+      "d": 0.333,
+      "word": 0
+     },
+     {
+      "t": 1.964,
+      "d": 0.333,
+      "word": 0
+     },
+     {
+      "t": 2.296,
+      "d": 0.333,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.491,
+    "slow": 2.629
+   }
+  },
+  {
+   "id": "stay-a-bit",
+   "cat": "affection",
+   "en": "Stay a little longer",
+   "my": "ခဏနေဦး",
+   "rom": "hka. na. ne u:",
+   "phon": "khá ná NAY oo",
+   "syllables": [
+    {
+     "my": "ခ",
+     "rom": "hka.",
+     "tone": 3,
+     "say": "khá"
+    },
+    {
+     "my": "ဏ",
+     "rom": "na.",
+     "tone": 3,
+     "say": "ná"
+    },
+    {
+     "my": "နေ",
+     "rom": "ne",
+     "tone": 1,
+     "say": "NAY"
+    },
+    {
+     "my": "ဦး",
+     "rom": "u:",
+     "tone": 2,
+     "say": "oo"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.173,
+      "d": 0.193,
+      "word": 0
+     },
+     {
+      "t": 0.366,
+      "d": 0.193,
+      "word": 0
+     },
+     {
+      "t": 0.559,
+      "d": 0.193,
+      "word": 0
+     },
+     {
+      "t": 0.753,
+      "d": 0.193,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.275,
+      "d": 0.34,
+      "word": 0
+     },
+     {
+      "t": 0.615,
+      "d": 0.34,
+      "word": 0
+     },
+     {
+      "t": 0.955,
+      "d": 0.34,
+      "word": 0
+     },
+     {
+      "t": 1.295,
+      "d": 0.34,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.946,
+    "slow": 1.635
+   }
+  },
+  {
+   "id": "dont-go-yet",
+   "cat": "affection",
+   "en": "Don't go yet",
+   "my": "မသွားသေးပါနဲ့",
+   "rom": "ma. thwa: the: pa neh.",
+   "phon": "má thwah THAY bah neh",
+   "syllables": [
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "သွား",
+     "rom": "thwa:",
+     "tone": 2,
+     "say": "thwah"
+    },
+    {
+     "my": "သေး",
+     "rom": "the:",
+     "tone": 2,
+     "say": "THAY"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    },
+    {
+     "my": "နဲ့",
+     "rom": "neh.",
+     "tone": 3,
+     "say": "neh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.195,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 0.405,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 0.615,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 0.825,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 1.035,
+      "d": 0.21,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.315,
+      "d": 0.373,
+      "word": 0
+     },
+     {
+      "t": 0.688,
+      "d": 0.373,
+      "word": 0
+     },
+     {
+      "t": 1.06,
+      "d": 0.373,
+      "word": 0
+     },
+     {
+      "t": 1.433,
+      "d": 0.373,
+      "word": 0
+     },
+     {
+      "t": 1.805,
+      "d": 0.373,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.244,
+    "slow": 2.178
+   }
   },
   {
    "id": "youre-pretty",
@@ -2218,6 +2748,398 @@ window.PHRASE_DATA = {
    },
    "note": "The two softened sounds at the end are not optional — \"tin pa te\" marks you instantly as reading off a page.",
    "starter": 4
+  },
+  {
+   "id": "your-eyes",
+   "cat": "compliments",
+   "en": "You have beautiful eyes",
+   "my": "မျက်လုံးလှလိုက်တာ",
+   "rom": "myeq loun: hla. laiq ta",
+   "phon": "myet LOHN hlá like tah",
+   "syllables": [
+    {
+     "my": "မျက်",
+     "rom": "myeq",
+     "tone": 4,
+     "say": "myet"
+    },
+    {
+     "my": "လုံး",
+     "rom": "loun:",
+     "tone": 2,
+     "say": "LOHN"
+    },
+    {
+     "my": "လှ",
+     "rom": "hla.",
+     "tone": 3,
+     "say": "hlá"
+    },
+    {
+     "my": "လိုက်",
+     "rom": "laiq",
+     "tone": 4,
+     "say": "like"
+    },
+    {
+     "my": "တာ",
+     "rom": "ta",
+     "tone": 1,
+     "say": "tah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.179,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.407,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.635,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.863,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 1.091,
+      "d": 0.228,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.286,
+      "d": 0.406,
+      "word": 0
+     },
+     {
+      "t": 0.692,
+      "d": 0.406,
+      "word": 0
+     },
+     {
+      "t": 1.097,
+      "d": 0.406,
+      "word": 0
+     },
+     {
+      "t": 1.503,
+      "d": 0.406,
+      "word": 0
+     },
+     {
+      "t": 1.908,
+      "d": 0.406,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.319,
+    "slow": 2.314
+   }
+  },
+  {
+   "id": "your-voice",
+   "cat": "compliments",
+   "en": "Your voice is lovely",
+   "my": "အသံချိုလိုက်တာ",
+   "rom": "a than cho laiq ta",
+   "phon": "uh DHAN cho like tah",
+   "syllables": [
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "သံ",
+     "rom": "than",
+     "tone": 1,
+     "say": "DHAN",
+     "say_rom": "dhan",
+     "voiced": true
+    },
+    {
+     "my": "ချို",
+     "rom": "cho",
+     "tone": 1,
+     "say": "cho"
+    },
+    {
+     "my": "လိုက်",
+     "rom": "laiq",
+     "tone": 4,
+     "say": "like"
+    },
+    {
+     "my": "တာ",
+     "rom": "ta",
+     "tone": 1,
+     "say": "tah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.195,
+      "d": 0.236,
+      "word": 0
+     },
+     {
+      "t": 0.431,
+      "d": 0.236,
+      "word": 0
+     },
+     {
+      "t": 0.668,
+      "d": 0.236,
+      "word": 0
+     },
+     {
+      "t": 0.904,
+      "d": 0.236,
+      "word": 0
+     },
+     {
+      "t": 1.141,
+      "d": 0.236,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.314,
+      "d": 0.422,
+      "word": 0
+     },
+     {
+      "t": 0.736,
+      "d": 0.422,
+      "word": 0
+     },
+     {
+      "t": 1.158,
+      "d": 0.422,
+      "word": 0
+     },
+     {
+      "t": 1.579,
+      "d": 0.422,
+      "word": 0
+     },
+     {
+      "t": 2.001,
+      "d": 0.422,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.377,
+    "slow": 2.423
+   }
+  },
+  {
+   "id": "your-laugh",
+   "cat": "compliments",
+   "en": "I love your laugh",
+   "my": "ရယ်သံလှလိုက်တာ",
+   "rom": "ye than hla. laiq ta",
+   "phon": "yeh dhan HLÁ like tah",
+   "syllables": [
+    {
+     "my": "ရယ်",
+     "rom": "ye",
+     "tone": 1,
+     "say": "yeh"
+    },
+    {
+     "my": "သံ",
+     "rom": "than",
+     "tone": 1,
+     "say": "dhan",
+     "say_rom": "dhan",
+     "voiced": true
+    },
+    {
+     "my": "လှ",
+     "rom": "hla.",
+     "tone": 3,
+     "say": "HLÁ"
+    },
+    {
+     "my": "လိုက်",
+     "rom": "laiq",
+     "tone": 4,
+     "say": "like"
+    },
+    {
+     "my": "တာ",
+     "rom": "ta",
+     "tone": 1,
+     "say": "tah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.219,
+      "d": 0.248,
+      "word": 0
+     },
+     {
+      "t": 0.467,
+      "d": 0.248,
+      "word": 0
+     },
+     {
+      "t": 0.715,
+      "d": 0.248,
+      "word": 0
+     },
+     {
+      "t": 0.962,
+      "d": 0.248,
+      "word": 0
+     },
+     {
+      "t": 1.21,
+      "d": 0.248,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.345,
+      "d": 0.444,
+      "word": 0
+     },
+     {
+      "t": 0.789,
+      "d": 0.444,
+      "word": 0
+     },
+     {
+      "t": 1.233,
+      "d": 0.444,
+      "word": 0
+     },
+     {
+      "t": 1.676,
+      "d": 0.444,
+      "word": 0
+     },
+     {
+      "t": 2.12,
+      "d": 0.444,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.458,
+    "slow": 2.564
+   }
+  },
+  {
+   "id": "smile-for-me",
+   "cat": "compliments",
+   "en": "Smile for me",
+   "my": "ပြုံးပြပါဦး",
+   "rom": "pyoun: pya. pa u:",
+   "phon": "PYOHN byá bah oo",
+   "syllables": [
+    {
+     "my": "ပြုံး",
+     "rom": "pyoun:",
+     "tone": 2,
+     "say": "PYOHN"
+    },
+    {
+     "my": "ပြ",
+     "rom": "pya.",
+     "tone": 3,
+     "say": "byá",
+     "say_rom": "bya.",
+     "voiced": true
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    },
+    {
+     "my": "ဦး",
+     "rom": "u:",
+     "tone": 2,
+     "say": "oo"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.202,
+      "d": 0.218,
+      "word": 0
+     },
+     {
+      "t": 0.42,
+      "d": 0.218,
+      "word": 0
+     },
+     {
+      "t": 0.639,
+      "d": 0.218,
+      "word": 0
+     },
+     {
+      "t": 0.857,
+      "d": 0.218,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.331,
+      "d": 0.386,
+      "word": 0
+     },
+     {
+      "t": 0.717,
+      "d": 0.386,
+      "word": 0
+     },
+     {
+      "t": 1.103,
+      "d": 0.386,
+      "word": 0
+     },
+     {
+      "t": 1.488,
+      "d": 0.386,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.076,
+    "slow": 1.874
+   }
   },
   {
    "id": "hello",
@@ -9948,6 +10870,3272 @@ window.PHRASE_DATA = {
    "end": {
     "natural": 1.542,
     "slow": 2.715
+   }
+  },
+  {
+   "id": "lets-go-out",
+   "cat": "dating",
+   "en": "Shall we go out together?",
+   "my": "အတူတူထွက်ရအောင်",
+   "rom": "a tu tu htweq ya. aun",
+   "phon": "uh too doo TWET yá aun",
+   "syllables": [
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "တူ",
+     "rom": "tu",
+     "tone": 1,
+     "say": "too"
+    },
+    {
+     "my": "တူ",
+     "rom": "tu",
+     "tone": 1,
+     "say": "doo",
+     "say_rom": "du",
+     "voiced": true
+    },
+    {
+     "my": "ထွက်",
+     "rom": "htweq",
+     "tone": 4,
+     "say": "TWET"
+    },
+    {
+     "my": "ရ",
+     "rom": "ya.",
+     "tone": 3,
+     "say": "yá"
+    },
+    {
+     "my": "အောင်",
+     "rom": "aun",
+     "tone": 1,
+     "say": "aun"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.168,
+      "d": 0.198,
+      "word": 0
+     },
+     {
+      "t": 0.366,
+      "d": 0.198,
+      "word": 0
+     },
+     {
+      "t": 0.564,
+      "d": 0.198,
+      "word": 0
+     },
+     {
+      "t": 0.763,
+      "d": 0.198,
+      "word": 0
+     },
+     {
+      "t": 0.961,
+      "d": 0.198,
+      "word": 0
+     },
+     {
+      "t": 1.159,
+      "d": 0.198,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.266,
+      "d": 0.352,
+      "word": 0
+     },
+     {
+      "t": 0.618,
+      "d": 0.352,
+      "word": 0
+     },
+     {
+      "t": 0.971,
+      "d": 0.352,
+      "word": 0
+     },
+     {
+      "t": 1.323,
+      "d": 0.352,
+      "word": 0
+     },
+     {
+      "t": 1.675,
+      "d": 0.352,
+      "word": 0
+     },
+     {
+      "t": 2.028,
+      "d": 0.352,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.357,
+    "slow": 2.381
+   },
+   "note": "ရအောင် on the end of a verb is \"let's\". Swap the verb and you have half the invitations you need."
+  },
+  {
+   "id": "lets-get-coffee",
+   "cat": "dating",
+   "en": "Let's get a coffee",
+   "my": "ကော်ဖီသောက်ရအောင်",
+   "rom": "kaw hpi thauq ya. aun",
+   "phon": "kaw BEE thauk yá aun",
+   "syllables": [
+    {
+     "my": "ကော်",
+     "rom": "kaw",
+     "tone": 1,
+     "say": "kaw"
+    },
+    {
+     "my": "ဖီ",
+     "rom": "hpi",
+     "tone": 1,
+     "say": "BEE",
+     "say_rom": "bi",
+     "voiced": true
+    },
+    {
+     "my": "သောက်",
+     "rom": "thauq",
+     "tone": 4,
+     "say": "thauk"
+    },
+    {
+     "my": "ရ",
+     "rom": "ya.",
+     "tone": 3,
+     "say": "yá"
+    },
+    {
+     "my": "အောင်",
+     "rom": "aun",
+     "tone": 1,
+     "say": "aun"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.198,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.426,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.653,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.881,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 1.108,
+      "d": 0.228,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.322,
+      "d": 0.404,
+      "word": 0
+     },
+     {
+      "t": 0.726,
+      "d": 0.404,
+      "word": 0
+     },
+     {
+      "t": 1.13,
+      "d": 0.404,
+      "word": 0
+     },
+     {
+      "t": 1.534,
+      "d": 0.404,
+      "word": 0
+     },
+     {
+      "t": 1.938,
+      "d": 0.404,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.336,
+    "slow": 2.342
+   }
+  },
+  {
+   "id": "can-i-call",
+   "cat": "dating",
+   "en": "Can I call you?",
+   "my": "ဖုန်းဆက်လို့ရလား",
+   "rom": "hpoun: hseq lo. ya. la:",
+   "phon": "phohn ZET lóh yá lah",
+   "syllables": [
+    {
+     "my": "ဖုန်း",
+     "rom": "hpoun:",
+     "tone": 2,
+     "say": "phohn"
+    },
+    {
+     "my": "ဆက်",
+     "rom": "hseq",
+     "tone": 4,
+     "say": "ZET",
+     "say_rom": "zeq",
+     "voiced": true
+    },
+    {
+     "my": "လို့",
+     "rom": "lo.",
+     "tone": 3,
+     "say": "lóh"
+    },
+    {
+     "my": "ရ",
+     "rom": "ya.",
+     "tone": 3,
+     "say": "yá"
+    },
+    {
+     "my": "လား",
+     "rom": "la:",
+     "tone": 2,
+     "say": "lah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.206,
+      "d": 0.229,
+      "word": 0
+     },
+     {
+      "t": 0.435,
+      "d": 0.229,
+      "word": 0
+     },
+     {
+      "t": 0.664,
+      "d": 0.229,
+      "word": 0
+     },
+     {
+      "t": 0.892,
+      "d": 0.229,
+      "word": 0
+     },
+     {
+      "t": 1.121,
+      "d": 0.229,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.334,
+      "d": 0.406,
+      "word": 0
+     },
+     {
+      "t": 0.74,
+      "d": 0.406,
+      "word": 0
+     },
+     {
+      "t": 1.145,
+      "d": 0.406,
+      "word": 0
+     },
+     {
+      "t": 1.551,
+      "d": 0.406,
+      "word": 0
+     },
+     {
+      "t": 1.956,
+      "d": 0.406,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.349,
+    "slow": 2.362
+   }
+  },
+  {
+   "id": "ill-call-tomorrow",
+   "cat": "dating",
+   "en": "I'll call you tomorrow",
+   "my": "မနက်ဖြန်ဖုန်းဆက်မယ်",
+   "rom": "ma neq hpyan hpoun: hseq me",
+   "phon": "muh net pyan phohn ZET meh",
+   "syllables": [
+    {
+     "my": "မ",
+     "rom": "ma",
+     "tone": 1,
+     "say": "muh"
+    },
+    {
+     "my": "နက်",
+     "rom": "neq",
+     "tone": 4,
+     "say": "net"
+    },
+    {
+     "my": "ဖြန်",
+     "rom": "hpyan",
+     "tone": 1,
+     "say": "pyan"
+    },
+    {
+     "my": "ဖုန်း",
+     "rom": "hpoun:",
+     "tone": 2,
+     "say": "phohn"
+    },
+    {
+     "my": "ဆက်",
+     "rom": "hseq",
+     "tone": 4,
+     "say": "ZET",
+     "say_rom": "zeq",
+     "voiced": true
+    },
+    {
+     "my": "မယ်",
+     "rom": "me",
+     "tone": 1,
+     "say": "meh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.194,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 0.414,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 0.634,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 0.853,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 1.073,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 1.293,
+      "d": 0.22,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.315,
+      "d": 0.392,
+      "word": 0
+     },
+     {
+      "t": 0.707,
+      "d": 0.392,
+      "word": 0
+     },
+     {
+      "t": 1.099,
+      "d": 0.392,
+      "word": 0
+     },
+     {
+      "t": 1.492,
+      "d": 0.392,
+      "word": 0
+     },
+     {
+      "t": 1.884,
+      "d": 0.392,
+      "word": 0
+     },
+     {
+      "t": 2.276,
+      "d": 0.392,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.513,
+    "slow": 2.668
+   }
+  },
+  {
+   "id": "walk-you-home",
+   "cat": "dating",
+   "en": "Let me walk you home",
+   "my": "အိမ်ကိုလိုက်ပို့ပေးမယ်",
+   "rom": "ein ko laiq po. pe: me",
+   "phon": "ain goh like póh BAY meh",
+   "syllables": [
+    {
+     "my": "အိမ်",
+     "rom": "ein",
+     "tone": 1,
+     "say": "ain"
+    },
+    {
+     "my": "ကို",
+     "rom": "ko",
+     "tone": 1,
+     "say": "goh",
+     "say_rom": "go",
+     "voiced": true
+    },
+    {
+     "my": "လိုက်",
+     "rom": "laiq",
+     "tone": 4,
+     "say": "like"
+    },
+    {
+     "my": "ပို့",
+     "rom": "po.",
+     "tone": 3,
+     "say": "póh"
+    },
+    {
+     "my": "ပေး",
+     "rom": "pe:",
+     "tone": 2,
+     "say": "BAY",
+     "say_rom": "be:",
+     "voiced": true
+    },
+    {
+     "my": "မယ်",
+     "rom": "me",
+     "tone": 1,
+     "say": "meh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.224,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.448,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.672,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.896,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 1.12,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 1.344,
+      "d": 0.224,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.367,
+      "d": 0.401,
+      "word": 0
+     },
+     {
+      "t": 0.768,
+      "d": 0.401,
+      "word": 0
+     },
+     {
+      "t": 1.168,
+      "d": 0.401,
+      "word": 0
+     },
+     {
+      "t": 1.569,
+      "d": 0.401,
+      "word": 0
+     },
+     {
+      "t": 1.969,
+      "d": 0.401,
+      "word": 0
+     },
+     {
+      "t": 2.369,
+      "d": 0.401,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.568,
+    "slow": 2.771
+   }
+  },
+  {
+   "id": "see-you-again",
+   "cat": "dating",
+   "en": "I want to see you again",
+   "my": "နောက်တစ်ခါတွေ့ချင်တယ်",
+   "rom": "nauq tiq hka twe. chin te",
+   "phon": "nauk tit kah TWAY chin deh",
+   "syllables": [
+    {
+     "my": "နောက်",
+     "rom": "nauq",
+     "tone": 4,
+     "say": "nauk"
+    },
+    {
+     "my": "တစ်",
+     "rom": "tiq",
+     "tone": 4,
+     "say": "tit"
+    },
+    {
+     "my": "ခါ",
+     "rom": "hka",
+     "tone": 1,
+     "say": "kah"
+    },
+    {
+     "my": "တွေ့",
+     "rom": "twe.",
+     "tone": 3,
+     "say": "TWAY"
+    },
+    {
+     "my": "ချင်",
+     "rom": "chin",
+     "tone": 1,
+     "say": "chin"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.22,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.419,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.618,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.817,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 1.015,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 1.214,
+      "d": 0.199,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.36,
+      "d": 0.354,
+      "word": 0
+     },
+     {
+      "t": 0.714,
+      "d": 0.354,
+      "word": 0
+     },
+     {
+      "t": 1.067,
+      "d": 0.354,
+      "word": 0
+     },
+     {
+      "t": 1.421,
+      "d": 0.354,
+      "word": 0
+     },
+     {
+      "t": 1.775,
+      "d": 0.354,
+      "word": 0
+     },
+     {
+      "t": 2.128,
+      "d": 0.354,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.413,
+    "slow": 2.482
+   }
+  },
+  {
+   "id": "lovely-time",
+   "cat": "dating",
+   "en": "I had a lovely time today",
+   "my": "ဒီနေ့အရမ်းပျော်တယ်",
+   "rom": "di ne. a yan: pyaw te",
+   "phon": "dee né uh yahn PYAW deh",
+   "syllables": [
+    {
+     "my": "ဒီ",
+     "rom": "di",
+     "tone": 1,
+     "say": "dee"
+    },
+    {
+     "my": "နေ့",
+     "rom": "ne.",
+     "tone": 3,
+     "say": "né"
+    },
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "ရမ်း",
+     "rom": "yan:",
+     "tone": 2,
+     "say": "yahn"
+    },
+    {
+     "my": "ပျော်",
+     "rom": "pyaw",
+     "tone": 1,
+     "say": "PYAW"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.191,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.418,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.646,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.873,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 1.101,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 1.329,
+      "d": 0.228,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.308,
+      "d": 0.407,
+      "word": 0
+     },
+     {
+      "t": 0.715,
+      "d": 0.407,
+      "word": 0
+     },
+     {
+      "t": 1.122,
+      "d": 0.407,
+      "word": 0
+     },
+     {
+      "t": 1.528,
+      "d": 0.407,
+      "word": 0
+     },
+     {
+      "t": 1.935,
+      "d": 0.407,
+      "word": 0
+     },
+     {
+      "t": 2.342,
+      "d": 0.407,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.557,
+    "slow": 2.75
+   }
+  },
+  {
+   "id": "thinking-of-you",
+   "cat": "dating",
+   "en": "I've been thinking about you",
+   "my": "မင်းကိုသတိရနေတယ်",
+   "rom": "min: ko tha. ti ya. ne te",
+   "phon": "min goh thá dí yá nay deh",
+   "syllables": [
+    {
+     "my": "မင်း",
+     "rom": "min:",
+     "tone": 2,
+     "say": "min"
+    },
+    {
+     "my": "ကို",
+     "rom": "ko",
+     "tone": 1,
+     "say": "goh",
+     "say_rom": "go",
+     "voiced": true
+    },
+    {
+     "my": "သ",
+     "rom": "tha.",
+     "tone": 3,
+     "say": "thá"
+    },
+    {
+     "my": "တိ",
+     "rom": "ti",
+     "tone": 1,
+     "say": "dí",
+     "say_rom": "di",
+     "voiced": true
+    },
+    {
+     "my": "ရ",
+     "rom": "ya.",
+     "tone": 3,
+     "say": "yá"
+    },
+    {
+     "my": "နေ",
+     "rom": "ne",
+     "tone": 1,
+     "say": "nay"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.202,
+      "d": 0.206,
+      "word": 0
+     },
+     {
+      "t": 0.408,
+      "d": 0.206,
+      "word": 0
+     },
+     {
+      "t": 0.613,
+      "d": 0.206,
+      "word": 0
+     },
+     {
+      "t": 0.819,
+      "d": 0.206,
+      "word": 0
+     },
+     {
+      "t": 1.025,
+      "d": 0.206,
+      "word": 0
+     },
+     {
+      "t": 1.231,
+      "d": 0.206,
+      "word": 0
+     },
+     {
+      "t": 1.436,
+      "d": 0.206,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.33,
+      "d": 0.368,
+      "word": 0
+     },
+     {
+      "t": 0.698,
+      "d": 0.368,
+      "word": 0
+     },
+     {
+      "t": 1.067,
+      "d": 0.368,
+      "word": 0
+     },
+     {
+      "t": 1.435,
+      "d": 0.368,
+      "word": 0
+     },
+     {
+      "t": 1.803,
+      "d": 0.368,
+      "word": 0
+     },
+     {
+      "t": 2.171,
+      "d": 0.368,
+      "word": 0
+     },
+     {
+      "t": 2.54,
+      "d": 0.368,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.642,
+    "slow": 2.909
+   }
+  },
+  {
+   "id": "you-make-me-smile",
+   "cat": "dating",
+   "en": "You make me smile",
+   "my": "မင်းကြောင့်ပြုံးမိတယ်",
+   "rom": "min: kyaun. pyoun: mi. te",
+   "phon": "min GYAUN byohn mí deh",
+   "syllables": [
+    {
+     "my": "မင်း",
+     "rom": "min:",
+     "tone": 2,
+     "say": "min"
+    },
+    {
+     "my": "ကြောင့်",
+     "rom": "kyaun.",
+     "tone": 3,
+     "say": "GYAUN",
+     "say_rom": "gyaun.",
+     "voiced": true
+    },
+    {
+     "my": "ပြုံး",
+     "rom": "pyoun:",
+     "tone": 2,
+     "say": "byohn",
+     "say_rom": "byoun:",
+     "voiced": true
+    },
+    {
+     "my": "မိ",
+     "rom": "mi.",
+     "tone": 3,
+     "say": "mí"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.189,
+      "d": 0.245,
+      "word": 0
+     },
+     {
+      "t": 0.434,
+      "d": 0.245,
+      "word": 0
+     },
+     {
+      "t": 0.68,
+      "d": 0.245,
+      "word": 0
+     },
+     {
+      "t": 0.925,
+      "d": 0.245,
+      "word": 0
+     },
+     {
+      "t": 1.171,
+      "d": 0.245,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.305,
+      "d": 0.436,
+      "word": 0
+     },
+     {
+      "t": 0.741,
+      "d": 0.436,
+      "word": 0
+     },
+     {
+      "t": 1.178,
+      "d": 0.436,
+      "word": 0
+     },
+     {
+      "t": 1.614,
+      "d": 0.436,
+      "word": 0
+     },
+     {
+      "t": 2.051,
+      "d": 0.436,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.415,
+    "slow": 2.487
+   }
+  },
+  {
+   "id": "heart-races",
+   "cat": "dating",
+   "en": "My heart races when I see you",
+   "my": "မင်းကိုမြင်ရင်ရင်ခုန်တယ်",
+   "rom": "min: ko myin yin yin hkoun te",
+   "phon": "min goh myin yin yin GOUN deh",
+   "syllables": [
+    {
+     "my": "မင်း",
+     "rom": "min:",
+     "tone": 2,
+     "say": "min"
+    },
+    {
+     "my": "ကို",
+     "rom": "ko",
+     "tone": 1,
+     "say": "goh",
+     "say_rom": "go",
+     "voiced": true
+    },
+    {
+     "my": "မြင်",
+     "rom": "myin",
+     "tone": 1,
+     "say": "myin"
+    },
+    {
+     "my": "ရင်",
+     "rom": "yin",
+     "tone": 1,
+     "say": "yin"
+    },
+    {
+     "my": "ရင်",
+     "rom": "yin",
+     "tone": 1,
+     "say": "yin"
+    },
+    {
+     "my": "ခုန်",
+     "rom": "hkoun",
+     "tone": 1,
+     "say": "GOUN",
+     "say_rom": "goun",
+     "voiced": true
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.194,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 0.414,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 0.635,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 0.855,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 1.076,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 1.296,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 1.517,
+      "d": 0.22,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.315,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 0.709,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 1.103,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 1.497,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 1.892,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 2.286,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 2.68,
+      "d": 0.394,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.737,
+    "slow": 3.075
+   }
+  },
+  {
+   "id": "only-you",
+   "cat": "dating",
+   "en": "You're the only one I want",
+   "my": "မင်းကိုပဲလိုချင်တယ်",
+   "rom": "min: ko peh: lo chin te",
+   "phon": "min goh beh loh chin DEH",
+   "syllables": [
+    {
+     "my": "မင်း",
+     "rom": "min:",
+     "tone": 2,
+     "say": "min"
+    },
+    {
+     "my": "ကို",
+     "rom": "ko",
+     "tone": 1,
+     "say": "goh",
+     "say_rom": "go",
+     "voiced": true
+    },
+    {
+     "my": "ပဲ",
+     "rom": "peh:",
+     "tone": 2,
+     "say": "beh",
+     "say_rom": "beh:",
+     "voiced": true
+    },
+    {
+     "my": "လို",
+     "rom": "lo",
+     "tone": 1,
+     "say": "loh"
+    },
+    {
+     "my": "ချင်",
+     "rom": "chin",
+     "tone": 1,
+     "say": "chin"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "DEH",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.207,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.431,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.656,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.88,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 1.104,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 1.329,
+      "d": 0.224,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.338,
+      "d": 0.4,
+      "word": 0
+     },
+     {
+      "t": 0.738,
+      "d": 0.4,
+      "word": 0
+     },
+     {
+      "t": 1.138,
+      "d": 0.4,
+      "word": 0
+     },
+     {
+      "t": 1.538,
+      "d": 0.4,
+      "word": 0
+     },
+     {
+      "t": 1.939,
+      "d": 0.4,
+      "word": 0
+     },
+     {
+      "t": 2.339,
+      "d": 0.4,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.554,
+    "slow": 2.739
+   }
+  },
+  {
+   "id": "hold-your-hand",
+   "cat": "dating",
+   "en": "Can I hold your hand?",
+   "my": "လက်ကိုင်လို့ရလား",
+   "rom": "leq kain lo. ya. la:",
+   "phon": "let KAIN lóh yá lah",
+   "syllables": [
+    {
+     "my": "လက်",
+     "rom": "leq",
+     "tone": 4,
+     "say": "let"
+    },
+    {
+     "my": "ကိုင်",
+     "rom": "kain",
+     "tone": 1,
+     "say": "KAIN"
+    },
+    {
+     "my": "လို့",
+     "rom": "lo.",
+     "tone": 3,
+     "say": "lóh"
+    },
+    {
+     "my": "ရ",
+     "rom": "ya.",
+     "tone": 3,
+     "say": "yá"
+    },
+    {
+     "my": "လား",
+     "rom": "la:",
+     "tone": 2,
+     "say": "lah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.203,
+      "d": 0.208,
+      "word": 0
+     },
+     {
+      "t": 0.411,
+      "d": 0.208,
+      "word": 0
+     },
+     {
+      "t": 0.619,
+      "d": 0.208,
+      "word": 0
+     },
+     {
+      "t": 0.827,
+      "d": 0.208,
+      "word": 0
+     },
+     {
+      "t": 1.035,
+      "d": 0.208,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.332,
+      "d": 0.368,
+      "word": 0
+     },
+     {
+      "t": 0.7,
+      "d": 0.368,
+      "word": 0
+     },
+     {
+      "t": 1.068,
+      "d": 0.368,
+      "word": 0
+     },
+     {
+      "t": 1.437,
+      "d": 0.368,
+      "word": 0
+     },
+     {
+      "t": 1.805,
+      "d": 0.368,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.243,
+    "slow": 2.174
+   }
+  },
+  {
+   "id": "let-me-pay",
+   "cat": "dating",
+   "en": "Let me get this",
+   "my": "ကျွန်တော်ရှင်းမယ်",
+   "rom": "kyun taw shin: me",
+   "phon": "chun daw SHIN meh",
+   "syllables": [
+    {
+     "my": "ကျွန်",
+     "rom": "kyun",
+     "tone": 1,
+     "say": "chun"
+    },
+    {
+     "my": "တော်",
+     "rom": "taw",
+     "tone": 1,
+     "say": "daw",
+     "say_rom": "daw",
+     "voiced": true
+    },
+    {
+     "my": "ရှင်း",
+     "rom": "shin:",
+     "tone": 2,
+     "say": "SHIN"
+    },
+    {
+     "my": "မယ်",
+     "rom": "me",
+     "tone": 1,
+     "say": "meh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.205,
+      "d": 0.24,
+      "word": 0
+     },
+     {
+      "t": 0.445,
+      "d": 0.24,
+      "word": 0
+     },
+     {
+      "t": 0.685,
+      "d": 0.24,
+      "word": 0
+     },
+     {
+      "t": 0.925,
+      "d": 0.24,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.334,
+      "d": 0.425,
+      "word": 0
+     },
+     {
+      "t": 0.759,
+      "d": 0.425,
+      "word": 0
+     },
+     {
+      "t": 1.183,
+      "d": 0.425,
+      "word": 0
+     },
+     {
+      "t": 1.608,
+      "d": 0.425,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.165,
+    "slow": 2.034
+   }
+  },
+  {
+   "id": "always-together",
+   "cat": "serious",
+   "en": "I want us to always be together",
+   "my": "အမြဲအတူရှိချင်တယ်",
+   "rom": "a myeh: a tu shi. chin te",
+   "phon": "uh myeh uh doo shí chin DEH",
+   "syllables": [
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "မြဲ",
+     "rom": "myeh:",
+     "tone": 2,
+     "say": "myeh"
+    },
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "တူ",
+     "rom": "tu",
+     "tone": 1,
+     "say": "doo",
+     "say_rom": "du",
+     "voiced": true
+    },
+    {
+     "my": "ရှိ",
+     "rom": "shi.",
+     "tone": 3,
+     "say": "shí"
+    },
+    {
+     "my": "ချင်",
+     "rom": "chin",
+     "tone": 1,
+     "say": "chin"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "DEH",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.187,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.386,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.585,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.784,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.982,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 1.181,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 1.38,
+      "d": 0.199,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.301,
+      "d": 0.355,
+      "word": 0
+     },
+     {
+      "t": 0.656,
+      "d": 0.355,
+      "word": 0
+     },
+     {
+      "t": 1.011,
+      "d": 0.355,
+      "word": 0
+     },
+     {
+      "t": 1.366,
+      "d": 0.355,
+      "word": 0
+     },
+     {
+      "t": 1.722,
+      "d": 0.355,
+      "word": 0
+     },
+     {
+      "t": 2.077,
+      "d": 0.355,
+      "word": 0
+     },
+     {
+      "t": 2.432,
+      "d": 0.355,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.579,
+    "slow": 2.786
+   }
+  },
+  {
+   "id": "want-to-marry",
+   "cat": "serious",
+   "en": "I want to marry you",
+   "my": "လက်ထပ်ချင်တယ်",
+   "rom": "leq htaq chin te",
+   "phon": "let TAT chin deh",
+   "syllables": [
+    {
+     "my": "လက်",
+     "rom": "leq",
+     "tone": 4,
+     "say": "let"
+    },
+    {
+     "my": "ထပ်",
+     "rom": "htaq",
+     "tone": 4,
+     "say": "TAT"
+    },
+    {
+     "my": "ချင်",
+     "rom": "chin",
+     "tone": 1,
+     "say": "chin"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.203,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 0.423,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 0.643,
+      "d": 0.22,
+      "word": 0
+     },
+     {
+      "t": 0.864,
+      "d": 0.22,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.331,
+      "d": 0.389,
+      "word": 0
+     },
+     {
+      "t": 0.72,
+      "d": 0.389,
+      "word": 0
+     },
+     {
+      "t": 1.109,
+      "d": 0.389,
+      "word": 0
+     },
+     {
+      "t": 1.497,
+      "d": 0.389,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.084,
+    "slow": 1.885
+   }
+  },
+  {
+   "id": "meet-your-parents",
+   "cat": "serious",
+   "en": "I'd like to meet your parents",
+   "my": "မိဘတွေကိုတွေ့ချင်တယ်",
+   "rom": "mi. ba. twe ko twe. chin te",
+   "phon": "mí bá dway goh tway chin DEH",
+   "syllables": [
+    {
+     "my": "မိ",
+     "rom": "mi.",
+     "tone": 3,
+     "say": "mí"
+    },
+    {
+     "my": "ဘ",
+     "rom": "ba.",
+     "tone": 3,
+     "say": "bá"
+    },
+    {
+     "my": "တွေ",
+     "rom": "twe",
+     "tone": 1,
+     "say": "dway",
+     "say_rom": "dwe",
+     "voiced": true
+    },
+    {
+     "my": "ကို",
+     "rom": "ko",
+     "tone": 1,
+     "say": "goh",
+     "say_rom": "go",
+     "voiced": true
+    },
+    {
+     "my": "တွေ့",
+     "rom": "twe.",
+     "tone": 3,
+     "say": "tway"
+    },
+    {
+     "my": "ချင်",
+     "rom": "chin",
+     "tone": 1,
+     "say": "chin"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "DEH",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.199,
+      "d": 0.205,
+      "word": 0
+     },
+     {
+      "t": 0.404,
+      "d": 0.205,
+      "word": 0
+     },
+     {
+      "t": 0.61,
+      "d": 0.205,
+      "word": 0
+     },
+     {
+      "t": 0.815,
+      "d": 0.205,
+      "word": 0
+     },
+     {
+      "t": 1.021,
+      "d": 0.205,
+      "word": 0
+     },
+     {
+      "t": 1.226,
+      "d": 0.205,
+      "word": 0
+     },
+     {
+      "t": 1.432,
+      "d": 0.205,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.324,
+      "d": 0.367,
+      "word": 0
+     },
+     {
+      "t": 0.691,
+      "d": 0.367,
+      "word": 0
+     },
+     {
+      "t": 1.058,
+      "d": 0.367,
+      "word": 0
+     },
+     {
+      "t": 1.425,
+      "d": 0.367,
+      "word": 0
+     },
+     {
+      "t": 1.791,
+      "d": 0.367,
+      "word": 0
+     },
+     {
+      "t": 2.158,
+      "d": 0.367,
+      "word": 0
+     },
+     {
+      "t": 2.525,
+      "d": 0.367,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.637,
+    "slow": 2.892
+   }
+  },
+  {
+   "id": "serious-about-you",
+   "cat": "serious",
+   "en": "I'm serious about you",
+   "my": "မင်းကိုအမှန်တကယ်ချစ်တယ်",
+   "rom": "min: ko a hman ta keh chiq te",
+   "phon": "min goh uh hman dá geh CHIT teh",
+   "syllables": [
+    {
+     "my": "မင်း",
+     "rom": "min:",
+     "tone": 2,
+     "say": "min"
+    },
+    {
+     "my": "ကို",
+     "rom": "ko",
+     "tone": 1,
+     "say": "goh",
+     "say_rom": "go",
+     "voiced": true
+    },
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "မှန်",
+     "rom": "hman",
+     "tone": 1,
+     "say": "hman"
+    },
+    {
+     "my": "တ",
+     "rom": "ta",
+     "tone": 1,
+     "say": "dá",
+     "say_rom": "da",
+     "voiced": true
+    },
+    {
+     "my": "ကယ်",
+     "rom": "keh",
+     "tone": 1,
+     "say": "geh",
+     "say_rom": "geh",
+     "voiced": true
+    },
+    {
+     "my": "ချစ်",
+     "rom": "chiq",
+     "tone": 4,
+     "say": "CHIT"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "teh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.201,
+      "d": 0.204,
+      "word": 0
+     },
+     {
+      "t": 0.405,
+      "d": 0.204,
+      "word": 0
+     },
+     {
+      "t": 0.609,
+      "d": 0.204,
+      "word": 0
+     },
+     {
+      "t": 0.812,
+      "d": 0.204,
+      "word": 0
+     },
+     {
+      "t": 1.016,
+      "d": 0.204,
+      "word": 0
+     },
+     {
+      "t": 1.22,
+      "d": 0.204,
+      "word": 0
+     },
+     {
+      "t": 1.423,
+      "d": 0.204,
+      "word": 0
+     },
+     {
+      "t": 1.627,
+      "d": 0.204,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.325,
+      "d": 0.365,
+      "word": 0
+     },
+     {
+      "t": 0.69,
+      "d": 0.365,
+      "word": 0
+     },
+     {
+      "t": 1.055,
+      "d": 0.365,
+      "word": 0
+     },
+     {
+      "t": 1.42,
+      "d": 0.365,
+      "word": 0
+     },
+     {
+      "t": 1.785,
+      "d": 0.365,
+      "word": 0
+     },
+     {
+      "t": 2.151,
+      "d": 0.365,
+      "word": 0
+     },
+     {
+      "t": 2.516,
+      "d": 0.365,
+      "word": 0
+     },
+     {
+      "t": 2.881,
+      "d": 0.365,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.83,
+    "slow": 3.246
+   }
+  },
+  {
+   "id": "im-right-here",
+   "cat": "comfort",
+   "en": "I'm right here",
+   "my": "ဒီမှာရှိတယ်",
+   "rom": "di hma shi. te",
+   "phon": "dee hmah SHÍ deh",
+   "syllables": [
+    {
+     "my": "ဒီ",
+     "rom": "di",
+     "tone": 1,
+     "say": "dee"
+    },
+    {
+     "my": "မှာ",
+     "rom": "hma",
+     "tone": 1,
+     "say": "hmah"
+    },
+    {
+     "my": "ရှိ",
+     "rom": "shi.",
+     "tone": 3,
+     "say": "SHÍ"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.184,
+      "d": 0.225,
+      "word": 0
+     },
+     {
+      "t": 0.409,
+      "d": 0.225,
+      "word": 0
+     },
+     {
+      "t": 0.633,
+      "d": 0.225,
+      "word": 0
+     },
+     {
+      "t": 0.858,
+      "d": 0.225,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.294,
+      "d": 0.397,
+      "word": 0
+     },
+     {
+      "t": 0.691,
+      "d": 0.397,
+      "word": 0
+     },
+     {
+      "t": 1.089,
+      "d": 0.397,
+      "word": 0
+     },
+     {
+      "t": 1.486,
+      "d": 0.397,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.083,
+    "slow": 1.884
+   }
+  },
+  {
+   "id": "tell-me",
+   "cat": "comfort",
+   "en": "Tell me about it",
+   "my": "ပြောပြပါ",
+   "rom": "pyaw pya. pa",
+   "phon": "PYAW byá bah",
+   "syllables": [
+    {
+     "my": "ပြော",
+     "rom": "pyaw",
+     "tone": 1,
+     "say": "PYAW"
+    },
+    {
+     "my": "ပြ",
+     "rom": "pya.",
+     "tone": 3,
+     "say": "byá",
+     "say_rom": "bya.",
+     "voiced": true
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.193,
+      "d": 0.259,
+      "word": 0
+     },
+     {
+      "t": 0.452,
+      "d": 0.259,
+      "word": 0
+     },
+     {
+      "t": 0.71,
+      "d": 0.259,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.311,
+      "d": 0.453,
+      "word": 0
+     },
+     {
+      "t": 0.764,
+      "d": 0.453,
+      "word": 0
+     },
+     {
+      "t": 1.216,
+      "d": 0.453,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.969,
+    "slow": 1.669
+   }
+  },
+  {
+   "id": "will-be-ok",
+   "cat": "comfort",
+   "en": "It'll be all right",
+   "my": "အဆင်ပြေသွားမှာပါ",
+   "rom": "a hsin pye thwa: hma pa",
+   "phon": "uh hsin PYAY thwah hmah bah",
+   "syllables": [
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "ဆင်",
+     "rom": "hsin",
+     "tone": 1,
+     "say": "hsin"
+    },
+    {
+     "my": "ပြေ",
+     "rom": "pye",
+     "tone": 1,
+     "say": "PYAY"
+    },
+    {
+     "my": "သွား",
+     "rom": "thwa:",
+     "tone": 2,
+     "say": "thwah"
+    },
+    {
+     "my": "မှာ",
+     "rom": "hma",
+     "tone": 1,
+     "say": "hmah"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.177,
+      "d": 0.216,
+      "word": 0
+     },
+     {
+      "t": 0.393,
+      "d": 0.216,
+      "word": 0
+     },
+     {
+      "t": 0.61,
+      "d": 0.216,
+      "word": 0
+     },
+     {
+      "t": 0.826,
+      "d": 0.216,
+      "word": 0
+     },
+     {
+      "t": 1.042,
+      "d": 0.216,
+      "word": 0
+     },
+     {
+      "t": 1.259,
+      "d": 0.216,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.283,
+      "d": 0.386,
+      "word": 0
+     },
+     {
+      "t": 0.669,
+      "d": 0.386,
+      "word": 0
+     },
+     {
+      "t": 1.054,
+      "d": 0.386,
+      "word": 0
+     },
+     {
+      "t": 1.44,
+      "d": 0.386,
+      "word": 0
+     },
+     {
+      "t": 1.826,
+      "d": 0.386,
+      "word": 0
+     },
+     {
+      "t": 2.211,
+      "d": 0.386,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.476,
+    "slow": 2.597
+   }
+  },
+  {
+   "id": "dont-cry",
+   "cat": "comfort",
+   "en": "Please don't cry",
+   "my": "မငိုပါနဲ့",
+   "rom": "ma. ngo pa neh.",
+   "phon": "má NGOH bah neh",
+   "syllables": [
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "ငို",
+     "rom": "ngo",
+     "tone": 1,
+     "say": "NGOH"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    },
+    {
+     "my": "နဲ့",
+     "rom": "neh.",
+     "tone": 3,
+     "say": "neh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.195,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 0.405,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 0.616,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 0.827,
+      "d": 0.21,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.314,
+      "d": 0.37,
+      "word": 0
+     },
+     {
+      "t": 0.684,
+      "d": 0.37,
+      "word": 0
+     },
+     {
+      "t": 1.054,
+      "d": 0.37,
+      "word": 0
+     },
+     {
+      "t": 1.423,
+      "d": 0.37,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.037,
+    "slow": 1.793
+   }
+  },
+  {
+   "id": "im-with-you",
+   "cat": "comfort",
+   "en": "I'm with you",
+   "my": "မင်းနဲ့အတူရှိတယ်",
+   "rom": "min: neh. a tu shi. te",
+   "phon": "min néh uh doo SHÍ deh",
+   "syllables": [
+    {
+     "my": "မင်း",
+     "rom": "min:",
+     "tone": 2,
+     "say": "min"
+    },
+    {
+     "my": "နဲ့",
+     "rom": "neh.",
+     "tone": 3,
+     "say": "néh"
+    },
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "တူ",
+     "rom": "tu",
+     "tone": 1,
+     "say": "doo",
+     "say_rom": "du",
+     "voiced": true
+    },
+    {
+     "my": "ရှိ",
+     "rom": "shi.",
+     "tone": 3,
+     "say": "SHÍ"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.182,
+      "d": 0.198,
+      "word": 0
+     },
+     {
+      "t": 0.38,
+      "d": 0.198,
+      "word": 0
+     },
+     {
+      "t": 0.578,
+      "d": 0.198,
+      "word": 0
+     },
+     {
+      "t": 0.776,
+      "d": 0.198,
+      "word": 0
+     },
+     {
+      "t": 0.973,
+      "d": 0.198,
+      "word": 0
+     },
+     {
+      "t": 1.171,
+      "d": 0.198,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.292,
+      "d": 0.352,
+      "word": 0
+     },
+     {
+      "t": 0.644,
+      "d": 0.352,
+      "word": 0
+     },
+     {
+      "t": 0.997,
+      "d": 0.352,
+      "word": 0
+     },
+     {
+      "t": 1.349,
+      "d": 0.352,
+      "word": 0
+     },
+     {
+      "t": 1.701,
+      "d": 0.352,
+      "word": 0
+     },
+     {
+      "t": 2.054,
+      "d": 0.352,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.369,
+    "slow": 2.406
+   }
+  },
+  {
+   "id": "count-on-me",
+   "cat": "comfort",
+   "en": "You can count on me",
+   "my": "စိတ်ချလို့ရတယ်",
+   "rom": "seiq cha. lo. ya. te",
+   "phon": "sate chá lóh yá deh",
+   "syllables": [
+    {
+     "my": "စိတ်",
+     "rom": "seiq",
+     "tone": 4,
+     "say": "sate"
+    },
+    {
+     "my": "ချ",
+     "rom": "cha.",
+     "tone": 3,
+     "say": "chá"
+    },
+    {
+     "my": "လို့",
+     "rom": "lo.",
+     "tone": 3,
+     "say": "lóh"
+    },
+    {
+     "my": "ရ",
+     "rom": "ya.",
+     "tone": 3,
+     "say": "yá"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.218,
+      "d": 0.227,
+      "word": 0
+     },
+     {
+      "t": 0.445,
+      "d": 0.227,
+      "word": 0
+     },
+     {
+      "t": 0.671,
+      "d": 0.227,
+      "word": 0
+     },
+     {
+      "t": 0.898,
+      "d": 0.227,
+      "word": 0
+     },
+     {
+      "t": 1.124,
+      "d": 0.227,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.358,
+      "d": 0.404,
+      "word": 0
+     },
+     {
+      "t": 0.762,
+      "d": 0.404,
+      "word": 0
+     },
+     {
+      "t": 1.166,
+      "d": 0.404,
+      "word": 0
+     },
+     {
+      "t": 1.57,
+      "d": 0.404,
+      "word": 0
+     },
+     {
+      "t": 1.974,
+      "d": 0.404,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.35,
+    "slow": 2.378
+   }
+  },
+  {
+   "id": "take-your-time",
+   "cat": "comfort",
+   "en": "Take your time",
+   "my": "ဖြေးဖြေးပဲလုပ်ပါ",
+   "rom": "hpye: hpye: peh: louq pa",
+   "phon": "pyay pyay BEH lout pah",
+   "syllables": [
+    {
+     "my": "ဖြေး",
+     "rom": "hpye:",
+     "tone": 2,
+     "say": "pyay"
+    },
+    {
+     "my": "ဖြေး",
+     "rom": "hpye:",
+     "tone": 2,
+     "say": "pyay"
+    },
+    {
+     "my": "ပဲ",
+     "rom": "peh:",
+     "tone": 2,
+     "say": "BEH",
+     "say_rom": "beh:",
+     "voiced": true
+    },
+    {
+     "my": "လုပ်",
+     "rom": "louq",
+     "tone": 4,
+     "say": "lout"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "pah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.179,
+      "d": 0.262,
+      "word": 0
+     },
+     {
+      "t": 0.441,
+      "d": 0.262,
+      "word": 0
+     },
+     {
+      "t": 0.703,
+      "d": 0.262,
+      "word": 0
+     },
+     {
+      "t": 0.964,
+      "d": 0.262,
+      "word": 0
+     },
+     {
+      "t": 1.226,
+      "d": 0.262,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.285,
+      "d": 0.465,
+      "word": 0
+     },
+     {
+      "t": 0.75,
+      "d": 0.465,
+      "word": 0
+     },
+     {
+      "t": 1.216,
+      "d": 0.465,
+      "word": 0
+     },
+     {
+      "t": 1.681,
+      "d": 0.465,
+      "word": 0
+     },
+     {
+      "t": 2.147,
+      "d": 0.465,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.488,
+    "slow": 2.612
+   }
+  },
+  {
+   "id": "off-to-sleep",
+   "cat": "messages",
+   "en": "Off to sleep now, okay?",
+   "my": "အိပ်တော့နော်",
+   "rom": "eiq taw. naw",
+   "phon": "ATE táw naw",
+   "syllables": [
+    {
+     "my": "အိပ်",
+     "rom": "eiq",
+     "tone": 4,
+     "say": "ATE"
+    },
+    {
+     "my": "တော့",
+     "rom": "taw.",
+     "tone": 3,
+     "say": "táw"
+    },
+    {
+     "my": "နော်",
+     "rom": "naw",
+     "tone": 1,
+     "say": "naw"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.213,
+      "d": 0.246,
+      "word": 0
+     },
+     {
+      "t": 0.459,
+      "d": 0.246,
+      "word": 0
+     },
+     {
+      "t": 0.704,
+      "d": 0.246,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.347,
+      "d": 0.432,
+      "word": 0
+     },
+     {
+      "t": 0.779,
+      "d": 0.432,
+      "word": 0
+     },
+     {
+      "t": 1.211,
+      "d": 0.432,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.95,
+    "slow": 1.643
+   },
+   "note": "What people actually send instead of a literal \"good night\"."
+  },
+  {
+   "id": "miss-your-voice",
+   "cat": "messages",
+   "en": "I miss your voice",
+   "my": "မင်းအသံလွမ်းတယ်",
+   "rom": "min: a than lun: te",
+   "phon": "min uh DHAN loon deh",
+   "syllables": [
+    {
+     "my": "မင်း",
+     "rom": "min:",
+     "tone": 2,
+     "say": "min"
+    },
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "သံ",
+     "rom": "than",
+     "tone": 1,
+     "say": "DHAN",
+     "say_rom": "dhan",
+     "voiced": true
+    },
+    {
+     "my": "လွမ်း",
+     "rom": "lun:",
+     "tone": 2,
+     "say": "loon"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.198,
+      "d": 0.221,
+      "word": 0
+     },
+     {
+      "t": 0.419,
+      "d": 0.221,
+      "word": 0
+     },
+     {
+      "t": 0.64,
+      "d": 0.221,
+      "word": 0
+     },
+     {
+      "t": 0.861,
+      "d": 0.221,
+      "word": 0
+     },
+     {
+      "t": 1.082,
+      "d": 0.221,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.319,
+      "d": 0.393,
+      "word": 0
+     },
+     {
+      "t": 0.712,
+      "d": 0.393,
+      "word": 0
+     },
+     {
+      "t": 1.105,
+      "d": 0.393,
+      "word": 0
+     },
+     {
+      "t": 1.497,
+      "d": 0.393,
+      "word": 0
+     },
+     {
+      "t": 1.89,
+      "d": 0.393,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.302,
+    "slow": 2.283
+   }
+  },
+  {
+   "id": "call-me",
+   "cat": "messages",
+   "en": "Give me a call",
+   "my": "ဖုန်းဆက်ပါဦး",
+   "rom": "hpoun: hseq pa u:",
+   "phon": "phohn ZET pah oo",
+   "syllables": [
+    {
+     "my": "ဖုန်း",
+     "rom": "hpoun:",
+     "tone": 2,
+     "say": "phohn"
+    },
+    {
+     "my": "ဆက်",
+     "rom": "hseq",
+     "tone": 4,
+     "say": "ZET",
+     "say_rom": "zeq",
+     "voiced": true
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "pah"
+    },
+    {
+     "my": "ဦး",
+     "rom": "u:",
+     "tone": 2,
+     "say": "oo"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.222,
+      "d": 0.233,
+      "word": 0
+     },
+     {
+      "t": 0.455,
+      "d": 0.233,
+      "word": 0
+     },
+     {
+      "t": 0.688,
+      "d": 0.233,
+      "word": 0
+     },
+     {
+      "t": 0.921,
+      "d": 0.233,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.364,
+      "d": 0.413,
+      "word": 0
+     },
+     {
+      "t": 0.777,
+      "d": 0.413,
+      "word": 0
+     },
+     {
+      "t": 1.19,
+      "d": 0.413,
+      "word": 0
+     },
+     {
+      "t": 1.602,
+      "d": 0.413,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.154,
+    "slow": 2.015
+   }
+  },
+  {
+   "id": "see-you-soon",
+   "cat": "messages",
+   "en": "See you soon",
+   "my": "မကြာခင်တွေ့မယ်",
+   "rom": "ma. kya hkin twe. me",
+   "phon": "má gyah gin TWAY meh",
+   "syllables": [
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "ကြာ",
+     "rom": "kya",
+     "tone": 1,
+     "say": "gyah",
+     "say_rom": "gya",
+     "voiced": true
+    },
+    {
+     "my": "ခင်",
+     "rom": "hkin",
+     "tone": 1,
+     "say": "gin",
+     "say_rom": "gin",
+     "voiced": true
+    },
+    {
+     "my": "တွေ့",
+     "rom": "twe.",
+     "tone": 3,
+     "say": "TWAY"
+    },
+    {
+     "my": "မယ်",
+     "rom": "me",
+     "tone": 1,
+     "say": "meh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.197,
+      "d": 0.227,
+      "word": 0
+     },
+     {
+      "t": 0.424,
+      "d": 0.227,
+      "word": 0
+     },
+     {
+      "t": 0.65,
+      "d": 0.227,
+      "word": 0
+     },
+     {
+      "t": 0.877,
+      "d": 0.227,
+      "word": 0
+     },
+     {
+      "t": 1.103,
+      "d": 0.227,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.32,
+      "d": 0.402,
+      "word": 0
+     },
+     {
+      "t": 0.722,
+      "d": 0.402,
+      "word": 0
+     },
+     {
+      "t": 1.125,
+      "d": 0.402,
+      "word": 0
+     },
+     {
+      "t": 1.527,
+      "d": 0.402,
+      "word": 0
+     },
+     {
+      "t": 1.93,
+      "d": 0.402,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.33,
+    "slow": 2.332
+   }
+  },
+  {
+   "id": "text-when-home",
+   "cat": "messages",
+   "en": "Let me know when you get home",
+   "my": "အိမ်ရောက်ရင်ပြောနော်",
+   "rom": "ein yauq yin pyaw naw",
+   "phon": "ain yauk yin PYAW naw",
+   "syllables": [
+    {
+     "my": "အိမ်",
+     "rom": "ein",
+     "tone": 1,
+     "say": "ain"
+    },
+    {
+     "my": "ရောက်",
+     "rom": "yauq",
+     "tone": 4,
+     "say": "yauk"
+    },
+    {
+     "my": "ရင်",
+     "rom": "yin",
+     "tone": 1,
+     "say": "yin"
+    },
+    {
+     "my": "ပြော",
+     "rom": "pyaw",
+     "tone": 1,
+     "say": "PYAW"
+    },
+    {
+     "my": "နော်",
+     "rom": "naw",
+     "tone": 1,
+     "say": "naw"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.202,
+      "d": 0.229,
+      "word": 0
+     },
+     {
+      "t": 0.431,
+      "d": 0.229,
+      "word": 0
+     },
+     {
+      "t": 0.66,
+      "d": 0.229,
+      "word": 0
+     },
+     {
+      "t": 0.889,
+      "d": 0.229,
+      "word": 0
+     },
+     {
+      "t": 1.118,
+      "d": 0.229,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.329,
+      "d": 0.407,
+      "word": 0
+     },
+     {
+      "t": 0.736,
+      "d": 0.407,
+      "word": 0
+     },
+     {
+      "t": 1.143,
+      "d": 0.407,
+      "word": 0
+     },
+     {
+      "t": 1.55,
+      "d": 0.407,
+      "word": 0
+     },
+     {
+      "t": 1.957,
+      "d": 0.407,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.347,
+    "slow": 2.364
+   }
+  },
+  {
+   "id": "reply-in-a-bit",
+   "cat": "messages",
+   "en": "I'll reply in a bit",
+   "my": "ခဏနေပြန်ပြောမယ်",
+   "rom": "hka. na. ne pyan pyaw me",
+   "phon": "khá ná nay pyan PYAW meh",
+   "syllables": [
+    {
+     "my": "ခ",
+     "rom": "hka.",
+     "tone": 3,
+     "say": "khá"
+    },
+    {
+     "my": "ဏ",
+     "rom": "na.",
+     "tone": 3,
+     "say": "ná"
+    },
+    {
+     "my": "နေ",
+     "rom": "ne",
+     "tone": 1,
+     "say": "nay"
+    },
+    {
+     "my": "ပြန်",
+     "rom": "pyan",
+     "tone": 1,
+     "say": "pyan"
+    },
+    {
+     "my": "ပြော",
+     "rom": "pyaw",
+     "tone": 1,
+     "say": "PYAW"
+    },
+    {
+     "my": "မယ်",
+     "rom": "me",
+     "tone": 1,
+     "say": "meh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.187,
+      "d": 0.221,
+      "word": 0
+     },
+     {
+      "t": 0.407,
+      "d": 0.221,
+      "word": 0
+     },
+     {
+      "t": 0.628,
+      "d": 0.221,
+      "word": 0
+     },
+     {
+      "t": 0.849,
+      "d": 0.221,
+      "word": 0
+     },
+     {
+      "t": 1.069,
+      "d": 0.221,
+      "word": 0
+     },
+     {
+      "t": 1.29,
+      "d": 0.221,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.298,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 0.692,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 1.086,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 1.48,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 1.873,
+      "d": 0.394,
+      "word": 0
+     },
+     {
+      "t": 2.267,
+      "d": 0.394,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.51,
+    "slow": 2.661
    }
   }
  ]

@@ -26,9 +26,11 @@ route — so the app just tells you where to tap.)
 
 ## What it does
 
-- **104 phrases** across affection, sweet talk, meeting the family, occasions
-  and blessings, the tea shop, meals, coming and going, checking in, chores,
-  and the "I'm still learning, say it slower" repair kit.
+- **Live mode** — the one built for actually being in front of her. See below.
+- **144 phrases** across affection, sweet talk, dating and flirting, getting
+  serious, comforting her, texts and voice notes, meeting the family, occasions
+  and blessings, the tea shop, meals, coming and going, checking in, chores, and
+  the "I'm still learning, say it slower" repair kit.
 - **Record yourself and hear it back** against the native clip, so you don't
   drill a wrong tone in without noticing.
 - **Continuous speed control**, 40% to 110% of native pace.
@@ -52,6 +54,35 @@ route — so the app just tells you where to tap.)
 - **Favourites** and search across English, the transcription, and the Burmese.
 - **Settings** (☰): install, updates, offline audio and storage, and display
   toggles.
+
+## Live mode
+
+Everything else in this app is for practising. Live mode is for the moment
+itself: AirPods in, phone in a pocket, someone in front of you. It is built so
+that using it doesn't read as using it.
+
+- **The stem drives it.** Squeeze to hear the line again, double-squeeze for the
+  next one. The phone never comes out. This is the whole feature — the rest is
+  support for it.
+- **The lock screen carries the line.** The English and the respelling go into
+  the media metadata, so glancing at a dark phone looks like checking what track
+  is playing, and you can read the line off it without unlocking anything.
+- **Rehearse** plays the line, leaves a beat for you to murmur it back, then
+  plays it once more. The version you say out loud is your second attempt, not
+  your first.
+- **Decks** are the queue: your saved phrases, your recent ones, or any
+  category. Switching deck is one tap.
+- **Dim** takes the screen to almost nothing, for when the phone is face-up on
+  the table between you. The first tap brings it back rather than firing
+  whatever was under your finger.
+- **Swipe** the card to move through the deck; tap it to play. The "Say it"
+  button is 78px tall and the full width of the screen, because it gets hit
+  without looking.
+- A **wake lock** keeps the screen alive while it's open. Unlocking a phone to
+  find your next line is the tell.
+
+`?live=1` opens it directly, and `&deck=dating` picks the deck — which is what
+makes it bindable to Back Tap or the Action Button through a Shortcut.
 
 ## The four tones
 
@@ -113,7 +144,11 @@ Specific things worth confirming before you lean on them:
 
 - **Register.** Burmese marks politeness heavily, and the line between warm and
   presumptuous moves with who you're speaking to. The family phrases lean
-  formal on purpose; the affection ones assume a partner.
+  formal on purpose; the affection, dating and getting-serious ones assume a
+  partner, and several of them use မင်း — the blunt-informal "you", which is
+  normal between people who are close and rude to anyone older. If in doubt,
+  drop the pronoun; Burmese does it constantly and none of these phrases need
+  it.
 - **Gendered forms.** "I" is ကျွန်တော် for a man and ကျွန်မ for a woman, and the
   polite sentence tag is ခင်ဗျာ for a man and ရှင် for a woman. The phrases here
   are written for a **male speaker**. Most of the time the pronoun is dropped
@@ -144,7 +179,7 @@ The app checks for a new version on launch and offers it rather than applying it
 silently: you get an **Update available** prompt with *Update* and *Later*. You
 can also check by hand from **☰ menu → Updates**. Accepting swaps in the new
 version and reloads; the downloaded audio is kept, so an update never costs you
-the 3.5 MB again.
+the 4.9 MB again.
 
 The mechanics are worth knowing if you change the deploy:
 
@@ -174,8 +209,8 @@ The build measures each rendered clip to find where the speech actually starts
 and stops, and stretches the TTS's reported word timings onto that. This is not
 a refinement — the TTS under-reports its own durations, much worse at the slow
 rate, and worst on the stacked clusters: it claims မင်္ဂလာပါ ends at 1.05s when
-the voice is still going at 1.61s. Trusting it cut the last syllable off 56 of
-the 208 clips, on the track a learner actually uses.
+the voice is still going at 1.61s. Trusting it cut the last syllable off a quarter of
+the clips, on the track a learner actually uses.
 
 The **slow** track is synthesised at `-45%`, so the voice genuinely enunciates more
 carefully rather than just being stretched. The speed slider picks whichever track

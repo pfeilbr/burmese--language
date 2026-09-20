@@ -675,3 +675,155 @@ body.has-quickbar .list { padding-bottom: calc(var(--safe-b) + 104px); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ── Live mode ───────────────────────────────────────────
+   Built for one-handed use in front of another person: everything is either
+   the full width of the screen or in the bottom third where a thumb already
+   is, and the line you read is the largest thing on the display by a long way.
+   Black rather than the app background, so a face-up phone looks switched off
+   in a dim room. */
+
+.live-btn {
+  flex: none;
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 8px 14px 8px 11px;
+  color: #1a1205; font-weight: 700;
+  background: var(--accent); border-color: var(--accent);
+}
+.live-btn svg { width: 15px; height: 15px; fill: currentColor; stroke: none; }
+.live-btn:active { filter: brightness(.92); background: var(--accent); }
+
+.ear-btn { margin: 0; color: var(--text-dim); }
+
+.live {
+  position: fixed; inset: 0; z-index: 85;
+  display: flex; flex-direction: column;
+  background: #000; color: #fff;
+  padding: calc(var(--safe-t) + 10px) 16px calc(var(--safe-b) + 12px);
+  animation: rise .2s cubic-bezier(.22,.75,.3,1);
+}
+
+/* Dimmed: the phone is on the table and should read as asleep. Kept just above
+   invisible rather than at zero so you can still find the card to tap. */
+.live.dimmed > * { opacity: .06; transition: opacity .35s; }
+.live.dimmed .live-card { opacity: .1; }
+
+.live-top {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--text-dim);
+}
+.live-top .close-btn { margin-left: -10px; color: var(--text-dim); }
+.live-deck-name { flex: 1; font-size: 14px; font-weight: 600; }
+.live-count { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.live-card {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px;
+  min-height: 0; padding: 8px 4px;
+  text-align: center;
+  border: none; background: none; color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.live-card.saying .live-say { color: var(--accent); }
+
+.live-en { margin: 0; font-size: 19px; font-weight: 600; color: #9aa4b2; }
+
+/* The line you actually read out loud. Sized off the viewport so it stays
+   legible at arm's length, and capped so a long phrase still fits. */
+.live-say {
+  margin: 0;
+  font-size: clamp(30px, 9vw, 52px); line-height: 1.16;
+  font-weight: 800; letter-spacing: -.02em;
+  transition: color .15s;
+}
+.live-my {
+  margin: 0;
+  font-family: var(--my-font);
+  font-size: clamp(17px, 5vw, 26px); line-height: 1.7;
+  color: #c3cad4; opacity: .9;
+}
+.live-note {
+  margin: 0; max-width: 34ch;
+  font-size: 13px; line-height: 1.45; color: #6b7482;
+}
+.live-note:empty { display: none; }
+
+.live-dots { display: flex; justify-content: center; gap: 6px; height: 7px; margin-bottom: 14px; }
+.live-dots i { width: 6px; height: 6px; border-radius: 50%; background: #2a313c; }
+.live-dots i.on { background: var(--accent); }
+
+.live-controls { display: flex; align-items: stretch; gap: 10px; }
+
+.live-step {
+  flex: none;
+  display: grid; place-items: center;
+  width: 62px;
+  background: #14181e;
+  border: 1px solid #2a313c; border-radius: 18px;
+  color: #fff;
+}
+.live-step svg { width: 26px; height: 26px; }
+.live-step:active { background: #1e242d; }
+
+/* The one control that gets hit without looking. */
+.live-say-btn {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 78px;
+  font-size: 19px; font-weight: 800; letter-spacing: -.01em;
+  color: #1a1205;
+  background: var(--accent);
+  border-radius: 18px;
+  box-shadow: 0 8px 26px -10px var(--accent);
+}
+.live-say-btn svg { width: 24px; height: 24px; fill: currentColor; stroke: none; }
+.live-say-btn:active { transform: scale(.985); }
+.live-say-btn:not(.playing) .i-stop { display: none; }
+.live-say-btn.playing .i-play { display: none; }
+
+.live-actions { display: flex; gap: 8px; margin-top: 10px; }
+
+.live-chip {
+  flex: 1;
+  padding: 11px 6px;
+  font-size: 13px; font-weight: 600; white-space: nowrap;
+  color: var(--text-dim);
+  background: #14181e;
+  border: 1px solid #2a313c; border-radius: 12px;
+}
+.live-chip[aria-pressed="true"] { color: #1a1205; background: var(--accent); border-color: var(--accent); }
+.live-chip:active { background: #1e242d; }
+
+.live-decks {
+  display: flex; gap: 8px;
+  margin: 10px -16px 0; padding: 0 16px 2px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.live-decks::-webkit-scrollbar { display: none; }
+
+.live-deck {
+  flex: none;
+  padding: 8px 13px;
+  font-size: 13px; font-weight: 600; white-space: nowrap;
+  color: var(--text-dim);
+  background: #14181e;
+  border: 1px solid #2a313c; border-radius: 999px;
+}
+.live-deck[aria-pressed="true"] { color: #fff; background: #2a313c; border-color: #3a4351; }
+
+.live-hint {
+  margin: 10px 0 0;
+  font-size: 11.5px; line-height: 1.45; text-align: center; color: #4a525e;
+}
+.live-hint b { color: #6b7482; font-weight: 700; }
+
+/* A short phone has no room for the deck strip and the footnote on top of a
+   usable card, and the card is what matters. */
+@media (max-height: 700px) {
+  .live-hint { display: none; }
+  .live-decks { margin-top: 8px; }
+}
+@media (max-height: 600px) {
+  .live-note, .live-decks { display: none; }
+}

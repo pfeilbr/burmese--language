@@ -183,6 +183,7 @@ function stopPlayback() {
   if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
   audio.pause();
   setPlayingUI(false);
+  setLiveSaying(false);   // every path out of playback, not just livePlay's own
   highlight(-1);
 }
 
@@ -269,7 +270,18 @@ function setMediaSession(phrase) {
     album: 'Say It In Burmese',
     artwork: [{ src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' }],
   });
-  const handlers = {
+  /* In live mode the deck is the thing being navigated, so the stem moves
+     through it: squeeze to hear the line again, double-squeeze for the next
+     one. That is the whole point of live mode -- it works with the phone still
+     in your pocket. Outside live mode there is nowhere to go, so both track
+     buttons just replay. */
+  const handlers = live ? {
+    play:  () => livePlay(),
+    pause: () => stopPlayback(),
+    stop:  () => stopPlayback(),
+    previoustrack: () => liveGo(-1),
+    nexttrack:     () => liveGo(1),
+  } : {
     play:  () => play(phrase),
     pause: () => stopPlayback(),
     stop:  () => stopPlayback(),
@@ -465,7 +477,9 @@ function hideSheet() {
   if (!activeSheet) return;
   const wasDrill = activeSheet === $('#drill');
   const wasDetail = activeSheet === el.sheet;
+  const wasLive = activeSheet === $('#live');
   if (wasDrill) { stopPlayback(); drill = null; }
+  if (wasLive) { stopPlayback(); live = null; releaseWakeLock(); }
   activeSheet.hidden = true;
   activeSheet = null;
   document.body.style.overflow = '';
@@ -740,6 +754,234 @@ $('#present-flip').addEventListener('click', e => {
   e.currentTarget.setAttribute('aria-pressed', String(on));
 });
 
+/* ── Live mode ───────────────────────────────────────────────────────
+   For the moment you are actually in: AirPods in, phone in a pocket, someone
+   in front of you. Everything here is built so that using it does not read as
+   using it.
+
+   - One deck, one line at a time, no list to scan and no sheet to open.
+   - The AirPods stem drives it (see setMediaSession): squeeze to hear the line
+     again, double-squeeze for the next. The phone never comes out.
+   - The lock screen carries the English and the respelling, so a glance at a
+     dark phone looks like checking what track is playing.
+   - Rehearse plays the line, leaves a beat to murmur it back, then plays it
+     once more -- so the version you say out loud is your second attempt.
+   - Dim takes the screen to almost nothing for the times the phone is face-up
+     on the table between you.
+   - A wake lock keeps the screen from sleeping mid-conversation, because
+     unlocking a phone to find your next line is the tell. */
+
+let live = null;              // { deck, ids, i }
+let wakeLock = null;
+let liveRehearse = store.get('liveRehearse', true);
+
+const liveCurrent = () => (live ? BY_ID.get(live.ids[live.i]) : null);
+
+function deckIds(deckId) {
+  if (deckId === 'fav') return [...favs];
+  if (deckId === 'recent') return recent.slice();
+  if (deckId === 'start') {
+    return DATA.phrases.filter(p => p.starter != null)
+      .sort((a, b) => a.starter - b.starter).map(p => p.id);
+  }
+  return DATA.phrases.filter(p => p.cat === deckId).map(p => p.id);
+}
+
+function liveDecks() {
+  return [
+    ...(favs.size ? [{ id: 'fav', name: '★ Saved' }] : []),
+    ...(recent.length ? [{ id: 'recent', name: 'Recent' }] : []),
+    { id: 'start', name: 'Start here' },
+    ...DATA.categories.map(c => ({ id: c.id, name: c.name })),
+  ];
+}
+
+/* The screen must not sleep while this is open, and iOS drops the lock
+   whenever the tab is backgrounded -- including every time the phone locks --
+   so it has to be re-taken on the way back. */
+async function requestWakeLock() {
+  if (!('wakeLock' in navigator)) return;
+  try { wakeLock = await navigator.wakeLock.request('screen'); } catch {}
+}
+function releaseWakeLock() {
+  try { if (wakeLock) wakeLock.release(); } catch {}
+  wakeLock = null;
+}
+document.addEventListener('visibilitychange', () => {
+  if (live && document.visibilityState === 'visible' && !wakeLock) requestWakeLock();
+});
+
+function openLive(deckId) {
+  const wanted = deckId || store.get('liveDeck', 'start');
+  let deck = wanted;
+  let ids = deckIds(deck).filter(id => BY_ID.has(id));
+  if (!ids.length) { deck = 'start'; ids = deckIds('start'); }
+  live = { deck, ids, i: 0 };
+  store.set('liveDeck', deck);
+  renderLive();
+  showSheet($('#live'));
+  requestWakeLock();
+}
+
+function renderLive() {
+  const phrase = liveCurrent();
+  if (!phrase) return;
+  const deck = liveDecks().find(d => d.id === live.deck);
+  $('#live-deck-name').textContent = deck ? deck.name : '';
+  $('#live-count').textContent = `${live.i + 1}/${live.ids.length}`;
+  $('#live-en').textContent = phrase.en;
+  $('#live-say').textContent = phrase.phon;
+  $('#live-my').textContent = phrase.my;
+  $('#live-note').textContent = phrase.note || '';
+  $('#live-fav').setAttribute('aria-pressed', String(favs.has(phrase.id)));
+  $('#live-fav').textContent = favs.has(phrase.id) ? 'Saved' : 'Save';
+  $('#live-rehearse').setAttribute('aria-pressed', String(liveRehearse));
+
+  // A dot per phrase while that stays readable; past ten or so it turns into
+  // a grey smear, and the counter is already carrying that information.
+  $('#live-dots').innerHTML = live.ids.length <= 14
+    ? live.ids.map((_, i) => `<i class="${i === live.i ? 'on' : ''}"></i>`).join('')
+    : '';
+
+  $('#live-decks').innerHTML = liveDecks().map(d =>
+    `<button class="live-deck" data-deck="${d.id}" aria-pressed="${d.id === live.deck}">${esc(d.name)}</button>`
+  ).join('');
+  const active = $('#live-decks').querySelector('[aria-pressed="true"]');
+  if (active) active.scrollIntoView({ block: 'nearest', inline: 'center' });
+
+  setMediaSession(phrase);
+}
+
+function setLiveSaying(on) {
+  const btn = $('#live-say-btn');
+  if (!btn) return;
+  btn.classList.toggle('playing', on);
+  $('#live-card').classList.toggle('saying', on);
+}
+
+/** Play the cued line straight through, ignoring the practice modes -- step,
+ *  loop and shadow all belong on the practice screen, not in a conversation. */
+async function livePlay() {
+  const phrase = liveCurrent();
+  if (!phrase) return;
+  stopPlayback();
+  noteUsed(phrase.id);
+  const gen = ++generation;
+  const plan = playbackPlan(phrase, speed);
+  if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
+  audio.playbackRate = plan.rate;
+  setMediaSession(phrase);
+  setLiveSaying(true);
+  const stop = endOf(phrase, plan.track);
+  try {
+    audio.playbackRate = plan.rate;            // Safari resets this on src load
+    if (!(await playRange(0, stop, gen))) return;
+    if (liveRehearse) {
+      if (!(await sleep(Math.max(800, (stop / plan.rate) * 1000), gen))) return;
+      audio.playbackRate = plan.rate;
+      await playRange(0, stop, gen);
+    }
+  } finally {
+    if (gen === generation) setLiveSaying(false);
+  }
+}
+
+function liveGo(delta) {
+  if (!live || !live.ids.length) return;
+  stopPlayback();
+  live.i = (live.i + delta + live.ids.length) % live.ids.length;
+  renderLive();
+  livePlay();
+}
+
+function setLiveDeck(deckId) {
+  const ids = deckIds(deckId).filter(id => BY_ID.has(id));
+  if (!ids.length) return toast('Nothing in that deck yet');
+  stopPlayback();
+  live.deck = deckId;
+  live.ids = ids;
+  live.i = 0;
+  store.set('liveDeck', deckId);
+  renderLive();
+}
+
+$('#live-btn').addEventListener('click', () => openLive());
+$('#live-prev').addEventListener('click', () => liveGo(-1));
+$('#live-next').addEventListener('click', () => liveGo(1));
+$('#live-say-btn').addEventListener('click', () => {
+  if (!audio.paused || rafId) stopPlayback(); else livePlay();
+});
+$('#live-decks').addEventListener('click', e => {
+  const btn = e.target.closest('[data-deck]');
+  if (btn) setLiveDeck(btn.dataset.deck);
+});
+$('#live-rehearse').addEventListener('click', () => {
+  liveRehearse = !liveRehearse;
+  store.set('liveRehearse', liveRehearse);
+  renderLive();
+  toast(liveRehearse ? 'Plays twice, with a beat to say it back' : 'Plays once');
+});
+$('#live-fav').addEventListener('click', () => {
+  const phrase = liveCurrent();
+  if (!phrase) return;
+  favs.has(phrase.id) ? favs.delete(phrase.id) : favs.add(phrase.id);
+  store.set('favs', [...favs]);
+  renderChips();
+  renderLive();
+});
+$('#live-show').addEventListener('click', () => {
+  const phrase = liveCurrent();
+  if (!phrase) return;
+  current = phrase;
+  openPresent();
+});
+
+/* Dim is for the phone lying face-up on the table. The first tap anywhere
+   brings the screen back rather than firing whatever was under the finger --
+   otherwise the gesture that says "let me look" also says "say it now". */
+$('#live-dim').addEventListener('click', e => {
+  e.stopPropagation();
+  const on = $('#live').classList.toggle('dimmed');
+  $('#live-dim').setAttribute('aria-pressed', String(on));
+});
+
+const liveCard = $('#live-card');
+let liveTouch = null;
+
+const undim = () => {
+  if (!$('#live').classList.contains('dimmed')) return false;
+  $('#live').classList.remove('dimmed');
+  $('#live-dim').setAttribute('aria-pressed', 'false');
+  return true;
+};
+
+liveCard.addEventListener('click', () => { if (!undim()) livePlay(); });
+liveCard.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); livePlay(); }
+});
+
+/* Swiping the card moves through the deck, so the common action needs no aim.
+   The vertical check keeps a scroll from being read as a swipe. */
+liveCard.addEventListener('touchstart', e => {
+  liveTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+}, { passive: true });
+liveCard.addEventListener('touchend', e => {
+  if (!liveTouch) return;
+  const dx = e.changedTouches[0].clientX - liveTouch.x;
+  const dy = e.changedTouches[0].clientY - liveTouch.y;
+  liveTouch = null;
+  if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+    e.preventDefault();
+    liveGo(dx < 0 ? 1 : -1);
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (!live || $('#present').hidden === false) return;
+  if (e.key === 'ArrowRight') { e.preventDefault(); liveGo(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); liveGo(-1); }
+});
+
 /* ── Quick strip ─────────────────────────────────────────────────────
    Live use is bursty and repetitive — the same handful of phrases, needed in
    seconds, one-handed. Those live in the thumb's reach at the bottom rather
@@ -787,6 +1029,7 @@ function applyDeepLink() {
     renderChips();
     renderList();
   }
+  if (q.get('live') === '1') return openLive(q.get('deck') || undefined);
   if (p) {
     openSheet(p);
     if (q.get('present') === '1') openPresent();

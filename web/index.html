@@ -42,7 +42,13 @@
   <header class="topbar">
     <div class="topbar-row">
       <h1>Say It In Burmese</h1>
-      <button id="ear-btn" class="pill-btn ear-btn">Train ear</button>
+      <button id="live-btn" class="pill-btn live-btn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2.5L5 13.5h5.5L10 21.5l8-11h-5.5z"/></svg>
+        Live
+      </button>
+      <button id="ear-btn" class="icon-btn ear-btn" aria-label="Train your ear">
+        <svg viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0116 0v2"/><path d="M4 13h3v6H5.5A1.5 1.5 0 014 17.5zM20 13h-3v6h1.5a1.5 1.5 0 001.5-1.5z"/></svg>
+      </button>
       <button id="menu-btn" class="icon-btn menu-btn" aria-label="Menu">
         <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -333,6 +339,59 @@
     <button id="present-play" class="cmp-btn">Play it</button>
     <button id="present-flip" class="cmp-btn" aria-pressed="false">Flip</button>
   </div>
+</section>
+
+<!-- Live mode. The phrase you need, in your ear, with the phone still in your
+     pocket: the deck is driven from the AirPods stem (squeeze to hear it again,
+     double-squeeze for the next line) and the lock screen carries the English
+     and the respelling, so a glance at a dark phone reads as checking your
+     music rather than reading off a script. -->
+<section id="live" class="live" hidden aria-modal="true" role="dialog" aria-label="Live mode">
+
+  <div class="live-top">
+    <button class="icon-btn close-btn" aria-label="Leave live mode">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <span id="live-deck-name" class="live-deck-name"></span>
+    <span id="live-count" class="live-count"></span>
+  </div>
+
+  <div id="live-card" class="live-card" role="button" tabindex="0" aria-label="Play this phrase">
+    <p id="live-en" class="live-en"></p>
+    <p id="live-say" class="live-say"></p>
+    <p id="live-my" class="live-my"></p>
+    <p id="live-note" class="live-note"></p>
+  </div>
+
+  <div id="live-dots" class="live-dots" aria-hidden="true"></div>
+
+  <div class="live-controls">
+    <button id="live-prev" class="live-step" aria-label="Previous phrase">
+      <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <button id="live-say-btn" class="live-say-btn">
+      <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+      <svg class="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>
+      <span>Say it</span>
+    </button>
+    <button id="live-next" class="live-step" aria-label="Next phrase">
+      <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <div class="live-actions">
+    <button id="live-rehearse" class="live-chip" aria-pressed="false">Rehearse</button>
+    <button id="live-fav" class="live-chip" aria-pressed="false">Save</button>
+    <button id="live-show" class="live-chip">Show her</button>
+    <button id="live-dim" class="live-chip" aria-pressed="false">Dim</button>
+  </div>
+
+  <nav id="live-decks" class="live-decks" aria-label="Decks"></nav>
+
+  <p class="live-hint">
+    Stem controls work with the phone in your pocket: <b>squeeze</b> to hear it again,
+    <b>double-squeeze</b> for the next line. The lock screen shows what's cued.
+  </p>
 </section>
 
 <!-- Quick strip: the handful of phrases actually used day to day, parked in
