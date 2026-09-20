@@ -1,8 +1,11 @@
 name: Deploy to GitHub Pages
 
+# Deploys whatever is on the repository's default branch, rather than naming
+# a branch here. Naming one means the workflow silently stops deploying the
+# day the default branch is renamed, and the failure mode is a site that just
+# quietly stops updating.
 on:
   push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -17,6 +20,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     environment:
       name: github-pages

@@ -187,7 +187,7 @@ must survive any speed change.
    ./scripts/build.py --check  # validates the data, no network
    ```
 
-3. Commit. Pushing to `main` redeploys the site.
+3. Commit. Pushing to the default branch redeploys the site.
 
 An entry looks like this:
 
