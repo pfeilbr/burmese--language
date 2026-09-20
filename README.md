@@ -239,6 +239,18 @@ asat in canonical order — so မုန့် is `မ ု န ့ ်` and a na
 character an asat?" test sees the dot, misses the asat, and splits one syllable
 into two.
 
+## Deploying your own copy
+
+The site is static and pre-built, so the deploy just uploads `web/` as-is.
+Two things need doing once on a fresh repository:
+
+1. **Settings → Pages → Build and deployment → Source: GitHub Actions.** Until
+   this is set, the deploy fails at `configure-pages` with *"Get Pages site
+   failed: Not Found"*. It cannot be automated from inside the workflow — the
+   default workflow token is not allowed to administer the repository.
+2. Push to the default branch. The workflow deploys whatever is on it, so it
+   keeps working if that branch is later renamed.
+
 ## Layout
 
 ```

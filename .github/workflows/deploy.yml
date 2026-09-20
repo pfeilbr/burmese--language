@@ -28,12 +28,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      # `enablement` turns Pages on for the repository the first time this
-      # runs, so a fresh clone of this repo deploys without anyone visiting
-      # Settings first.
+      # Pages itself has to be switched on by hand once, under
+      # Settings -> Pages -> Source: GitHub Actions. The `enablement: true`
+      # input here would do it, but only with a workflow token allowed to
+      # administer the repository, which the default one is not.
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       # The browser decides an update exists by byte-comparing sw.js, so it has
       # to differ between deploys or no update is ever detected. Stamping the
