@@ -310,7 +310,7 @@ window.PHRASE_DATA = {
   {
    "id": "i-miss-you",
    "cat": "affection",
-   "en": "I miss you",
+   "en": "I miss you so much",
    "my": "အရမ်းလွမ်းတယ်",
    "rom": "a yan: lun: te",
    "phon": "uh yahn LOON deh",
@@ -392,6 +392,7 @@ window.PHRASE_DATA = {
     "natural": 1.147,
     "slow": 2.001
    },
+   "note": "Written in Burmese chat as \"A yan lwan tel\".",
    "starter": 2
   },
   {
@@ -1609,6 +1610,865 @@ window.PHRASE_DATA = {
     "natural": 1.244,
     "slow": 2.178
    }
+  },
+  {
+   "id": "miss-you",
+   "cat": "affection",
+   "en": "I miss you",
+   "my": "လွမ်းတယ်",
+   "rom": "lun: te",
+   "phon": "LOON deh",
+   "syllables": [
+    {
+     "my": "လွမ်း",
+     "rom": "lun:",
+     "tone": 2,
+     "say": "LOON"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.213,
+      "d": 0.299,
+      "word": 0
+     },
+     {
+      "t": 0.512,
+      "d": 0.299,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.35,
+      "d": 0.52,
+      "word": 0
+     },
+     {
+      "t": 0.87,
+      "d": 0.52,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.812,
+    "slow": 1.391
+   }
+  },
+  {
+   "id": "wife",
+   "cat": "affection",
+   "en": "Wife",
+   "my": "မိန်းမ",
+   "rom": "mein: ma.",
+   "phon": "MAIN má",
+   "syllables": [
+    {
+     "my": "မိန်း",
+     "rom": "mein:",
+     "tone": 2,
+     "say": "MAIN"
+    },
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.187,
+      "d": 0.251,
+      "word": 0
+     },
+     {
+      "t": 0.438,
+      "d": 0.251,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.3,
+      "d": 0.433,
+      "word": 0
+     },
+     {
+      "t": 0.734,
+      "d": 0.433,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.687,
+    "slow": 1.166
+   },
+   "note": "The everyday word — \"my wife\" in normal speech. ဇနီး (zuh NEE) is the formal one you'd see on a form."
+  },
+  {
+   "id": "husband",
+   "cat": "affection",
+   "en": "Husband",
+   "my": "ယောက်ျား",
+   "rom": "yauq-kya:",
+   "phon": "YAUK-chah",
+   "syllables": [
+    {
+     "my": "ယောက်ျား",
+     "rom": "yauq-kya:",
+     "tone": 2,
+     "say": "YAUK-chah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.242,
+      "d": 0.665,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.401,
+      "d": 1.166,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.908,
+    "slow": 1.567
+   },
+   "note": "The everyday word. ခင်ပွန်း (khin BOON) is the formal one."
+  },
+  {
+   "id": "wifey",
+   "cat": "affection",
+   "en": "Wifey",
+   "my": "မိန်းမိန်း",
+   "rom": "mein: mein:",
+   "phon": "MAIN main",
+   "syllables": [
+    {
+     "my": "မိန်း",
+     "rom": "mein:",
+     "tone": 2,
+     "say": "MAIN"
+    },
+    {
+     "my": "မိန်း",
+     "rom": "mein:",
+     "tone": 2,
+     "say": "main"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.197,
+      "d": 0.232,
+      "word": 0
+     },
+     {
+      "t": 0.428,
+      "d": 0.232,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.319,
+      "d": 0.398,
+      "word": 0
+     },
+     {
+      "t": 0.717,
+      "d": 0.398,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.66,
+    "slow": 1.115
+   },
+   "note": "Pet name from မိန်းမ (wife). Written in chat as \"Main Main\" or just \"Main\"."
+  },
+  {
+   "id": "hubby",
+   "cat": "affection",
+   "en": "Hubby",
+   "my": "ကျားကျား",
+   "rom": "kya: kya:",
+   "phon": "CHAH chah",
+   "syllables": [
+    {
+     "my": "ကျား",
+     "rom": "kya:",
+     "tone": 2,
+     "say": "CHAH"
+    },
+    {
+     "my": "ကျား",
+     "rom": "kya:",
+     "tone": 2,
+     "say": "chah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.218,
+      "d": 0.349,
+      "word": 0
+     },
+     {
+      "t": 0.568,
+      "d": 0.349,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.359,
+      "d": 0.612,
+      "word": 0
+     },
+     {
+      "t": 0.971,
+      "d": 0.612,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.917,
+    "slow": 1.583
+   },
+   "note": "Pet name for a husband. Written in chat as \"Kyar Kyar\" or just \"Kyar\"."
+  },
+  {
+   "id": "love-my-wifey",
+   "cat": "affection",
+   "en": "I love my wifey",
+   "my": "မိန်းမိန်းကိုချစ်တယ်",
+   "rom": "mein: mein: ko chiq te",
+   "phon": "main main goh CHIT teh",
+   "syllables": [
+    {
+     "my": "မိန်း",
+     "rom": "mein:",
+     "tone": 2,
+     "say": "main"
+    },
+    {
+     "my": "မိန်း",
+     "rom": "mein:",
+     "tone": 2,
+     "say": "main"
+    },
+    {
+     "my": "ကို",
+     "rom": "ko",
+     "tone": 1,
+     "say": "goh",
+     "say_rom": "go",
+     "voiced": true
+    },
+    {
+     "my": "ချစ်",
+     "rom": "chiq",
+     "tone": 4,
+     "say": "CHIT"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "teh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.203,
+      "d": 0.232,
+      "word": 0
+     },
+     {
+      "t": 0.435,
+      "d": 0.232,
+      "word": 0
+     },
+     {
+      "t": 0.667,
+      "d": 0.232,
+      "word": 0
+     },
+     {
+      "t": 0.9,
+      "d": 0.232,
+      "word": 0
+     },
+     {
+      "t": 1.132,
+      "d": 0.232,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.329,
+      "d": 0.413,
+      "word": 0
+     },
+     {
+      "t": 0.742,
+      "d": 0.413,
+      "word": 0
+     },
+     {
+      "t": 1.155,
+      "d": 0.413,
+      "word": 0
+     },
+     {
+      "t": 1.568,
+      "d": 0.413,
+      "word": 0
+     },
+     {
+      "t": 1.981,
+      "d": 0.413,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.363,
+    "slow": 2.395
+   },
+   "note": "Written in chat as \"Main Main ko chit tel\"."
+  },
+  {
+   "id": "love-my-hubby",
+   "cat": "affection",
+   "en": "I love my hubby",
+   "my": "ကျားကျားကိုချစ်တယ်",
+   "rom": "kya: kya: ko chiq te",
+   "phon": "chah chah goh CHIT teh",
+   "syllables": [
+    {
+     "my": "ကျား",
+     "rom": "kya:",
+     "tone": 2,
+     "say": "chah"
+    },
+    {
+     "my": "ကျား",
+     "rom": "kya:",
+     "tone": 2,
+     "say": "chah"
+    },
+    {
+     "my": "ကို",
+     "rom": "ko",
+     "tone": 1,
+     "say": "goh",
+     "say_rom": "go",
+     "voiced": true
+    },
+    {
+     "my": "ချစ်",
+     "rom": "chiq",
+     "tone": 4,
+     "say": "CHIT"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "teh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.219,
+      "d": 0.243,
+      "word": 0
+     },
+     {
+      "t": 0.462,
+      "d": 0.243,
+      "word": 0
+     },
+     {
+      "t": 0.705,
+      "d": 0.243,
+      "word": 0
+     },
+     {
+      "t": 0.948,
+      "d": 0.243,
+      "word": 0
+     },
+     {
+      "t": 1.191,
+      "d": 0.243,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.358,
+      "d": 0.433,
+      "word": 0
+     },
+     {
+      "t": 0.791,
+      "d": 0.433,
+      "word": 0
+     },
+     {
+      "t": 1.225,
+      "d": 0.433,
+      "word": 0
+     },
+     {
+      "t": 1.658,
+      "d": 0.433,
+      "word": 0
+     },
+     {
+      "t": 2.092,
+      "d": 0.433,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.434,
+    "slow": 2.525
+   },
+   "note": "Written in chat as \"Kyar Kyar ko chit tel\"."
+  },
+  {
+   "id": "want-to-hug",
+   "cat": "affection",
+   "en": "I want to hug you",
+   "my": "ဖက်ချင်တယ်",
+   "rom": "hpeq chin te",
+   "phon": "PET chin deh",
+   "syllables": [
+    {
+     "my": "ဖက်",
+     "rom": "hpeq",
+     "tone": 4,
+     "say": "PET"
+    },
+    {
+     "my": "ချင်",
+     "rom": "chin",
+     "tone": 1,
+     "say": "chin"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.192,
+      "d": 0.235,
+      "word": 0
+     },
+     {
+      "t": 0.427,
+      "d": 0.235,
+      "word": 0
+     },
+     {
+      "t": 0.662,
+      "d": 0.235,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.308,
+      "d": 0.413,
+      "word": 0
+     },
+     {
+      "t": 0.721,
+      "d": 0.413,
+      "word": 0
+     },
+     {
+      "t": 1.133,
+      "d": 0.413,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.896,
+    "slow": 1.547
+   },
+   "note": "Written in chat as \"Phat chin tel\"."
+  },
+  {
+   "id": "want-to-kiss",
+   "cat": "affection",
+   "en": "I want to kiss you",
+   "my": "နမ်းချင်တယ်",
+   "rom": "nan: chin te",
+   "phon": "NAHN chin deh",
+   "syllables": [
+    {
+     "my": "နမ်း",
+     "rom": "nan:",
+     "tone": 2,
+     "say": "NAHN"
+    },
+    {
+     "my": "ချင်",
+     "rom": "chin",
+     "tone": 1,
+     "say": "chin"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.193,
+      "d": 0.281,
+      "word": 0
+     },
+     {
+      "t": 0.474,
+      "d": 0.281,
+      "word": 0
+     },
+     {
+      "t": 0.754,
+      "d": 0.281,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.311,
+      "d": 0.495,
+      "word": 0
+     },
+     {
+      "t": 0.806,
+      "d": 0.495,
+      "word": 0
+     },
+     {
+      "t": 1.302,
+      "d": 0.495,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.036,
+    "slow": 1.798
+   },
+   "note": "Written in chat as \"Nan chin tel\"."
+  },
+  {
+   "id": "cutie",
+   "cat": "affection",
+   "en": "Cutie / sweetie",
+   "my": "ချစ်စရာလေး",
+   "rom": "chiq sa. ya le:",
+   "phon": "chit sá yah LAY",
+   "syllables": [
+    {
+     "my": "ချစ်",
+     "rom": "chiq",
+     "tone": 4,
+     "say": "chit"
+    },
+    {
+     "my": "စ",
+     "rom": "sa.",
+     "tone": 3,
+     "say": "sá"
+    },
+    {
+     "my": "ရာ",
+     "rom": "ya",
+     "tone": 1,
+     "say": "yah"
+    },
+    {
+     "my": "လေး",
+     "rom": "le:",
+     "tone": 2,
+     "say": "LAY"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.185,
+      "d": 0.24,
+      "word": 0
+     },
+     {
+      "t": 0.425,
+      "d": 0.24,
+      "word": 0
+     },
+     {
+      "t": 0.666,
+      "d": 0.24,
+      "word": 0
+     },
+     {
+      "t": 0.907,
+      "d": 0.24,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.297,
+      "d": 0.426,
+      "word": 0
+     },
+     {
+      "t": 0.723,
+      "d": 0.426,
+      "word": 0
+     },
+     {
+      "t": 1.149,
+      "d": 0.426,
+      "word": 0
+     },
+     {
+      "t": 1.574,
+      "d": 0.426,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.147,
+    "slow": 2.0
+   },
+   "note": "Literally \"little lovable one\". Written in chat as \"Chit sa yar lay\"."
+  },
+  {
+   "id": "thinking-of-you-short",
+   "cat": "affection",
+   "en": "I miss you / I'm thinking of you",
+   "my": "သတိရတယ်",
+   "rom": "tha. ti ya. te",
+   "phon": "thá DÍ yá deh",
+   "syllables": [
+    {
+     "my": "သ",
+     "rom": "tha.",
+     "tone": 3,
+     "say": "thá"
+    },
+    {
+     "my": "တိ",
+     "rom": "ti",
+     "tone": 1,
+     "say": "DÍ",
+     "say_rom": "di",
+     "voiced": true
+    },
+    {
+     "my": "ရ",
+     "rom": "ya.",
+     "tone": 3,
+     "say": "yá"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.184,
+      "d": 0.201,
+      "word": 0
+     },
+     {
+      "t": 0.385,
+      "d": 0.201,
+      "word": 0
+     },
+     {
+      "t": 0.585,
+      "d": 0.201,
+      "word": 0
+     },
+     {
+      "t": 0.786,
+      "d": 0.201,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.295,
+      "d": 0.353,
+      "word": 0
+     },
+     {
+      "t": 0.648,
+      "d": 0.353,
+      "word": 0
+     },
+     {
+      "t": 1.001,
+      "d": 0.353,
+      "word": 0
+     },
+     {
+      "t": 1.354,
+      "d": 0.353,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.986,
+    "slow": 1.707
+   },
+   "note": "Softer than လွမ်း — \"you're on my mind\". Written in chat as \"Thati ya tel\"."
+  },
+  {
+   "id": "so-happy",
+   "cat": "affection",
+   "en": "I'm so happy",
+   "my": "အရမ်းပျော်တယ်",
+   "rom": "a yan: pyaw te",
+   "phon": "uh yahn PYAW deh",
+   "syllables": [
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "ရမ်း",
+     "rom": "yan:",
+     "tone": 2,
+     "say": "yahn"
+    },
+    {
+     "my": "ပျော်",
+     "rom": "pyaw",
+     "tone": 1,
+     "say": "PYAW"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.178,
+      "d": 0.248,
+      "word": 0
+     },
+     {
+      "t": 0.426,
+      "d": 0.248,
+      "word": 0
+     },
+     {
+      "t": 0.675,
+      "d": 0.248,
+      "word": 0
+     },
+     {
+      "t": 0.923,
+      "d": 0.248,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.28,
+      "d": 0.442,
+      "word": 0
+     },
+     {
+      "t": 0.722,
+      "d": 0.442,
+      "word": 0
+     },
+     {
+      "t": 1.163,
+      "d": 0.442,
+      "word": 0
+     },
+     {
+      "t": 1.605,
+      "d": 0.442,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.172,
+    "slow": 2.046
+   },
+   "note": "Written in chat as \"A yan pyaw tel\". အရမ်း (a yan) means \"very\"."
   },
   {
    "id": "youre-pretty",
