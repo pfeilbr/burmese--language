@@ -179,10 +179,22 @@ svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; 
 .card-say { font-weight: 600; }
 .card-say .t1 { color: var(--t1); } .card-say .t2 { color: var(--t2); }
 .card-say .t3 { color: var(--t3); } .card-say .t4 { color: var(--t4); }
-.card-script {
-  color: var(--text-faint);
+.card-burmese {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 3px; font-size: 15px;
+  color: var(--text-dim);
   font-family: var(--my-font);
 }
+.card-burmese [lang] { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.copy-mini {
+  flex: none;
+  display: grid; place-items: center;
+  width: 30px; height: 30px; margin: -6px 0;
+  color: var(--text-faint);
+  border-radius: 8px;
+}
+.copy-mini svg, .copy-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.copy-mini:active { color: var(--accent); background: var(--bg-hover); }
 .card-fav { flex: none; width: 15px; height: 15px; color: var(--accent); fill: var(--accent); }
 
 .card-play {
@@ -231,6 +243,18 @@ svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; 
   margin: 14px 0 0;
   font-size: 27px; font-weight: 700; line-height: 1.24; letter-spacing: -.025em;
 }
+
+.d-copy {
+  display: flex; align-items: center; gap: 12px;
+  margin: 10px 0 0;
+}
+.d-my {
+  flex: 1; min-width: 0; margin: 0;
+  font-family: var(--my-font); font-size: 22px; line-height: 1.6;
+  color: var(--text-dim);
+  -webkit-user-select: text; user-select: text;
+}
+.copy-btn { flex: none; }
 
 .d-note {
   margin: 12px 0 0; padding: 11px 13px;
@@ -536,8 +560,7 @@ html.no-tone-colour .card-say .t4 { color: var(--text); }
 
 html.hide-rom .syl-rom { display: none; }
 
-html.hide-script .syl-my,
-html.hide-script .card-script { display: none; }
+html.hide-script .syl-my { display: none; }
 
 /* ── Ear training ────────────────────────────────────────── */
 

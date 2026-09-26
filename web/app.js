@@ -36,7 +36,7 @@ let current = null;                            // phrase object shown in the she
 const $ = sel => document.querySelector(sel);
 const el = {
   list: $('#list'), chips: $('#chips'), search: $('#search'), empty: $('#empty'),
-  sheet: $('#detail'), dEn: $('#d-en'), dNote: $('#d-note'), dScript: $('#d-script'),
+  sheet: $('#detail'), dEn: $('#d-en'), dNote: $('#d-note'), dMy: $('#d-my'), dScript: $('#d-script'),
   dPhon: $('#d-phon'), dVoicing: $('#d-voicing'),
   playBtn: $('#play-btn'), speed: $('#speed'), speedVal: $('#speed-val'),
   favBtn: $('#fav-btn'), toast: $('#toast'), shadowHint: $('#shadow-hint'),
@@ -342,15 +342,15 @@ function syllablesHtml(phrase, { interactive }) {
   }).join('');
 }
 
-/** Compact preview for list cards — respelling first, script second. */
+/** Compact preview for list cards — the respelling you read out loud. */
 function inlineMy(phrase) {
   return `<span class="card-say">`
        + phrase.syllables.map(s => `<span class="t${s.tone}">${esc(s.say)}</span>`).join(' ')
-       + `</span>`
-       + `<span class="card-script"> ${esc(phrase.my)}</span>`;
+       + `</span>`;
 }
 
 const PLAY_ICON = '<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>';
+const COPY_ICON = '<svg viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/></svg>';
 const STAR_ICON = '<svg class="card-fav" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8L3.5 9.7l5.9-.9z"/></svg>';
 
 const VIRTUAL_FILTERS = {
@@ -384,6 +384,7 @@ function cardHtml(p) {
     <span class="card-text">
       <span class="card-en">${esc(p.en)}${favs.has(p.id) ? ' ' + STAR_ICON : ''}</span>
       <span class="card-my">${inlineMy(p)}</span>
+      <span class="card-burmese"><span lang="my">${esc(p.my)}</span><span class="copy-mini" data-copy="${p.id}" role="button" aria-label="Copy Burmese">${COPY_ICON}</span></span>
     </span>
     <span class="card-play" data-play="${p.id}" role="button" aria-label="Play ${esc(p.en)}">${PLAY_ICON}</span>
   </button>`;
@@ -495,6 +496,7 @@ function hideSheet() {
 function openSheet(phrase) {
   current = phrase;
   el.dEn.textContent = phrase.en;
+  el.dMy.textContent = phrase.my;
   el.dNote.textContent = phrase.note || '';
   el.dNote.hidden = !phrase.note;
   el.dScript.innerHTML = syllablesHtml(phrase, { interactive: true });
@@ -524,9 +526,36 @@ function toast(msg) {
   toast.t = setTimeout(() => { el.toast.hidden = true; }, 2200);
 }
 
+/** Burmese script to the clipboard, so it can be pasted into a chat. The
+ *  execCommand path covers older iOS Safari and non-secure (http) origins,
+ *  where navigator.clipboard is missing. */
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    const ok = document.execCommand('copy');
+    ta.remove();
+    if (!ok) { toast('Copy failed — press and hold the text instead'); return; }
+  }
+  toast(`Copied ${text}`);
+}
+
 /* ── Events ──────────────────────────────────────────────────────────── */
 
 el.list.addEventListener('click', e => {
+  const copyNode = e.target.closest('[data-copy]');
+  if (copyNode) {
+    e.stopPropagation();
+    copyText(BY_ID.get(copyNode.dataset.copy).my);
+    return;
+  }
   const playNode = e.target.closest('[data-play]');
   if (playNode) {
     e.stopPropagation();
@@ -552,6 +581,10 @@ el.chips.addEventListener('click', e => {
 el.search.addEventListener('input', () => {
   query = el.search.value.trim().toLowerCase();
   renderList();
+});
+
+$('#copy-btn').addEventListener('click', () => {
+  if (current) copyText(current.my);
 });
 
 el.dScript.addEventListener('click', e => {

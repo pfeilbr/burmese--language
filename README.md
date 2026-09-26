@@ -40,6 +40,10 @@ route — so the app just tells you where to tap.)
   transcription are both off by default: two spellings you can't read yet are
   noise around the one line you're trying to say. Turn either back on in
   Settings.
+- **Copy the Burmese.** Every phrase shows its full Burmese script with a copy
+  button — on the list card and on the phrase page — so you can paste it
+  straight into Messenger or Viber. This line stays on even with the
+  per-syllable script switched off.
 - **Tone colouring and contour marks** on every syllable, riding on the English
   respelling so they work with both scripts hidden.
 - **Softened consonants are marked.** Where a syllable's opening consonant
