@@ -27,9 +27,9 @@ route — so the app just tells you where to tap.)
 ## What it does
 
 - **Live mode** — the one built for actually being in front of her. See below.
-- **262 phrases** across affection, sweet talk, dating and flirting, getting
+- **298 phrases** across affection, sweet talk, dating and flirting, getting
   serious, comforting her, texts and voice notes, meeting the family, occasions
-  and blessings, the tea shop, meals, coming and going, checking in, chores,
+  and blessings, the tea shop, eating out, meals, coming and going, checking in, chores,
   needs and the body ("I have to pee"), yes/no and everyday basics, getting
   around, shopping, time and plans, feelings, and the "I'm still learning, say
   it slower" repair kit.

@@ -52,6 +52,11 @@ window.PHRASE_DATA = {
    "emoji": "🍵"
   },
   {
+   "id": "restaurant",
+   "name": "Eating Out",
+   "emoji": "🍽️"
+  },
+  {
    "id": "morning-night",
    "name": "Morning & Night",
    "emoji": "🌙"
@@ -23819,6 +23824,3538 @@ window.PHRASE_DATA = {
    "end": {
     "natural": 1.253,
     "slow": 2.191
+   }
+  },
+  {
+   "id": "table-for-two",
+   "cat": "restaurant",
+   "en": "A table for two, please",
+   "my": "နှစ်ယောက်ပါ",
+   "rom": "hniq yauq pa",
+   "phon": "hnit YAUK pah",
+   "syllables": [
+    {
+     "my": "နှစ်",
+     "rom": "hniq",
+     "tone": 4,
+     "say": "hnit"
+    },
+    {
+     "my": "ယောက်",
+     "rom": "yauq",
+     "tone": 4,
+     "say": "YAUK"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "pah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.192,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.416,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.64,
+      "d": 0.224,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.312,
+      "d": 0.395,
+      "word": 0
+     },
+     {
+      "t": 0.707,
+      "d": 0.395,
+      "word": 0
+     },
+     {
+      "t": 1.103,
+      "d": 0.395,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.865,
+    "slow": 1.498
+   },
+   "note": "Literally just \"two people\" — that's all you need to say at the door."
+  },
+  {
+   "id": "menu-please",
+   "cat": "restaurant",
+   "en": "Can I see the menu?",
+   "my": "မီနူးပေးပါ",
+   "rom": "mi nu: pe: pa",
+   "phon": "mee noo BAY bah",
+   "syllables": [
+    {
+     "my": "မီ",
+     "rom": "mi",
+     "tone": 1,
+     "say": "mee"
+    },
+    {
+     "my": "နူး",
+     "rom": "nu:",
+     "tone": 2,
+     "say": "noo"
+    },
+    {
+     "my": "ပေး",
+     "rom": "pe:",
+     "tone": 2,
+     "say": "BAY",
+     "say_rom": "be:",
+     "voiced": true
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.196,
+      "d": 0.232,
+      "word": 0
+     },
+     {
+      "t": 0.428,
+      "d": 0.232,
+      "word": 0
+     },
+     {
+      "t": 0.661,
+      "d": 0.232,
+      "word": 0
+     },
+     {
+      "t": 0.893,
+      "d": 0.232,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.32,
+      "d": 0.409,
+      "word": 0
+     },
+     {
+      "t": 0.729,
+      "d": 0.409,
+      "word": 0
+     },
+     {
+      "t": 1.139,
+      "d": 0.409,
+      "word": 0
+     },
+     {
+      "t": 1.548,
+      "d": 0.409,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.126,
+    "slow": 1.957
+   }
+  },
+  {
+   "id": "whats-good",
+   "cat": "restaurant",
+   "en": "What's good here?",
+   "my": "ဘာကောင်းလဲ",
+   "rom": "ba kaun: leh:",
+   "phon": "bah GAUN leh",
+   "syllables": [
+    {
+     "my": "ဘာ",
+     "rom": "ba",
+     "tone": 1,
+     "say": "bah"
+    },
+    {
+     "my": "ကောင်း",
+     "rom": "kaun:",
+     "tone": 2,
+     "say": "GAUN",
+     "say_rom": "gaun:",
+     "voiced": true
+    },
+    {
+     "my": "လဲ",
+     "rom": "leh:",
+     "tone": 2,
+     "say": "leh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.167,
+      "d": 0.285,
+      "word": 0
+     },
+     {
+      "t": 0.452,
+      "d": 0.285,
+      "word": 0
+     },
+     {
+      "t": 0.738,
+      "d": 0.285,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.263,
+      "d": 0.504,
+      "word": 0
+     },
+     {
+      "t": 0.767,
+      "d": 0.504,
+      "word": 0
+     },
+     {
+      "t": 1.272,
+      "d": 0.504,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.022,
+    "slow": 1.776
+   }
+  },
+  {
+   "id": "whats-this-dish",
+   "cat": "restaurant",
+   "en": "What's this dish called?",
+   "my": "ဒီဟင်းကဘာလဲ",
+   "rom": "di hin: ka. ba leh:",
+   "phon": "dee hin gá BAH leh",
+   "syllables": [
+    {
+     "my": "ဒီ",
+     "rom": "di",
+     "tone": 1,
+     "say": "dee"
+    },
+    {
+     "my": "ဟင်း",
+     "rom": "hin:",
+     "tone": 2,
+     "say": "hin"
+    },
+    {
+     "my": "က",
+     "rom": "ka.",
+     "tone": 3,
+     "say": "gá",
+     "say_rom": "ga.",
+     "voiced": true
+    },
+    {
+     "my": "ဘာ",
+     "rom": "ba",
+     "tone": 1,
+     "say": "BAH"
+    },
+    {
+     "my": "လဲ",
+     "rom": "leh:",
+     "tone": 2,
+     "say": "leh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.177,
+      "d": 0.191,
+      "word": 0
+     },
+     {
+      "t": 0.368,
+      "d": 0.191,
+      "word": 0
+     },
+     {
+      "t": 0.558,
+      "d": 0.191,
+      "word": 0
+     },
+     {
+      "t": 0.749,
+      "d": 0.191,
+      "word": 0
+     },
+     {
+      "t": 0.939,
+      "d": 0.191,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.282,
+      "d": 0.338,
+      "word": 0
+     },
+     {
+      "t": 0.62,
+      "d": 0.338,
+      "word": 0
+     },
+     {
+      "t": 0.958,
+      "d": 0.338,
+      "word": 0
+     },
+     {
+      "t": 1.295,
+      "d": 0.338,
+      "word": 0
+     },
+     {
+      "t": 1.633,
+      "d": 0.338,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.13,
+    "slow": 1.971
+   },
+   "note": "ဟင်း is any curry or dish you eat with rice."
+  },
+  {
+   "id": "is-it-spicy",
+   "cat": "restaurant",
+   "en": "Is it spicy?",
+   "my": "စပ်လား",
+   "rom": "saq la:",
+   "phon": "SAT lah",
+   "syllables": [
+    {
+     "my": "စပ်",
+     "rom": "saq",
+     "tone": 4,
+     "say": "SAT"
+    },
+    {
+     "my": "လား",
+     "rom": "la:",
+     "tone": 2,
+     "say": "lah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.215,
+      "d": 0.309,
+      "word": 0
+     },
+     {
+      "t": 0.524,
+      "d": 0.309,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.354,
+      "d": 0.537,
+      "word": 0
+     },
+     {
+      "t": 0.891,
+      "d": 0.537,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.833,
+    "slow": 1.429
+   }
+  },
+  {
+   "id": "ill-have-this",
+   "cat": "restaurant",
+   "en": "I'll have this",
+   "my": "ဒါစားမယ်",
+   "rom": "da sa: me",
+   "phon": "dah SAH meh",
+   "syllables": [
+    {
+     "my": "ဒါ",
+     "rom": "da",
+     "tone": 1,
+     "say": "dah"
+    },
+    {
+     "my": "စား",
+     "rom": "sa:",
+     "tone": 2,
+     "say": "SAH"
+    },
+    {
+     "my": "မယ်",
+     "rom": "me",
+     "tone": 1,
+     "say": "meh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.162,
+      "d": 0.244,
+      "word": 0
+     },
+     {
+      "t": 0.406,
+      "d": 0.244,
+      "word": 0
+     },
+     {
+      "t": 0.651,
+      "d": 0.244,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.256,
+      "d": 0.427,
+      "word": 0
+     },
+     {
+      "t": 0.683,
+      "d": 0.427,
+      "word": 0
+     },
+     {
+      "t": 1.111,
+      "d": 0.427,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.895,
+    "slow": 1.538
+   },
+   "note": "Point at the menu as you say it."
+  },
+  {
+   "id": "same-as-her",
+   "cat": "restaurant",
+   "en": "The same as her, please",
+   "my": "သူ့လိုပဲပေးပါ",
+   "rom": "thu. lo peh: pe: pa",
+   "phon": "thú loh beh BAY bah",
+   "syllables": [
+    {
+     "my": "သူ့",
+     "rom": "thu.",
+     "tone": 3,
+     "say": "thú"
+    },
+    {
+     "my": "လို",
+     "rom": "lo",
+     "tone": 1,
+     "say": "loh"
+    },
+    {
+     "my": "ပဲ",
+     "rom": "peh:",
+     "tone": 2,
+     "say": "beh",
+     "say_rom": "beh:",
+     "voiced": true
+    },
+    {
+     "my": "ပေး",
+     "rom": "pe:",
+     "tone": 2,
+     "say": "BAY",
+     "say_rom": "be:",
+     "voiced": true
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.179,
+      "d": 0.203,
+      "word": 0
+     },
+     {
+      "t": 0.382,
+      "d": 0.203,
+      "word": 0
+     },
+     {
+      "t": 0.586,
+      "d": 0.203,
+      "word": 0
+     },
+     {
+      "t": 0.789,
+      "d": 0.203,
+      "word": 0
+     },
+     {
+      "t": 0.993,
+      "d": 0.203,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.286,
+      "d": 0.361,
+      "word": 0
+     },
+     {
+      "t": 0.647,
+      "d": 0.361,
+      "word": 0
+     },
+     {
+      "t": 1.008,
+      "d": 0.361,
+      "word": 0
+     },
+     {
+      "t": 1.369,
+      "d": 0.361,
+      "word": 0
+     },
+     {
+      "t": 1.73,
+      "d": 0.361,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.196,
+    "slow": 2.09
+   }
+  },
+  {
+   "id": "a-bit-spicy",
+   "cat": "restaurant",
+   "en": "Just a little spicy",
+   "my": "နည်းနည်းပဲစပ်ပါ",
+   "rom": "neh: neh: peh: saq pa",
+   "phon": "neh neh beh SAT pah",
+   "syllables": [
+    {
+     "my": "နည်း",
+     "rom": "neh:",
+     "tone": 2,
+     "say": "neh"
+    },
+    {
+     "my": "နည်း",
+     "rom": "neh:",
+     "tone": 2,
+     "say": "neh"
+    },
+    {
+     "my": "ပဲ",
+     "rom": "peh:",
+     "tone": 2,
+     "say": "beh",
+     "say_rom": "beh:",
+     "voiced": true
+    },
+    {
+     "my": "စပ်",
+     "rom": "saq",
+     "tone": 4,
+     "say": "SAT"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "pah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.198,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.426,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.654,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 0.881,
+      "d": 0.228,
+      "word": 0
+     },
+     {
+      "t": 1.109,
+      "d": 0.228,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.323,
+      "d": 0.403,
+      "word": 0
+     },
+     {
+      "t": 0.726,
+      "d": 0.403,
+      "word": 0
+     },
+     {
+      "t": 1.13,
+      "d": 0.403,
+      "word": 0
+     },
+     {
+      "t": 1.533,
+      "d": 0.403,
+      "word": 0
+     },
+     {
+      "t": 1.937,
+      "d": 0.403,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.338,
+    "slow": 2.34
+   }
+  },
+  {
+   "id": "not-too-sweet",
+   "cat": "restaurant",
+   "en": "Not too sweet, please",
+   "my": "မချိုပါစေနဲ့",
+   "rom": "ma. cho pa se neh.",
+   "phon": "má CHO bah zay neh",
+   "syllables": [
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "ချို",
+     "rom": "cho",
+     "tone": 1,
+     "say": "CHO"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    },
+    {
+     "my": "စေ",
+     "rom": "se",
+     "tone": 1,
+     "say": "zay",
+     "say_rom": "ze",
+     "voiced": true
+    },
+    {
+     "my": "နဲ့",
+     "rom": "neh.",
+     "tone": 3,
+     "say": "neh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.188,
+      "d": 0.212,
+      "word": 0
+     },
+     {
+      "t": 0.4,
+      "d": 0.212,
+      "word": 0
+     },
+     {
+      "t": 0.611,
+      "d": 0.212,
+      "word": 0
+     },
+     {
+      "t": 0.823,
+      "d": 0.212,
+      "word": 0
+     },
+     {
+      "t": 1.034,
+      "d": 0.212,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.303,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 0.679,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 1.054,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 1.43,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 1.805,
+      "d": 0.376,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.246,
+    "slow": 2.181
+   }
+  },
+  {
+   "id": "less-sugar",
+   "cat": "restaurant",
+   "en": "Less sugar, please",
+   "my": "သကြားနည်းနည်းပဲထည့်ပါ",
+   "rom": "tha. kya: neh: neh: peh: hte. pa",
+   "phon": "thá GYAH neh neh beh té bah",
+   "syllables": [
+    {
+     "my": "သ",
+     "rom": "tha.",
+     "tone": 3,
+     "say": "thá"
+    },
+    {
+     "my": "ကြား",
+     "rom": "kya:",
+     "tone": 2,
+     "say": "GYAH",
+     "say_rom": "gya:",
+     "voiced": true
+    },
+    {
+     "my": "နည်း",
+     "rom": "neh:",
+     "tone": 2,
+     "say": "neh"
+    },
+    {
+     "my": "နည်း",
+     "rom": "neh:",
+     "tone": 2,
+     "say": "neh"
+    },
+    {
+     "my": "ပဲ",
+     "rom": "peh:",
+     "tone": 2,
+     "say": "beh",
+     "say_rom": "beh:",
+     "voiced": true
+    },
+    {
+     "my": "ထည့်",
+     "rom": "hte.",
+     "tone": 3,
+     "say": "té"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.178,
+      "d": 0.209,
+      "word": 0
+     },
+     {
+      "t": 0.387,
+      "d": 0.209,
+      "word": 0
+     },
+     {
+      "t": 0.597,
+      "d": 0.209,
+      "word": 0
+     },
+     {
+      "t": 0.806,
+      "d": 0.209,
+      "word": 0
+     },
+     {
+      "t": 1.015,
+      "d": 0.209,
+      "word": 0
+     },
+     {
+      "t": 1.224,
+      "d": 0.209,
+      "word": 0
+     },
+     {
+      "t": 1.434,
+      "d": 0.209,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.285,
+      "d": 0.374,
+      "word": 0
+     },
+     {
+      "t": 0.659,
+      "d": 0.374,
+      "word": 0
+     },
+     {
+      "t": 1.032,
+      "d": 0.374,
+      "word": 0
+     },
+     {
+      "t": 1.406,
+      "d": 0.374,
+      "word": 0
+     },
+     {
+      "t": 1.78,
+      "d": 0.374,
+      "word": 0
+     },
+     {
+      "t": 2.154,
+      "d": 0.374,
+      "word": 0
+     },
+     {
+      "t": 2.527,
+      "d": 0.374,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.643,
+    "slow": 2.901
+   }
+  },
+  {
+   "id": "no-msg",
+   "cat": "restaurant",
+   "en": "No MSG, please",
+   "my": "အချိုမှုန့်မထည့်ပါနဲ့",
+   "rom": "a cho hmoun. ma. hte. pa neh.",
+   "phon": "uh cho hmohn má TÉ bah neh",
+   "syllables": [
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "ချို",
+     "rom": "cho",
+     "tone": 1,
+     "say": "cho"
+    },
+    {
+     "my": "မှုန့်",
+     "rom": "hmoun.",
+     "tone": 3,
+     "say": "hmohn"
+    },
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "ထည့်",
+     "rom": "hte.",
+     "tone": 3,
+     "say": "TÉ"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    },
+    {
+     "my": "နဲ့",
+     "rom": "neh.",
+     "tone": 3,
+     "say": "neh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.177,
+      "d": 0.191,
+      "word": 0
+     },
+     {
+      "t": 0.368,
+      "d": 0.191,
+      "word": 0
+     },
+     {
+      "t": 0.56,
+      "d": 0.191,
+      "word": 0
+     },
+     {
+      "t": 0.751,
+      "d": 0.191,
+      "word": 0
+     },
+     {
+      "t": 0.942,
+      "d": 0.191,
+      "word": 0
+     },
+     {
+      "t": 1.133,
+      "d": 0.191,
+      "word": 0
+     },
+     {
+      "t": 1.325,
+      "d": 0.191,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.282,
+      "d": 0.341,
+      "word": 0
+     },
+     {
+      "t": 0.623,
+      "d": 0.341,
+      "word": 0
+     },
+     {
+      "t": 0.964,
+      "d": 0.341,
+      "word": 0
+     },
+     {
+      "t": 1.305,
+      "d": 0.341,
+      "word": 0
+     },
+     {
+      "t": 1.646,
+      "d": 0.341,
+      "word": 0
+     },
+     {
+      "t": 1.987,
+      "d": 0.341,
+      "word": 0
+     },
+     {
+      "t": 2.328,
+      "d": 0.341,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.515,
+    "slow": 2.669
+   },
+   "note": "အချိုမှုန့် is MSG — Burmese cooks use a lot of it by default."
+  },
+  {
+   "id": "no-ice",
+   "cat": "restaurant",
+   "en": "No ice, please",
+   "my": "ရေခဲမထည့်ပါနဲ့",
+   "rom": "ye hkeh: ma. hte. pa neh.",
+   "phon": "yay GEH má TÉ bah neh",
+   "syllables": [
+    {
+     "my": "ရေ",
+     "rom": "ye",
+     "tone": 1,
+     "say": "yay"
+    },
+    {
+     "my": "ခဲ",
+     "rom": "hkeh:",
+     "tone": 2,
+     "say": "GEH",
+     "say_rom": "geh:",
+     "voiced": true
+    },
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "ထည့်",
+     "rom": "hte.",
+     "tone": 3,
+     "say": "TÉ"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    },
+    {
+     "my": "နဲ့",
+     "rom": "neh.",
+     "tone": 3,
+     "say": "neh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.231,
+      "d": 0.207,
+      "word": 0
+     },
+     {
+      "t": 0.438,
+      "d": 0.207,
+      "word": 0
+     },
+     {
+      "t": 0.645,
+      "d": 0.207,
+      "word": 0
+     },
+     {
+      "t": 0.853,
+      "d": 0.207,
+      "word": 0
+     },
+     {
+      "t": 1.06,
+      "d": 0.207,
+      "word": 0
+     },
+     {
+      "t": 1.267,
+      "d": 0.207,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.382,
+      "d": 0.37,
+      "word": 0
+     },
+     {
+      "t": 0.752,
+      "d": 0.37,
+      "word": 0
+     },
+     {
+      "t": 1.123,
+      "d": 0.37,
+      "word": 0
+     },
+     {
+      "t": 1.493,
+      "d": 0.37,
+      "word": 0
+     },
+     {
+      "t": 1.863,
+      "d": 0.37,
+      "word": 0
+     },
+     {
+      "t": 2.234,
+      "d": 0.37,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.474,
+    "slow": 2.604
+   }
+  },
+  {
+   "id": "extra-chili",
+   "cat": "restaurant",
+   "en": "Extra chili, please",
+   "my": "ငရုတ်သီးထပ်ထည့်ပေးပါ",
+   "rom": "nga. youq thi: htaq hte. pe: pa",
+   "phon": "ngá yoke thee tat TÉ bay bah",
+   "syllables": [
+    {
+     "my": "င",
+     "rom": "nga.",
+     "tone": 3,
+     "say": "ngá"
+    },
+    {
+     "my": "ရုတ်",
+     "rom": "youq",
+     "tone": 4,
+     "say": "yoke"
+    },
+    {
+     "my": "သီး",
+     "rom": "thi:",
+     "tone": 2,
+     "say": "thee"
+    },
+    {
+     "my": "ထပ်",
+     "rom": "htaq",
+     "tone": 4,
+     "say": "tat"
+    },
+    {
+     "my": "ထည့်",
+     "rom": "hte.",
+     "tone": 3,
+     "say": "TÉ"
+    },
+    {
+     "my": "ပေး",
+     "rom": "pe:",
+     "tone": 2,
+     "say": "bay",
+     "say_rom": "be:",
+     "voiced": true
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.209,
+      "d": 0.214,
+      "word": 0
+     },
+     {
+      "t": 0.423,
+      "d": 0.214,
+      "word": 0
+     },
+     {
+      "t": 0.636,
+      "d": 0.214,
+      "word": 0
+     },
+     {
+      "t": 0.85,
+      "d": 0.214,
+      "word": 0
+     },
+     {
+      "t": 1.063,
+      "d": 0.214,
+      "word": 0
+     },
+     {
+      "t": 1.277,
+      "d": 0.214,
+      "word": 0
+     },
+     {
+      "t": 1.49,
+      "d": 0.214,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.34,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 0.722,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 1.104,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 1.486,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 1.867,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 2.249,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 2.631,
+      "d": 0.382,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.704,
+    "slow": 3.013
+   }
+  },
+  {
+   "id": "no-meat",
+   "cat": "restaurant",
+   "en": "I don't eat meat",
+   "my": "အသားမစားဘူး",
+   "rom": "a tha: ma. sa: bu:",
+   "phon": "uh THAH má sah boo",
+   "syllables": [
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "သား",
+     "rom": "tha:",
+     "tone": 2,
+     "say": "THAH"
+    },
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "စား",
+     "rom": "sa:",
+     "tone": 2,
+     "say": "sah"
+    },
+    {
+     "my": "ဘူး",
+     "rom": "bu:",
+     "tone": 2,
+     "say": "boo"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.181,
+      "d": 0.209,
+      "word": 0
+     },
+     {
+      "t": 0.39,
+      "d": 0.209,
+      "word": 0
+     },
+     {
+      "t": 0.6,
+      "d": 0.209,
+      "word": 0
+     },
+     {
+      "t": 0.809,
+      "d": 0.209,
+      "word": 0
+     },
+     {
+      "t": 1.019,
+      "d": 0.209,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.289,
+      "d": 0.372,
+      "word": 0
+     },
+     {
+      "t": 0.661,
+      "d": 0.372,
+      "word": 0
+     },
+     {
+      "t": 1.033,
+      "d": 0.372,
+      "word": 0
+     },
+     {
+      "t": 1.404,
+      "d": 0.372,
+      "word": 0
+     },
+     {
+      "t": 1.776,
+      "d": 0.372,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.228,
+    "slow": 2.147
+   }
+  },
+  {
+   "id": "cold-water",
+   "cat": "restaurant",
+   "en": "A cold water, please",
+   "my": "ရေအေးတစ်ခွက်ပေးပါ",
+   "rom": "ye e: tiq hkweq pe: pa",
+   "phon": "yay AY tit kwet pay bah",
+   "syllables": [
+    {
+     "my": "ရေ",
+     "rom": "ye",
+     "tone": 1,
+     "say": "yay"
+    },
+    {
+     "my": "အေး",
+     "rom": "e:",
+     "tone": 2,
+     "say": "AY"
+    },
+    {
+     "my": "တစ်",
+     "rom": "tiq",
+     "tone": 4,
+     "say": "tit"
+    },
+    {
+     "my": "ခွက်",
+     "rom": "hkweq",
+     "tone": 4,
+     "say": "kwet"
+    },
+    {
+     "my": "ပေး",
+     "rom": "pe:",
+     "tone": 2,
+     "say": "pay"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.235,
+      "d": 0.222,
+      "word": 0
+     },
+     {
+      "t": 0.457,
+      "d": 0.222,
+      "word": 0
+     },
+     {
+      "t": 0.679,
+      "d": 0.222,
+      "word": 0
+     },
+     {
+      "t": 0.9,
+      "d": 0.222,
+      "word": 0
+     },
+     {
+      "t": 1.122,
+      "d": 0.222,
+      "word": 0
+     },
+     {
+      "t": 1.344,
+      "d": 0.222,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.391,
+      "d": 0.395,
+      "word": 0
+     },
+     {
+      "t": 0.786,
+      "d": 0.395,
+      "word": 0
+     },
+     {
+      "t": 1.181,
+      "d": 0.395,
+      "word": 0
+     },
+     {
+      "t": 1.576,
+      "d": 0.395,
+      "word": 0
+     },
+     {
+      "t": 1.97,
+      "d": 0.395,
+      "word": 0
+     },
+     {
+      "t": 2.365,
+      "d": 0.395,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.566,
+    "slow": 2.76
+   }
+  },
+  {
+   "id": "a-beer",
+   "cat": "restaurant",
+   "en": "A beer, please",
+   "my": "ဘီယာတစ်ခွက်ပေးပါ",
+   "rom": "bi ya tiq hkweq pe: pa",
+   "phon": "bee yah tit kwet PAY bah",
+   "syllables": [
+    {
+     "my": "ဘီ",
+     "rom": "bi",
+     "tone": 1,
+     "say": "bee"
+    },
+    {
+     "my": "ယာ",
+     "rom": "ya",
+     "tone": 1,
+     "say": "yah"
+    },
+    {
+     "my": "တစ်",
+     "rom": "tiq",
+     "tone": 4,
+     "say": "tit"
+    },
+    {
+     "my": "ခွက်",
+     "rom": "hkweq",
+     "tone": 4,
+     "say": "kwet"
+    },
+    {
+     "my": "ပေး",
+     "rom": "pe:",
+     "tone": 2,
+     "say": "PAY"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.212,
+      "d": 0.195,
+      "word": 0
+     },
+     {
+      "t": 0.407,
+      "d": 0.195,
+      "word": 0
+     },
+     {
+      "t": 0.602,
+      "d": 0.195,
+      "word": 0
+     },
+     {
+      "t": 0.797,
+      "d": 0.195,
+      "word": 0
+     },
+     {
+      "t": 0.993,
+      "d": 0.195,
+      "word": 0
+     },
+     {
+      "t": 1.188,
+      "d": 0.195,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.347,
+      "d": 0.347,
+      "word": 0
+     },
+     {
+      "t": 0.694,
+      "d": 0.347,
+      "word": 0
+     },
+     {
+      "t": 1.041,
+      "d": 0.347,
+      "word": 0
+     },
+     {
+      "t": 1.388,
+      "d": 0.347,
+      "word": 0
+     },
+     {
+      "t": 1.735,
+      "d": 0.347,
+      "word": 0
+     },
+     {
+      "t": 2.082,
+      "d": 0.347,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.383,
+    "slow": 2.43
+   }
+  },
+  {
+   "id": "calling-waiter",
+   "cat": "restaurant",
+   "en": "Excuse me! (calling a waiter)",
+   "my": "ညီလေး",
+   "rom": "nyi le:",
+   "phon": "nyee LAY",
+   "syllables": [
+    {
+     "my": "ညီ",
+     "rom": "nyi",
+     "tone": 1,
+     "say": "nyee"
+    },
+    {
+     "my": "လေး",
+     "rom": "le:",
+     "tone": 2,
+     "say": "LAY"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.202,
+      "d": 0.344,
+      "word": 0
+     },
+     {
+      "t": 0.546,
+      "d": 0.344,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.327,
+      "d": 0.604,
+      "word": 0
+     },
+     {
+      "t": 0.931,
+      "d": 0.604,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.89,
+    "slow": 1.535
+   },
+   "note": "Literally \"little brother\" — the normal, friendly way to call a young waiter. For a young woman, ညီမလေး."
+  },
+  {
+   "id": "eat-here",
+   "cat": "restaurant",
+   "en": "We'll eat here",
+   "my": "ဒီမှာစားမယ်",
+   "rom": "di hma sa: me",
+   "phon": "dee hmah SAH meh",
+   "syllables": [
+    {
+     "my": "ဒီ",
+     "rom": "di",
+     "tone": 1,
+     "say": "dee"
+    },
+    {
+     "my": "မှာ",
+     "rom": "hma",
+     "tone": 1,
+     "say": "hmah"
+    },
+    {
+     "my": "စား",
+     "rom": "sa:",
+     "tone": 2,
+     "say": "SAH"
+    },
+    {
+     "my": "မယ်",
+     "rom": "me",
+     "tone": 1,
+     "say": "meh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.18,
+      "d": 0.235,
+      "word": 0
+     },
+     {
+      "t": 0.415,
+      "d": 0.235,
+      "word": 0
+     },
+     {
+      "t": 0.65,
+      "d": 0.235,
+      "word": 0
+     },
+     {
+      "t": 0.885,
+      "d": 0.235,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.29,
+      "d": 0.416,
+      "word": 0
+     },
+     {
+      "t": 0.706,
+      "d": 0.416,
+      "word": 0
+     },
+     {
+      "t": 1.122,
+      "d": 0.416,
+      "word": 0
+     },
+     {
+      "t": 1.538,
+      "d": 0.416,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.121,
+    "slow": 1.954
+   }
+  },
+  {
+   "id": "takeaway",
+   "cat": "restaurant",
+   "en": "To take away, please",
+   "my": "ပါဆယ်ပါ",
+   "rom": "pa hseh pa",
+   "phon": "pah SEH bah",
+   "syllables": [
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "pah"
+    },
+    {
+     "my": "ဆယ်",
+     "rom": "hseh",
+     "tone": 1,
+     "say": "SEH"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.225,
+      "d": 0.272,
+      "word": 0
+     },
+     {
+      "t": 0.497,
+      "d": 0.272,
+      "word": 0
+     },
+     {
+      "t": 0.769,
+      "d": 0.272,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.371,
+      "d": 0.479,
+      "word": 0
+     },
+     {
+      "t": 0.85,
+      "d": 0.479,
+      "word": 0
+     },
+     {
+      "t": 1.328,
+      "d": 0.479,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.042,
+    "slow": 1.807
+   },
+   "note": "ပါဆယ် is borrowed from English \"parcel\"."
+  },
+  {
+   "id": "thats-enough",
+   "cat": "restaurant",
+   "en": "That's enough, thanks",
+   "my": "တော်ပြီ",
+   "rom": "taw pyi",
+   "phon": "TAW byee",
+   "syllables": [
+    {
+     "my": "တော်",
+     "rom": "taw",
+     "tone": 1,
+     "say": "TAW"
+    },
+    {
+     "my": "ပြီ",
+     "rom": "pyi",
+     "tone": 1,
+     "say": "byee",
+     "say_rom": "byi",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.171,
+      "d": 0.262,
+      "word": 0
+     },
+     {
+      "t": 0.433,
+      "d": 0.262,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.271,
+      "d": 0.452,
+      "word": 0
+     },
+     {
+      "t": 0.723,
+      "d": 0.452,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.695,
+    "slow": 1.176
+   }
+  },
+  {
+   "id": "not-done-yet",
+   "cat": "restaurant",
+   "en": "I'm not finished yet",
+   "my": "မပြီးသေးဘူး",
+   "rom": "ma. pyi: the: bu:",
+   "phon": "má PYEE thay boo",
+   "syllables": [
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "ပြီး",
+     "rom": "pyi:",
+     "tone": 2,
+     "say": "PYEE"
+    },
+    {
+     "my": "သေး",
+     "rom": "the:",
+     "tone": 2,
+     "say": "thay"
+    },
+    {
+     "my": "ဘူး",
+     "rom": "bu:",
+     "tone": 2,
+     "say": "boo"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.189,
+      "d": 0.244,
+      "word": 0
+     },
+     {
+      "t": 0.433,
+      "d": 0.244,
+      "word": 0
+     },
+     {
+      "t": 0.676,
+      "d": 0.244,
+      "word": 0
+     },
+     {
+      "t": 0.92,
+      "d": 0.244,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.307,
+      "d": 0.431,
+      "word": 0
+     },
+     {
+      "t": 0.738,
+      "d": 0.431,
+      "word": 0
+     },
+     {
+      "t": 1.169,
+      "d": 0.431,
+      "word": 0
+     },
+     {
+      "t": 1.601,
+      "d": 0.431,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.164,
+    "slow": 2.032
+   }
+  },
+  {
+   "id": "bill-please",
+   "cat": "restaurant",
+   "en": "The bill, please",
+   "my": "ပိုက်ဆံရှင်းမယ်",
+   "rom": "paiq hsan shin: me",
+   "phon": "pike san SHIN meh",
+   "syllables": [
+    {
+     "my": "ပိုက်",
+     "rom": "paiq",
+     "tone": 4,
+     "say": "pike"
+    },
+    {
+     "my": "ဆံ",
+     "rom": "hsan",
+     "tone": 1,
+     "say": "san"
+    },
+    {
+     "my": "ရှင်း",
+     "rom": "shin:",
+     "tone": 2,
+     "say": "SHIN"
+    },
+    {
+     "my": "မယ်",
+     "rom": "me",
+     "tone": 1,
+     "say": "meh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.211,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.435,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.658,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.882,
+      "d": 0.224,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.344,
+      "d": 0.397,
+      "word": 0
+     },
+     {
+      "t": 0.74,
+      "d": 0.397,
+      "word": 0
+     },
+     {
+      "t": 1.137,
+      "d": 0.397,
+      "word": 0
+     },
+     {
+      "t": 1.534,
+      "d": 0.397,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.106,
+    "slow": 1.93
+   }
+  },
+  {
+   "id": "how-much-total",
+   "cat": "restaurant",
+   "en": "How much altogether?",
+   "my": "စုစုပေါင်းဘယ်လောက်လဲ",
+   "rom": "su. su. paun: be lauq leh:",
+   "phon": "sú zú baun beh LAUK leh",
+   "syllables": [
+    {
+     "my": "စု",
+     "rom": "su.",
+     "tone": 3,
+     "say": "sú"
+    },
+    {
+     "my": "စု",
+     "rom": "su.",
+     "tone": 3,
+     "say": "zú",
+     "say_rom": "zu.",
+     "voiced": true
+    },
+    {
+     "my": "ပေါင်း",
+     "rom": "paun:",
+     "tone": 2,
+     "say": "baun",
+     "say_rom": "baun:",
+     "voiced": true
+    },
+    {
+     "my": "ဘယ်",
+     "rom": "be",
+     "tone": 1,
+     "say": "beh"
+    },
+    {
+     "my": "လောက်",
+     "rom": "lauq",
+     "tone": 4,
+     "say": "LAUK"
+    },
+    {
+     "my": "လဲ",
+     "rom": "leh:",
+     "tone": 2,
+     "say": "leh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.198,
+      "d": 0.207,
+      "word": 0
+     },
+     {
+      "t": 0.405,
+      "d": 0.207,
+      "word": 0
+     },
+     {
+      "t": 0.613,
+      "d": 0.207,
+      "word": 0
+     },
+     {
+      "t": 0.82,
+      "d": 0.207,
+      "word": 0
+     },
+     {
+      "t": 1.027,
+      "d": 0.207,
+      "word": 0
+     },
+     {
+      "t": 1.235,
+      "d": 0.207,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.312,
+      "d": 0.371,
+      "word": 0
+     },
+     {
+      "t": 0.683,
+      "d": 0.371,
+      "word": 0
+     },
+     {
+      "t": 1.053,
+      "d": 0.371,
+      "word": 0
+     },
+     {
+      "t": 1.424,
+      "d": 0.371,
+      "word": 0
+     },
+     {
+      "t": 1.795,
+      "d": 0.371,
+      "word": 0
+     },
+     {
+      "t": 2.165,
+      "d": 0.371,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.442,
+    "slow": 2.536
+   }
+  },
+  {
+   "id": "lets-eat-out",
+   "cat": "restaurant",
+   "en": "Let's eat out tonight",
+   "my": "ဒီညအပြင်မှာစားရအောင်",
+   "rom": "di nya. a pyin hma sa: ya. aun",
+   "phon": "dee nyá uh pyin hmah SAH yá aun",
+   "syllables": [
+    {
+     "my": "ဒီ",
+     "rom": "di",
+     "tone": 1,
+     "say": "dee"
+    },
+    {
+     "my": "ည",
+     "rom": "nya.",
+     "tone": 3,
+     "say": "nyá"
+    },
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "ပြင်",
+     "rom": "pyin",
+     "tone": 1,
+     "say": "pyin"
+    },
+    {
+     "my": "မှာ",
+     "rom": "hma",
+     "tone": 1,
+     "say": "hmah"
+    },
+    {
+     "my": "စား",
+     "rom": "sa:",
+     "tone": 2,
+     "say": "SAH"
+    },
+    {
+     "my": "ရ",
+     "rom": "ya.",
+     "tone": 3,
+     "say": "yá"
+    },
+    {
+     "my": "အောင်",
+     "rom": "aun",
+     "tone": 1,
+     "say": "aun"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.208,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 0.418,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 0.628,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 0.838,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 1.048,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 1.258,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 1.468,
+      "d": 0.21,
+      "word": 0
+     },
+     {
+      "t": 1.678,
+      "d": 0.21,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.339,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 0.715,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 1.091,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 1.468,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 1.844,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 2.22,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 2.596,
+      "d": 0.376,
+      "word": 0
+     },
+     {
+      "t": 2.973,
+      "d": 0.376,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.888,
+    "slow": 3.35
+   }
+  },
+  {
+   "id": "im-starving",
+   "cat": "food",
+   "en": "I'm starving",
+   "my": "ဗိုက်အရမ်းဆာတယ်",
+   "rom": "baiq a yan: hsa te",
+   "phon": "bike uh yahn HSAH deh",
+   "syllables": [
+    {
+     "my": "ဗိုက်",
+     "rom": "baiq",
+     "tone": 4,
+     "say": "bike"
+    },
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "ရမ်း",
+     "rom": "yan:",
+     "tone": 2,
+     "say": "yahn"
+    },
+    {
+     "my": "ဆာ",
+     "rom": "hsa",
+     "tone": 1,
+     "say": "HSAH"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.207,
+      "d": 0.23,
+      "word": 0
+     },
+     {
+      "t": 0.437,
+      "d": 0.23,
+      "word": 0
+     },
+     {
+      "t": 0.667,
+      "d": 0.23,
+      "word": 0
+     },
+     {
+      "t": 0.898,
+      "d": 0.23,
+      "word": 0
+     },
+     {
+      "t": 1.128,
+      "d": 0.23,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.337,
+      "d": 0.41,
+      "word": 0
+     },
+     {
+      "t": 0.747,
+      "d": 0.41,
+      "word": 0
+     },
+     {
+      "t": 1.157,
+      "d": 0.41,
+      "word": 0
+     },
+     {
+      "t": 1.566,
+      "d": 0.41,
+      "word": 0
+     },
+     {
+      "t": 1.976,
+      "d": 0.41,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.358,
+    "slow": 2.386
+   }
+  },
+  {
+   "id": "what-did-you-cook",
+   "cat": "food",
+   "en": "What did you make?",
+   "my": "ဘာချက်ထားလဲ",
+   "rom": "ba cheq hta: leh:",
+   "phon": "bah CHET tah leh",
+   "syllables": [
+    {
+     "my": "ဘာ",
+     "rom": "ba",
+     "tone": 1,
+     "say": "bah"
+    },
+    {
+     "my": "ချက်",
+     "rom": "cheq",
+     "tone": 4,
+     "say": "CHET"
+    },
+    {
+     "my": "ထား",
+     "rom": "hta:",
+     "tone": 2,
+     "say": "tah"
+    },
+    {
+     "my": "လဲ",
+     "rom": "leh:",
+     "tone": 2,
+     "say": "leh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.18,
+      "d": 0.258,
+      "word": 0
+     },
+     {
+      "t": 0.438,
+      "d": 0.258,
+      "word": 0
+     },
+     {
+      "t": 0.695,
+      "d": 0.258,
+      "word": 0
+     },
+     {
+      "t": 0.952,
+      "d": 0.258,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.288,
+      "d": 0.456,
+      "word": 0
+     },
+     {
+      "t": 0.744,
+      "d": 0.456,
+      "word": 0
+     },
+     {
+      "t": 1.2,
+      "d": 0.456,
+      "word": 0
+     },
+     {
+      "t": 1.657,
+      "d": 0.456,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.21,
+    "slow": 2.113
+   }
+  },
+  {
+   "id": "smells-good",
+   "cat": "food",
+   "en": "It smells so good",
+   "my": "မွှေးလိုက်တာ",
+   "rom": "hmwe: laiq ta",
+   "phon": "HMWAY like tah",
+   "syllables": [
+    {
+     "my": "မွှေး",
+     "rom": "hmwe:",
+     "tone": 2,
+     "say": "HMWAY"
+    },
+    {
+     "my": "လိုက်",
+     "rom": "laiq",
+     "tone": 4,
+     "say": "like"
+    },
+    {
+     "my": "တာ",
+     "rom": "ta",
+     "tone": 1,
+     "say": "tah"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.215,
+      "d": 0.28,
+      "word": 0
+     },
+     {
+      "t": 0.495,
+      "d": 0.28,
+      "word": 0
+     },
+     {
+      "t": 0.774,
+      "d": 0.28,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.353,
+      "d": 0.492,
+      "word": 0
+     },
+     {
+      "t": 0.845,
+      "d": 0.492,
+      "word": 0
+     },
+     {
+      "t": 1.338,
+      "d": 0.492,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.054,
+    "slow": 1.83
+   }
+  },
+  {
+   "id": "try-this",
+   "cat": "food",
+   "en": "Try this",
+   "my": "ဒါစားကြည့်",
+   "rom": "da sa: kyi.",
+   "phon": "dah sah GYÍ",
+   "syllables": [
+    {
+     "my": "ဒါ",
+     "rom": "da",
+     "tone": 1,
+     "say": "dah"
+    },
+    {
+     "my": "စား",
+     "rom": "sa:",
+     "tone": 2,
+     "say": "sah"
+    },
+    {
+     "my": "ကြည့်",
+     "rom": "kyi.",
+     "tone": 3,
+     "say": "GYÍ",
+     "say_rom": "gyi.",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.193,
+      "d": 0.26,
+      "word": 0
+     },
+     {
+      "t": 0.453,
+      "d": 0.26,
+      "word": 0
+     },
+     {
+      "t": 0.714,
+      "d": 0.26,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.312,
+      "d": 0.458,
+      "word": 0
+     },
+     {
+      "t": 0.77,
+      "d": 0.458,
+      "word": 0
+     },
+     {
+      "t": 1.229,
+      "d": 0.458,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.974,
+    "slow": 1.687
+   }
+  },
+  {
+   "id": "cook-together",
+   "cat": "food",
+   "en": "Let's cook together",
+   "my": "အတူတူချက်ရအောင်",
+   "rom": "a tu tu cheq ya. aun",
+   "phon": "uh too doo CHET yá aun",
+   "syllables": [
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "တူ",
+     "rom": "tu",
+     "tone": 1,
+     "say": "too"
+    },
+    {
+     "my": "တူ",
+     "rom": "tu",
+     "tone": 1,
+     "say": "doo",
+     "say_rom": "du",
+     "voiced": true
+    },
+    {
+     "my": "ချက်",
+     "rom": "cheq",
+     "tone": 4,
+     "say": "CHET"
+    },
+    {
+     "my": "ရ",
+     "rom": "ya.",
+     "tone": 3,
+     "say": "yá"
+    },
+    {
+     "my": "အောင်",
+     "rom": "aun",
+     "tone": 1,
+     "say": "aun"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.178,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.377,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.575,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.774,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 0.972,
+      "d": 0.199,
+      "word": 0
+     },
+     {
+      "t": 1.171,
+      "d": 0.199,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.285,
+      "d": 0.353,
+      "word": 0
+     },
+     {
+      "t": 0.638,
+      "d": 0.353,
+      "word": 0
+     },
+     {
+      "t": 0.991,
+      "d": 0.353,
+      "word": 0
+     },
+     {
+      "t": 1.344,
+      "d": 0.353,
+      "word": 0
+     },
+     {
+      "t": 1.697,
+      "d": 0.353,
+      "word": 0
+     },
+     {
+      "t": 2.05,
+      "d": 0.353,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.369,
+    "slow": 2.404
+   }
+  },
+  {
+   "id": "teach-me-cook",
+   "cat": "food",
+   "en": "Teach me how to make this",
+   "my": "ဒါချက်နည်းသင်ပေးပါ",
+   "rom": "da cheq ni: thin pe: pa",
+   "phon": "dah chet nee thin BAY bah",
+   "syllables": [
+    {
+     "my": "ဒါ",
+     "rom": "da",
+     "tone": 1,
+     "say": "dah"
+    },
+    {
+     "my": "ချက်",
+     "rom": "cheq",
+     "tone": 4,
+     "say": "chet"
+    },
+    {
+     "my": "နည်း",
+     "rom": "ni:",
+     "tone": 2,
+     "say": "nee"
+    },
+    {
+     "my": "သင်",
+     "rom": "thin",
+     "tone": 1,
+     "say": "thin"
+    },
+    {
+     "my": "ပေး",
+     "rom": "pe:",
+     "tone": 2,
+     "say": "BAY",
+     "say_rom": "be:",
+     "voiced": true
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.181,
+      "d": 0.244,
+      "word": 0
+     },
+     {
+      "t": 0.424,
+      "d": 0.244,
+      "word": 0
+     },
+     {
+      "t": 0.668,
+      "d": 0.244,
+      "word": 0
+     },
+     {
+      "t": 0.911,
+      "d": 0.244,
+      "word": 0
+     },
+     {
+      "t": 1.155,
+      "d": 0.244,
+      "word": 0
+     },
+     {
+      "t": 1.399,
+      "d": 0.244,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.288,
+      "d": 0.435,
+      "word": 0
+     },
+     {
+      "t": 0.723,
+      "d": 0.435,
+      "word": 0
+     },
+     {
+      "t": 1.158,
+      "d": 0.435,
+      "word": 0
+     },
+     {
+      "t": 1.593,
+      "d": 0.435,
+      "word": 0
+     },
+     {
+      "t": 2.028,
+      "d": 0.435,
+      "word": 0
+     },
+     {
+      "t": 2.463,
+      "d": 0.435,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.641,
+    "slow": 2.898
+   }
+  },
+  {
+   "id": "a-bit-salty",
+   "cat": "food",
+   "en": "It's a bit salty",
+   "my": "နည်းနည်းငန်တယ်",
+   "rom": "neh: neh: ngan te",
+   "phon": "neh neh NGAHN deh",
+   "syllables": [
+    {
+     "my": "နည်း",
+     "rom": "neh:",
+     "tone": 2,
+     "say": "neh"
+    },
+    {
+     "my": "နည်း",
+     "rom": "neh:",
+     "tone": 2,
+     "say": "neh"
+    },
+    {
+     "my": "ငန်",
+     "rom": "ngan",
+     "tone": 1,
+     "say": "NGAHN"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "deh",
+     "say_rom": "de",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.202,
+      "d": 0.241,
+      "word": 0
+     },
+     {
+      "t": 0.444,
+      "d": 0.241,
+      "word": 0
+     },
+     {
+      "t": 0.685,
+      "d": 0.241,
+      "word": 0
+     },
+     {
+      "t": 0.926,
+      "d": 0.241,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.33,
+      "d": 0.427,
+      "word": 0
+     },
+     {
+      "t": 0.757,
+      "d": 0.427,
+      "word": 0
+     },
+     {
+      "t": 1.185,
+      "d": 0.427,
+      "word": 0
+     },
+     {
+      "t": 1.612,
+      "d": 0.427,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.168,
+    "slow": 2.039
+   }
+  },
+  {
+   "id": "whats-for-breakfast",
+   "cat": "food",
+   "en": "What's for breakfast?",
+   "my": "မနက်စာဘာစားမလဲ",
+   "rom": "ma neq sa ba sa: ma. leh:",
+   "phon": "muh net sah bah ZAH má leh",
+   "syllables": [
+    {
+     "my": "မ",
+     "rom": "ma",
+     "tone": 1,
+     "say": "muh"
+    },
+    {
+     "my": "နက်",
+     "rom": "neq",
+     "tone": 4,
+     "say": "net"
+    },
+    {
+     "my": "စာ",
+     "rom": "sa",
+     "tone": 1,
+     "say": "sah"
+    },
+    {
+     "my": "ဘာ",
+     "rom": "ba",
+     "tone": 1,
+     "say": "bah"
+    },
+    {
+     "my": "စား",
+     "rom": "sa:",
+     "tone": 2,
+     "say": "ZAH"
+    },
+    {
+     "my": "မ",
+     "rom": "ma.",
+     "tone": 3,
+     "say": "má"
+    },
+    {
+     "my": "လဲ",
+     "rom": "leh:",
+     "tone": 2,
+     "say": "leh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.193,
+      "d": 0.213,
+      "word": 0
+     },
+     {
+      "t": 0.406,
+      "d": 0.213,
+      "word": 0
+     },
+     {
+      "t": 0.62,
+      "d": 0.213,
+      "word": 0
+     },
+     {
+      "t": 0.833,
+      "d": 0.213,
+      "word": 0
+     },
+     {
+      "t": 1.047,
+      "d": 0.213,
+      "word": 0
+     },
+     {
+      "t": 1.26,
+      "d": 0.213,
+      "word": 0
+     },
+     {
+      "t": 1.474,
+      "d": 0.213,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.31,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 0.692,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 1.074,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 1.456,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 1.837,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 2.219,
+      "d": 0.382,
+      "word": 0
+     },
+     {
+      "t": 2.601,
+      "d": 0.382,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.687,
+    "slow": 2.982
+   }
+  },
+  {
+   "id": "love-burmese-food",
+   "cat": "food",
+   "en": "I love Burmese food",
+   "my": "မြန်မာအစားအစာကြိုက်တယ်",
+   "rom": "myan ma a sa: a sa kyaiq te",
+   "phon": "myan mah uh sah uh sah CHIKE teh",
+   "syllables": [
+    {
+     "my": "မြန်",
+     "rom": "myan",
+     "tone": 1,
+     "say": "myan"
+    },
+    {
+     "my": "မာ",
+     "rom": "ma",
+     "tone": 1,
+     "say": "mah"
+    },
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "စား",
+     "rom": "sa:",
+     "tone": 2,
+     "say": "sah"
+    },
+    {
+     "my": "အ",
+     "rom": "a",
+     "tone": 1,
+     "say": "uh"
+    },
+    {
+     "my": "စာ",
+     "rom": "sa",
+     "tone": 1,
+     "say": "sah"
+    },
+    {
+     "my": "ကြိုက်",
+     "rom": "kyaiq",
+     "tone": 4,
+     "say": "CHIKE"
+    },
+    {
+     "my": "တယ်",
+     "rom": "te",
+     "tone": 1,
+     "say": "teh"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.207,
+      "d": 0.187,
+      "word": 0
+     },
+     {
+      "t": 0.394,
+      "d": 0.187,
+      "word": 0
+     },
+     {
+      "t": 0.58,
+      "d": 0.187,
+      "word": 0
+     },
+     {
+      "t": 0.767,
+      "d": 0.187,
+      "word": 0
+     },
+     {
+      "t": 0.954,
+      "d": 0.187,
+      "word": 0
+     },
+     {
+      "t": 1.14,
+      "d": 0.187,
+      "word": 0
+     },
+     {
+      "t": 1.327,
+      "d": 0.187,
+      "word": 0
+     },
+     {
+      "t": 1.513,
+      "d": 0.187,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.335,
+      "d": 0.334,
+      "word": 0
+     },
+     {
+      "t": 0.669,
+      "d": 0.334,
+      "word": 0
+     },
+     {
+      "t": 1.003,
+      "d": 0.334,
+      "word": 0
+     },
+     {
+      "t": 1.337,
+      "d": 0.334,
+      "word": 0
+     },
+     {
+      "t": 1.671,
+      "d": 0.334,
+      "word": 0
+     },
+     {
+      "t": 2.006,
+      "d": 0.334,
+      "word": 0
+     },
+     {
+      "t": 2.34,
+      "d": 0.334,
+      "word": 0
+     },
+     {
+      "t": 2.674,
+      "d": 0.334,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.7,
+    "slow": 3.008
+   }
+  },
+  {
+   "id": "with-rice",
+   "cat": "food",
+   "en": "With rice",
+   "my": "ထမင်းနဲ့",
+   "rom": "hta min: neh.",
+   "phon": "tuh min NÉH",
+   "syllables": [
+    {
+     "my": "ထ",
+     "rom": "hta",
+     "tone": 1,
+     "say": "tuh"
+    },
+    {
+     "my": "မင်း",
+     "rom": "min:",
+     "tone": 2,
+     "say": "min"
+    },
+    {
+     "my": "နဲ့",
+     "rom": "neh.",
+     "tone": 3,
+     "say": "NÉH"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.187,
+      "d": 0.196,
+      "word": 0
+     },
+     {
+      "t": 0.383,
+      "d": 0.196,
+      "word": 0
+     },
+     {
+      "t": 0.578,
+      "d": 0.196,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.298,
+      "d": 0.338,
+      "word": 0
+     },
+     {
+      "t": 0.636,
+      "d": 0.338,
+      "word": 0
+     },
+     {
+      "t": 0.975,
+      "d": 0.338,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 0.773,
+    "slow": 1.313
+   }
+  },
+  {
+   "id": "fried-rice",
+   "cat": "food",
+   "en": "Fried rice, please",
+   "my": "ထမင်းကြော်ပေးပါ",
+   "rom": "hta min: kyaw pe: pa",
+   "phon": "tuh min GYAW bay bah",
+   "syllables": [
+    {
+     "my": "ထ",
+     "rom": "hta",
+     "tone": 1,
+     "say": "tuh"
+    },
+    {
+     "my": "မင်း",
+     "rom": "min:",
+     "tone": 2,
+     "say": "min"
+    },
+    {
+     "my": "ကြော်",
+     "rom": "kyaw",
+     "tone": 1,
+     "say": "GYAW",
+     "say_rom": "gyaw",
+     "voiced": true
+    },
+    {
+     "my": "ပေး",
+     "rom": "pe:",
+     "tone": 2,
+     "say": "bay",
+     "say_rom": "be:",
+     "voiced": true
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.187,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.411,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.635,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 0.86,
+      "d": 0.224,
+      "word": 0
+     },
+     {
+      "t": 1.084,
+      "d": 0.224,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.301,
+      "d": 0.397,
+      "word": 0
+     },
+     {
+      "t": 0.698,
+      "d": 0.397,
+      "word": 0
+     },
+     {
+      "t": 1.095,
+      "d": 0.397,
+      "word": 0
+     },
+     {
+      "t": 1.492,
+      "d": 0.397,
+      "word": 0
+     },
+     {
+      "t": 1.889,
+      "d": 0.397,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.308,
+    "slow": 2.286
+   }
+  },
+  {
+   "id": "shan-noodles",
+   "cat": "food",
+   "en": "Shan noodles, please",
+   "my": "ရှမ်းခေါက်ဆွဲပေးပါ",
+   "rom": "shan: hkauq hswe: pe: pa",
+   "phon": "shahn khauk SWEH bay bah",
+   "syllables": [
+    {
+     "my": "ရှမ်း",
+     "rom": "shan:",
+     "tone": 2,
+     "say": "shahn"
+    },
+    {
+     "my": "ခေါက်",
+     "rom": "hkauq",
+     "tone": 4,
+     "say": "khauk"
+    },
+    {
+     "my": "ဆွဲ",
+     "rom": "hswe:",
+     "tone": 2,
+     "say": "SWEH"
+    },
+    {
+     "my": "ပေး",
+     "rom": "pe:",
+     "tone": 2,
+     "say": "bay",
+     "say_rom": "be:",
+     "voiced": true
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.218,
+      "d": 0.272,
+      "word": 0
+     },
+     {
+      "t": 0.49,
+      "d": 0.272,
+      "word": 0
+     },
+     {
+      "t": 0.762,
+      "d": 0.272,
+      "word": 0
+     },
+     {
+      "t": 1.035,
+      "d": 0.272,
+      "word": 0
+     },
+     {
+      "t": 1.307,
+      "d": 0.272,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.358,
+      "d": 0.485,
+      "word": 0
+     },
+     {
+      "t": 0.843,
+      "d": 0.485,
+      "word": 0
+     },
+     {
+      "t": 1.328,
+      "d": 0.485,
+      "word": 0
+     },
+     {
+      "t": 1.813,
+      "d": 0.485,
+      "word": 0
+     },
+     {
+      "t": 2.298,
+      "d": 0.485,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.579,
+    "slow": 2.782
    }
   }
  ]
