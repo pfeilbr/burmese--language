@@ -92,6 +92,36 @@ const sleep = (ms, gen) => new Promise(res => setTimeout(() => res(gen === gener
 
 let cancelActive = null;   // aborts the clip currently in flight
 
+/* The generation of the sequence currently running, or 0. The audio element
+   alone can't answer "is something playing?": between loop passes, in the
+   shadow gap and between syllables it is paused while the sequence is very
+   much alive, and a stop button that reads it restarts instead of stopping. */
+let busyGen = 0;
+const isPlaying = () => busyGen !== 0 && busyGen === generation;
+
+/* Tell the OS whether we're playing, so the lock screen shows the right button
+   and an AirPods squeeze maps to the action the listener expects. */
+function setPlaybackState(state) {
+  try { if ('mediaSession' in navigator) navigator.mediaSession.playbackState = state; } catch {}
+}
+
+/** Cancel whatever is running and claim a new generation for a sequence. */
+function beginSequence() {
+  stopPlayback();
+  const gen = ++generation;
+  busyGen = gen;
+  setPlaybackState('playing');
+  return gen;
+}
+
+/** Mark a sequence finished, unless something newer has already taken over. */
+function endSequence(gen) {
+  if (gen !== generation) return false;
+  busyGen = 0;
+  setPlaybackState('paused');
+  return true;
+}
+
 /** Surface a playback failure instead of failing silently. Defined here and
  *  assigned below, once the toast helper exists. */
 let playbackFailed = () => {};
@@ -141,7 +171,9 @@ function playRange(from, to, gen, onTick) {
     };
 
     function onLoadFail() {
-      playbackFailed('That clip could not be loaded');
+      playbackFailed(navigator.onLine === false
+        ? "You're offline and this clip isn't saved — ☰ → Save all audio"
+        : 'That clip could not be loaded');
       finish(false);
     }
 
@@ -179,6 +211,8 @@ function playRange(from, to, gen, onTick) {
 
 function stopPlayback() {
   generation++;
+  busyGen = 0;
+  setPlaybackState('paused');
   if (cancelActive) cancelActive(false);
   if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
   audio.pause();
@@ -210,9 +244,8 @@ async function playOnce(phrase, plan, gen) {
 }
 
 async function play(phrase) {
-  stopPlayback();
+  const gen = beginSequence();
   noteUsed(phrase.id);
-  const gen = ++generation;
   const plan = playbackPlan(phrase, speed);
 
   if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
@@ -238,7 +271,7 @@ async function play(phrase) {
     // Covers every exit: finished, cancelled, or play() rejected (autoplay
     // blocked, missing file). Without this the button stays stuck on "stop"
     // with nothing playing. Skipped if a newer playback already took over.
-    if (gen === generation) {
+    if (endSequence(gen)) {
       setPlayingUI(false);
       highlight(-1);
     }
@@ -247,8 +280,7 @@ async function play(phrase) {
 
 /** Play a single syllable in its real phrase context (tap-a-syllable). */
 async function playSyllable(phrase, index) {
-  stopPlayback();
-  const gen = ++generation;
+  const gen = beginSequence();
   const plan = playbackPlan(phrase, speed);
   if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
   audio.playbackRate = plan.rate;
@@ -257,7 +289,7 @@ async function playSyllable(phrase, index) {
   highlight(index);
   setPlayingUI(true);
   await playRange(t.t, t.t + t.d, gen);
-  if (gen === generation) { highlight(-1); setPlayingUI(false); }
+  if (endSequence(gen)) { highlight(-1); setPlayingUI(false); }
 }
 
 /* AirPods stem-squeeze and lock-screen controls map onto play/pause, which is
@@ -353,6 +385,8 @@ const PLAY_ICON = '<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>'
 const COPY_ICON = '<svg viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/></svg>';
 const STAR_ICON = '<svg class="card-fav" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8L3.5 9.7l5.9-.9z"/></svg>';
 
+const STARTER_COUNT = DATA.phrases.filter(p => p.starter != null).length;
+
 const VIRTUAL_FILTERS = {
   all:    () => true,
   start:  p => p.starter != null,
@@ -360,11 +394,19 @@ const VIRTUAL_FILTERS = {
   fav:    p => favs.has(p.id),
 };
 
+/** Lower-case and strip Latin accents, so typing "ya" finds the respelling
+ *  "yá". Only combining marks in the Latin range go: Burmese vowel signs are
+ *  combining marks too, and removing those would change the word. */
+const fold = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+// Built once: the searchable text never changes after load.
+const HAY = new Map(DATA.phrases.map(p => [p.id, fold(`${p.en} ${p.rom} ${p.my} ${p.phon}`)]));
+
 function matches(p) {
   const virtual = VIRTUAL_FILTERS[filter];
   if (virtual ? !virtual(p) : p.cat !== filter) return false;
   if (!query) return true;
-  const hay = `${p.en} ${p.rom} ${p.my} ${p.phon}`.toLowerCase();
+  const hay = HAY.get(p.id);
   return query.split(/\s+/).every(w => hay.includes(w));
 }
 
@@ -398,7 +440,7 @@ function renderList() {
   if (filter === 'recent') hits.sort((a, b) => recent.indexOf(a.id) - recent.indexOf(b.id));
 
   const intro = (filter === 'start' && !query)
-    ? `<p class="list-intro">Twelve to learn first — the ones you'll use nearly every day.
+    ? `<p class="list-intro">${STARTER_COUNT} to learn first — the ones you'll use nearly every day.
        Once these feel easy, work through the categories.</p>`
     : '';
 
@@ -415,18 +457,38 @@ function renderList() {
   }
 }
 
-function renderChips() {
-  const all = [
+/** The chips on offer right now. Recent and Favourites only appear once
+ *  there's something in them. */
+function chipList() {
+  return [
     { id: 'start', name: 'Start here', emoji: '🌱' },
     { id: 'all', name: 'All', emoji: '' },
-    // Only worth offering once there's something in them.
     ...(recent.length ? [{ id: 'recent', name: 'Recent', emoji: '🕘' }] : []),
     ...(favs.size ? [{ id: 'fav', name: 'Favourites', emoji: '★' }] : []),
     ...DATA.categories,
   ];
-  el.chips.innerHTML = all.map(c =>
+}
+
+/** Fall back to the starter set if the selected filter no longer exists --
+ *  a category removed in an update, or Favourites after they were cleared.
+ *  Otherwise the list comes up empty with no chip selected to explain why. */
+function ensureFilter() {
+  if (chipList().some(c => c.id === filter)) return;
+  filter = 'start';
+  store.set('filter', filter);
+}
+
+function renderChips() {
+  el.chips.innerHTML = chipList().map(c =>
     `<button class="chip" data-cat="${c.id}" aria-pressed="${filter === c.id}">${c.emoji} ${esc(c.name)}</button>`
   ).join('');
+}
+
+/** Scroll the chip strip so the selected chip is on screen -- a filter
+ *  restored from last time may be well off to the right. */
+function revealActiveChip() {
+  const chip = el.chips.querySelector('[aria-pressed="true"]');
+  if (chip) el.chips.scrollLeft = chip.offsetLeft - (el.chips.clientWidth - chip.offsetWidth) / 2;
 }
 
 function highlight(index) {
@@ -480,7 +542,7 @@ function hideSheet() {
   const wasDetail = activeSheet === el.sheet;
   const wasLive = activeSheet === $('#live');
   if (wasDrill) { stopPlayback(); drill = null; }
-  if (wasLive) { stopPlayback(); live = null; releaseWakeLock(); }
+  if (wasLive) { stopPlayback(); live = null; releaseWakeLock(); renderList(); }
   activeSheet.hidden = true;
   activeSheet = null;
   document.body.style.overflow = '';
@@ -560,7 +622,7 @@ el.list.addEventListener('click', e => {
   if (playNode) {
     e.stopPropagation();
     const p = BY_ID.get(playNode.dataset.play);
-    if (current && current.id === p.id && !audio.paused) stopPlayback();
+    if (current && current.id === p.id && isPlaying()) stopPlayback();
     else { current = p; play(p); }
     return;
   }
@@ -579,7 +641,16 @@ el.chips.addEventListener('click', e => {
 });
 
 el.search.addEventListener('input', () => {
-  query = el.search.value.trim().toLowerCase();
+  query = fold(el.search.value.trim());
+  renderList();
+});
+
+// Escape empties the search box, the way it does in any native search field.
+el.search.addEventListener('keydown', e => {
+  if (e.key !== 'Escape' || !el.search.value) return;
+  e.stopPropagation();
+  el.search.value = '';
+  query = '';
   renderList();
 });
 
@@ -594,7 +665,7 @@ el.dScript.addEventListener('click', e => {
 
 el.playBtn.addEventListener('click', () => {
   if (!current) return;
-  if (!audio.paused || rafId) stopPlayback();
+  if (isPlaying()) stopPlayback();
   else play(current);
 });
 
@@ -605,7 +676,7 @@ el.speed.addEventListener('input', () => {
 el.speed.addEventListener('change', () => {
   store.set('speed', speed);
   // Re-start at the new speed so the change is immediately audible.
-  if (current && (!audio.paused || rafId)) play(current);
+  if (current && isPlaying()) play(current);
 });
 
 for (const m of ['step', 'loop', 'shadow']) {
@@ -616,7 +687,7 @@ for (const m of ['step', 'loop', 'shadow']) {
     if (m === 'shadow' && modes.shadow) modes.loop = false;
     store.set('modes', modes);
     updateModeUI();
-    if (current && (!audio.paused || rafId)) play(current);
+    if (current && isPlaying()) play(current);
   });
 }
 
@@ -634,14 +705,19 @@ for (const btn of document.querySelectorAll('.close-btn')) {
   btn.addEventListener('click', () => history.back());
 }
 
-window.addEventListener('popstate', hideSheet);
+// Back (the Android button, the iOS edge swipe) closes Present too; it sits on
+// top of a sheet without a history entry of its own.
+window.addEventListener('popstate', () => {
+  if (!$('#present').hidden) closePresent();
+  hideSheet();
+});
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !$('#present').hidden) return closePresent();
   if (e.key === 'Escape' && activeSheet) history.back();
   if (e.key === ' ' && current && activeSheet === el.sheet && e.target === document.body) {
     e.preventDefault();
-    (!audio.paused || rafId) ? stopPlayback() : play(current);
+    isPlaying() ? stopPlayback() : play(current);
   }
 });
 
@@ -677,8 +753,11 @@ const drillable = p => p.syllables
   .map((s, i) => ({ s, i }))
   .filter(({ s }) => s.tone >= 1 && s.tone <= 4 && !s.say.includes('-'));
 
+const DRILL_POOL = DATA.phrases.filter(p => drillable(p).length);
+
 function nextQuestion() {
-  const pool = DATA.phrases.filter(p => drillable(p).length);
+  const prev = drill && drill.phrase;
+  const pool = DRILL_POOL.length > 1 ? DRILL_POOL.filter(p => p !== prev) : DRILL_POOL;
   const phrase = pool[Math.floor(Math.random() * pool.length)];
   const opts = drillable(phrase);
   const pick = opts[Math.floor(Math.random() * opts.length)];
@@ -710,12 +789,12 @@ function renderDrillScore() {
 /** Play a phrase straight through, ignoring loop/shadow/syllable modes. */
 async function playDrillPhrase() {
   if (!drill) return;
-  stopPlayback();
-  const gen = ++generation;
+  const gen = beginSequence();
   const plan = playbackPlan(drill.phrase, speed);
   if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
   audio.playbackRate = plan.rate;
   await playRange(0, endOf(drill.phrase, plan.track), gen);
+  endSequence(gen);
 }
 
 function answerDrill(tone) {
@@ -897,9 +976,8 @@ function setLiveSaying(on) {
 async function livePlay() {
   const phrase = liveCurrent();
   if (!phrase) return;
-  stopPlayback();
+  const gen = beginSequence();
   noteUsed(phrase.id);
-  const gen = ++generation;
   const plan = playbackPlan(phrase, speed);
   if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
   audio.playbackRate = plan.rate;
@@ -915,7 +993,7 @@ async function livePlay() {
       await playRange(0, stop, gen);
     }
   } finally {
-    if (gen === generation) setLiveSaying(false);
+    if (endSequence(gen)) setLiveSaying(false);
   }
 }
 
@@ -942,7 +1020,7 @@ $('#live-btn').addEventListener('click', () => openLive());
 $('#live-prev').addEventListener('click', () => liveGo(-1));
 $('#live-next').addEventListener('click', () => liveGo(1));
 $('#live-say-btn').addEventListener('click', () => {
-  if (!audio.paused || rafId) stopPlayback(); else livePlay();
+  if (isPlaying()) stopPlayback(); else livePlay();
 });
 $('#live-decks').addEventListener('click', e => {
   const btn = e.target.closest('[data-deck]');
@@ -1048,7 +1126,7 @@ $('#quick-tiles').addEventListener('click', e => {
   const node = e.target.closest('[data-quick]');
   if (!node) return;
   const p = BY_ID.get(node.dataset.quick);
-  if (current && current.id === p.id && !audio.paused) return stopPlayback();
+  if (current && current.id === p.id && isPlaying()) return stopPlayback();
   current = p;
   play(p);
 });
@@ -1104,12 +1182,19 @@ function refreshCompareUI() {
 }
 
 async function startRecording() {
+  if (!current) return;
   stopPlayback();
+  // Taken before the permission prompt: the sheet can be closed while it's up.
+  const phraseId = current.id;
   let stream;
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   } catch {
     return toast('Microphone access is needed to record');
+  }
+  if (!current || current.id !== phraseId) {
+    stream.getTracks().forEach(t => t.stop());
+    return;
   }
 
   const chunks = [];
@@ -1121,7 +1206,6 @@ async function startRecording() {
     return toast("This browser can't record audio");
   }
 
-  const phraseId = current.id;
   mediaRecorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
   mediaRecorder.onstop = () => {
     // Releasing the mic matters on iOS, which otherwise keeps showing the
@@ -1181,8 +1265,7 @@ function playBlob(url, gen) {
 async function playComparison(includeNative) {
   const rec = current && recordings.get(current.id);
   if (!rec) return;
-  stopPlayback();
-  const gen = ++generation;
+  const gen = beginSequence();
   setPlayingUI(true);
 
   try {
@@ -1202,7 +1285,7 @@ async function playComparison(includeNative) {
     }
     await playBlob(rec.url, gen);
   } finally {
-    if (gen === generation) { setPlayingUI(false); highlight(-1); }
+    if (endSequence(gen)) { setPlayingUI(false); highlight(-1); }
   }
 }
 
@@ -1302,12 +1385,18 @@ function bytes(n) {
   return n > 1e9 ? (n / 1e9).toFixed(1) + ' GB' : Math.max(1, Math.round(n / 1e6)) + ' MB';
 }
 
+const clipUrls = () => DATA.phrases.flatMap(p =>
+  Object.keys(DATA.tracks).map(t => `audio/${p.id}.${t}.mp3`));
+
 async function refreshStorage() {
   const sub = $('#offline-sub');
-  const total = DATA.phrases.length * Object.keys(DATA.tracks).length;
+  const wanted = new Set(clipUrls().map(u => new URL(u, location.href).href));
+  const total = wanted.size;
   try {
     const cache = await caches.open('sib-audio');
-    const saved = (await cache.keys()).length;
+    // Clips for phrases removed in an update stay in the cache, so count only
+    // the ones this version actually uses.
+    const saved = (await cache.keys()).filter(r => wanted.has(r.url)).length;
     if (saved >= total) {
       sub.textContent = `All ${total} clips saved`;
       $('#offline-pill').textContent = 'Saved';
@@ -1367,18 +1456,23 @@ $('#offline-btn').addEventListener('click', async e => {
   const sub = $('#offline-sub');
   if (pill.dataset.state === 'busy') return;
 
-  const urls = [];
-  for (const p of DATA.phrases) for (const t of Object.keys(DATA.tracks)) urls.push(`audio/${p.id}.${t}.mp3`);
+  const urls = clipUrls();
 
   pill.dataset.state = 'busy';
   pill.textContent = '0%';
-  let done = 0, failed = 0;
-  for (const u of urls) {
-    try { const r = await fetch(u); if (!r.ok) failed++; } catch { failed++; }
-    done++;
-    pill.textContent = Math.round((done / urls.length) * 100) + '%';
-    sub.textContent = `Saving ${done} of ${urls.length}…`;
-  }
+  let done = 0, failed = 0, next = 0;
+  // A few requests in flight at once: one at a time spends most of the wait
+  // on round trips for clips that are only a few KB each.
+  const worker = async () => {
+    while (next < urls.length) {
+      const u = urls[next++];
+      try { const r = await fetch(u); if (!r.ok) failed++; } catch { failed++; }
+      done++;
+      pill.textContent = Math.round((done / urls.length) * 100) + '%';
+      sub.textContent = `Saving ${done} of ${urls.length}…`;
+    }
+  };
+  await Promise.all(Array.from({ length: 6 }, worker));
   await refreshStorage();
   toast(failed ? `Saved, but ${failed} clip${failed === 1 ? '' : 's'} failed` : 'All audio available offline');
 });
@@ -1394,6 +1488,8 @@ $('#clear-favs-btn').addEventListener('click', () => {
   favs.clear();
   store.set('favs', []);
   refreshFavsRow();
+  ensureFilter();
+  renderChips();
   renderList();
   toast('Favourites cleared');
 });
@@ -1476,13 +1572,6 @@ async function checkForUpdate(manual) {
 function initServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
 
-  // Whether a worker controlled this page *at load* is what distinguishes an
-  // update from a first install. It can't be read later: the initial worker's
-  // clients.claim() sets a controller mid-install, which would make a brand new
-  // visitor's first load look like an update and prompt them to update to the
-  // version they just downloaded.
-  const hadController = !!navigator.serviceWorker.controller;
-
   navigator.serviceWorker.addEventListener('controllerchange', () => {
     // Only reload for an update the user actually asked for; the very first
     // registration also fires this when it claims the page.
@@ -1494,7 +1583,7 @@ function initServiceWorker() {
   navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' })
     .then(reg => {
       swReg = reg;
-      if (reg.waiting && hadController) showUpdatePrompt();
+      if (reg.waiting && HAD_CONTROLLER) showUpdatePrompt();
 
       reg.addEventListener('updatefound', () => {
         const nw = reg.installing;
@@ -1502,7 +1591,7 @@ function initServiceWorker() {
         nw.addEventListener('statechange', () => {
           // A worker reaching `installed` when one already controlled the page
           // means this is an update, not a first install.
-          if (nw.state === 'installed' && hadController) showUpdatePrompt();
+          if (nw.state === 'installed' && HAD_CONTROLLER) showUpdatePrompt();
         });
       });
 
@@ -1517,6 +1606,7 @@ function initServiceWorker() {
 playbackFailed = msg => { stopPlayback(); toast(msg); };
 
 applyPrefs();
+ensureFilter();
 renderChips();
 renderList();
 updateSpeedUI();
@@ -1524,6 +1614,7 @@ updateModeUI();
 refreshInstallSection();
 renderQuickbar();
 applyDeepLink();
+revealActiveChip();
 
 window.addEventListener('load', initServiceWorker);
 

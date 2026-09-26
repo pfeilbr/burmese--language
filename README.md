@@ -27,7 +27,7 @@ route — so the app just tells you where to tap.)
 ## What it does
 
 - **Live mode** — the one built for actually being in front of her. See below.
-- **262 phrases** across affection, sweet talk, dating and flirting, getting
+- **267 phrases** across affection, sweet talk, dating and flirting, getting
   serious, comforting her, texts and voice notes, meeting the family, occasions
   and blessings, the tea shop, meals, coming and going, checking in, chores,
   needs and the body ("I have to pee"), yes/no and everyday basics, getting
@@ -185,7 +185,7 @@ The app checks for a new version on launch and offers it rather than applying it
 silently: you get an **Update available** prompt with *Update* and *Later*. You
 can also check by hand from **☰ menu → Updates**. Accepting swaps in the new
 version and reloads; the downloaded audio is kept, so an update never costs you
-the 5.2 MB again.
+the 8.9 MB again.
 
 The mechanics are worth knowing if you change the deploy:
 
@@ -236,6 +236,14 @@ must survive any speed change.
    ```
 
 3. Commit. Pushing to the default branch redeploys the site.
+
+The build also warns, without failing, when two phrases share an English label
+or when `web/audio/` holds clips for a phrase that no longer exists.
+
+Every push and pull request runs the **Check** workflow
+(`.github/workflows/check.yml`): `--check`, a test that `web/data/phrases.js`
+and the audio match `data/phrases.json`, and a syntax check of the JavaScript.
+A phrase added to the JSON without re-running the build fails it.
 
 An entry looks like this:
 
