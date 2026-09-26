@@ -685,7 +685,7 @@ body.has-quickbar .list { padding-bottom: calc(var(--safe-b) + 104px); }
 /* ── Toast ───────────────────────────────────────────────── */
 
 .toast {
-  position: fixed; left: 50%; bottom: calc(var(--safe-b) + 24px); z-index: 60;
+  position: fixed; left: 50%; bottom: calc(var(--safe-b) + 24px); z-index: 90;
   transform: translateX(-50%);
   padding: 11px 18px;
   font-size: 14px; font-weight: 600; white-space: nowrap;
@@ -805,7 +805,7 @@ body.has-quickbar .list { padding-bottom: calc(var(--safe-b) + 104px); }
 .live-say-btn:not(.playing) .i-stop { display: none; }
 .live-say-btn.playing .i-play { display: none; }
 
-.live-actions { display: flex; gap: 8px; margin-top: 10px; }
+.live-actions { display: flex; gap: 6px; margin-top: 10px; }
 
 .live-chip {
   flex: 1;

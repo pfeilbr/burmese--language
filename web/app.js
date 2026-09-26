@@ -972,6 +972,12 @@ $('#live-show').addEventListener('click', () => {
 /* Dim is for the phone lying face-up on the table. The first tap anywhere
    brings the screen back rather than firing whatever was under the finger --
    otherwise the gesture that says "let me look" also says "say it now". */
+// The card itself plays on tap, so the script can't be long-pressed to select.
+$('#live-copy').addEventListener('click', () => {
+  const phrase = liveCurrent();
+  if (phrase) copyText(phrase.my);
+});
+
 $('#live-dim').addEventListener('click', e => {
   e.stopPropagation();
   const on = $('#live').classList.toggle('dimmed');
