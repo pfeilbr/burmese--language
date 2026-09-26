@@ -2334,7 +2334,7 @@ window.PHRASE_DATA = {
    "cat": "affection",
    "en": "I miss you / I'm thinking of you",
    "my": "သတိရတယ်",
-   "rom": "tha. ti ya. te",
+   "rom": "tha. ti. ya. te",
    "phon": "thá DÍ yá deh",
    "syllables": [
     {
@@ -2345,10 +2345,10 @@ window.PHRASE_DATA = {
     },
     {
      "my": "တိ",
-     "rom": "ti",
-     "tone": 1,
+     "rom": "ti.",
+     "tone": 3,
      "say": "DÍ",
-     "say_rom": "di",
+     "say_rom": "di.",
      "voiced": true
     },
     {
@@ -2701,7 +2701,7 @@ window.PHRASE_DATA = {
    "cat": "compliments",
    "en": "You look lovely today",
    "my": "ဒီနေ့အရမ်းချောတယ်",
-   "rom": "di ne. a yan: chaw te",
+   "rom": "di ne. a yan: chaw: te",
    "phon": "dee né uh yahn CHAW deh",
    "syllables": [
     {
@@ -2730,8 +2730,8 @@ window.PHRASE_DATA = {
     },
     {
      "my": "ချော",
-     "rom": "chaw",
-     "tone": 1,
+     "rom": "chaw:",
+     "tone": 2,
      "say": "CHAW"
     },
     {
@@ -5377,7 +5377,7 @@ window.PHRASE_DATA = {
    "cat": "family",
    "en": "Please teach me what I don't know",
    "my": "မသိတာတွေသင်ပေးပါ",
-   "rom": "ma. thi ta twe thin pe: pa",
+   "rom": "ma. thi. ta twe thin pe: pa",
    "phon": "má thi dah dway thin PAY bah",
    "syllables": [
     {
@@ -5388,8 +5388,8 @@ window.PHRASE_DATA = {
     },
     {
      "my": "သိ",
-     "rom": "thi",
-     "tone": 1,
+     "rom": "thi.",
+     "tone": 3,
      "say": "thi"
     },
     {
@@ -7907,7 +7907,7 @@ window.PHRASE_DATA = {
    "cat": "morning-night",
    "en": "Good night",
    "my": "ကောင်းသောညပါ",
-   "rom": "kaun: thaw nya. pa",
+   "rom": "kaun: thaw: nya. pa",
    "phon": "KAUN thaw nyá bah",
    "syllables": [
     {
@@ -7918,8 +7918,8 @@ window.PHRASE_DATA = {
     },
     {
      "my": "သော",
-     "rom": "thaw",
-     "tone": 1,
+     "rom": "thaw:",
+     "tone": 2,
      "say": "thaw"
     },
     {
@@ -8651,7 +8651,7 @@ window.PHRASE_DATA = {
    "cat": "coming-going",
    "en": "Take care on the way",
    "my": "လမ်းမှာသတိထားနော်",
-   "rom": "lan: hma tha. ti hta: naw",
+   "rom": "lan: hma tha. ti. hta: naw",
    "phon": "lan hmah thá DÍ tah naw",
    "syllables": [
     {
@@ -8674,10 +8674,10 @@ window.PHRASE_DATA = {
     },
     {
      "my": "တိ",
-     "rom": "ti",
-     "tone": 1,
+     "rom": "ti.",
+     "tone": 3,
      "say": "DÍ",
-     "say_rom": "di",
+     "say_rom": "di.",
      "voiced": true
     },
     {
@@ -11112,7 +11112,7 @@ window.PHRASE_DATA = {
    "cat": "learning",
    "en": "Please say it slowly",
    "my": "ဖြေးဖြေးပြောပေးပါ",
-   "rom": "hpye: hpye: pyaw pe: pa",
+   "rom": "hpye: hpye: pyaw: pe: pa",
    "phon": "PYAY pyay pyaw bay bah",
    "syllables": [
     {
@@ -11129,8 +11129,8 @@ window.PHRASE_DATA = {
     },
     {
      "my": "ပြော",
-     "rom": "pyaw",
-     "tone": 1,
+     "rom": "pyaw:",
+     "tone": 2,
      "say": "pyaw"
     },
     {
@@ -11216,7 +11216,7 @@ window.PHRASE_DATA = {
    "cat": "learning",
    "en": "Please say that again",
    "my": "ထပ်ပြောပါဦး",
-   "rom": "htaq pyaw pa u:",
+   "rom": "htaq pyaw: pa u:",
    "phon": "tat PYAW pah oo",
    "syllables": [
     {
@@ -11227,8 +11227,8 @@ window.PHRASE_DATA = {
     },
     {
      "my": "ပြော",
-     "rom": "pyaw",
-     "tone": 1,
+     "rom": "pyaw:",
+     "tone": 2,
      "say": "PYAW"
     },
     {
@@ -11656,7 +11656,7 @@ window.PHRASE_DATA = {
    "cat": "learning",
    "en": "Do you speak English?",
    "my": "အင်္ဂလိပ်လိုပြောတတ်လား",
-   "rom": "in-ga leiq lo pyaw taq la:",
+   "rom": "in-ga leiq lo pyaw: taq la:",
    "phon": "in-guh late loh PYAW tat lah",
    "syllables": [
     {
@@ -11679,8 +11679,8 @@ window.PHRASE_DATA = {
     },
     {
      "my": "ပြော",
-     "rom": "pyaw",
-     "tone": 1,
+     "rom": "pyaw:",
+     "tone": 2,
      "say": "PYAW"
     },
     {
@@ -12569,7 +12569,7 @@ window.PHRASE_DATA = {
    "cat": "dating",
    "en": "I've been thinking about you",
    "my": "မင်းကိုသတိရနေတယ်",
-   "rom": "min: ko tha. ti ya. ne te",
+   "rom": "min: ko tha. ti. ya. ne te",
    "phon": "min goh thá dí yá nay deh",
    "syllables": [
     {
@@ -12594,10 +12594,10 @@ window.PHRASE_DATA = {
     },
     {
      "my": "တိ",
-     "rom": "ti",
-     "tone": 1,
+     "rom": "ti.",
+     "tone": 3,
      "say": "dí",
-     "say_rom": "di",
+     "say_rom": "di.",
      "voiced": true
     },
     {
@@ -13859,13 +13859,13 @@ window.PHRASE_DATA = {
    "cat": "comfort",
    "en": "Tell me about it",
    "my": "ပြောပြပါ",
-   "rom": "pyaw pya. pa",
+   "rom": "pyaw: pya. pa",
    "phon": "PYAW byá bah",
    "syllables": [
     {
      "my": "ပြော",
-     "rom": "pyaw",
-     "tone": 1,
+     "rom": "pyaw:",
+     "tone": 2,
      "say": "PYAW"
     },
     {
@@ -14822,7 +14822,7 @@ window.PHRASE_DATA = {
    "cat": "messages",
    "en": "Let me know when you get home",
    "my": "အိမ်ရောက်ရင်ပြောနော်",
-   "rom": "ein yauq yin pyaw naw",
+   "rom": "ein yauq yin pyaw: naw",
    "phon": "ain yauk yin PYAW naw",
    "syllables": [
     {
@@ -14845,8 +14845,8 @@ window.PHRASE_DATA = {
     },
     {
      "my": "ပြော",
-     "rom": "pyaw",
-     "tone": 1,
+     "rom": "pyaw:",
+     "tone": 2,
      "say": "PYAW"
     },
     {
@@ -14922,7 +14922,7 @@ window.PHRASE_DATA = {
    "cat": "messages",
    "en": "I'll reply in a bit",
    "my": "ခဏနေပြန်ပြောမယ်",
-   "rom": "hka. na. ne pyan pyaw me",
+   "rom": "hka. na. ne pyan pyaw: me",
    "phon": "khá ná nay pyan PYAW meh",
    "syllables": [
     {
@@ -14951,8 +14951,8 @@ window.PHRASE_DATA = {
     },
     {
      "my": "ပြော",
-     "rom": "pyaw",
-     "tone": 1,
+     "rom": "pyaw:",
+     "tone": 2,
      "say": "PYAW"
     },
     {

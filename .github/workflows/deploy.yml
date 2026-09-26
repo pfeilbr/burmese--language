@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Test and deploy
 
 # Deploys whatever is on the repository's default branch, rather than naming
 # a branch here. Naming one means the workflow silently stops deploying the
@@ -13,14 +13,27 @@ permissions:
   pages: write
   id-token: write
 
-# Let a running deploy finish rather than cancelling it midway.
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
+  # Runs on every branch, so a bad phrase or a stale build fails before it can
+  # reach the site rather than after.
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+      - name: Validate phrase data
+        run: uv run --with edge-tts --with miniaudio scripts/build.py --check
+      - name: Unit and artifact tests
+        run: uv run --with edge-tts --with miniaudio --with pytest pytest -q tests
+
   deploy:
+    needs: test
     if: github.ref_name == github.event.repository.default_branch
+    # Let a running deploy finish rather than cancelling it midway. Scoped to
+    # this job so test runs on other branches never queue behind a deploy.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     environment:
       name: github-pages
