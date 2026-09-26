@@ -88,6 +88,25 @@ function playbackPlan(phrase, targetPct) {
   return { track, rate, src: `audio/${phrase.id}.${track}.mp3` };
 }
 
+/** Point the shared element at the right track for a phrase and start a new
+ *  playback generation. Every way of playing something goes through here, so
+ *  each one cancels whatever was playing before it. */
+function loadPlan(phrase) {
+  stopPlayback();
+  const gen = ++generation;
+  const plan = playbackPlan(phrase, speed);
+  if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
+  audio.playbackRate = plan.rate;
+  return { gen, plan };
+}
+
+/** A playRange tick handler that lights up whichever syllable is sounding. */
+const followAlong = timing => t => {
+  let idx = -1;
+  for (let i = 0; i < timing.length; i++) if (t >= timing[i].t - 0.02) idx = i;
+  highlight(idx);
+};
+
 const sleep = (ms, gen) => new Promise(res => setTimeout(() => res(gen === generation), ms));
 
 let cancelActive = null;   // aborts the clip currently in flight
@@ -200,23 +219,14 @@ async function playOnce(phrase, plan, gen) {
     highlight(-1);
     return true;
   }
-  const ok = await playRange(0, endOf(phrase, plan.track), gen, t => {
-    let idx = -1;
-    for (let i = 0; i < timing.length; i++) if (t >= timing[i].t - 0.02) idx = i;
-    highlight(idx);
-  });
+  const ok = await playRange(0, endOf(phrase, plan.track), gen, followAlong(timing));
   highlight(-1);
   return ok;
 }
 
 async function play(phrase) {
-  stopPlayback();
+  const { gen, plan } = loadPlan(phrase);
   noteUsed(phrase.id);
-  const gen = ++generation;
-  const plan = playbackPlan(phrase, speed);
-
-  if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
-  audio.playbackRate = plan.rate;
   setMediaSession(phrase);
   setPlayingUI(true);
 
@@ -247,11 +257,7 @@ async function play(phrase) {
 
 /** Play a single syllable in its real phrase context (tap-a-syllable). */
 async function playSyllable(phrase, index) {
-  stopPlayback();
-  const gen = ++generation;
-  const plan = playbackPlan(phrase, speed);
-  if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
-  audio.playbackRate = plan.rate;
+  const { gen, plan } = loadPlan(phrase);
 
   const t = phrase.timing[plan.track][index];
   highlight(index);
@@ -333,7 +339,7 @@ function syllablesHtml(phrase, { interactive }) {
            (interactive ? ` data-syl="${i}" aria-label="${esc(s.say)}"` : '') + '>' +
              `<span class="syl-say">${esc(s.say)}</span>` +
              toneSvg(s.tone) +
-             `<span class="syl-my">${esc(s.my)}</span>` +
+             `<span class="syl-my" lang="my">${esc(s.my)}</span>` +
              // `say_rom` is the softened form the voice actually produces; the
              // citation form in `rom` is what a dictionary would give you, and
              // is not what you want to read out loud.
@@ -360,11 +366,21 @@ const VIRTUAL_FILTERS = {
   fav:    p => favs.has(p.id),
 };
 
+/** Lowercased with Latin accents stripped, so "kha" finds the respelling "khá"
+ *  and "ne" finds "né". Only combining marks in the Latin range are removed —
+ *  Burmese vowel signs are combining marks too, and stripping those would make
+ *  a Burmese search match the wrong words. */
+const fold = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+// Built once: the phrase list never changes while the page is open.
+const HAYSTACK = new Map(DATA.phrases.map(p =>
+  [p.id, fold(`${p.en} ${p.rom} ${p.my} ${p.phon} ${spokenRom(p)}`)]));
+
 function matches(p) {
   const virtual = VIRTUAL_FILTERS[filter];
   if (virtual ? !virtual(p) : p.cat !== filter) return false;
   if (!query) return true;
-  const hay = `${p.en} ${p.rom} ${p.my} ${p.phon}`.toLowerCase();
+  const hay = HAYSTACK.get(p.id);
   return query.split(/\s+/).every(w => hay.includes(w));
 }
 
@@ -380,14 +396,18 @@ function noteUsed(id) {
 }
 
 function cardHtml(p) {
-  return `<button class="card" data-id="${p.id}">
+  // The open button is stretched over the whole card rather than wrapping it:
+  // buttons can't contain other buttons, and copy and play have to be real,
+  // separately focusable controls sitting on top of it.
+  return `<div class="card">
+    <button class="card-open" data-id="${p.id}" aria-label="${esc(p.en)}"></button>
     <span class="card-text">
       <span class="card-en">${esc(p.en)}${favs.has(p.id) ? ' ' + STAR_ICON : ''}</span>
       <span class="card-my">${inlineMy(p)}</span>
-      <span class="card-burmese"><span lang="my">${esc(p.my)}</span><span class="copy-mini" data-copy="${p.id}" role="button" aria-label="Copy Burmese">${COPY_ICON}</span></span>
+      <span class="card-burmese"><span lang="my">${esc(p.my)}</span><button class="copy-mini" data-copy="${p.id}" aria-label="Copy Burmese: ${esc(p.en)}">${COPY_ICON}</button></span>
     </span>
-    <span class="card-play" data-play="${p.id}" role="button" aria-label="Play ${esc(p.en)}">${PLAY_ICON}</span>
-  </button>`;
+    <button class="card-play" data-play="${p.id}" aria-label="Play ${esc(p.en)}">${PLAY_ICON}</button>
+  </div>`;
 }
 
 function renderList() {
@@ -579,7 +599,7 @@ el.chips.addEventListener('click', e => {
 });
 
 el.search.addEventListener('input', () => {
-  query = el.search.value.trim().toLowerCase();
+  query = fold(el.search.value.trim());
   renderList();
 });
 
@@ -634,10 +654,13 @@ for (const btn of document.querySelectorAll('.close-btn')) {
   btn.addEventListener('click', () => history.back());
 }
 
-window.addEventListener('popstate', hideSheet);
+window.addEventListener('popstate', () => {
+  if (!$('#present').hidden) return closePresent();
+  hideSheet();
+});
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && !$('#present').hidden) return closePresent();
+  if (e.key === 'Escape' && !$('#present').hidden) return history.back();
   if (e.key === 'Escape' && activeSheet) history.back();
   if (e.key === ' ' && current && activeSheet === el.sheet && e.target === document.body) {
     e.preventDefault();
@@ -710,11 +733,7 @@ function renderDrillScore() {
 /** Play a phrase straight through, ignoring loop/shadow/syllable modes. */
 async function playDrillPhrase() {
   if (!drill) return;
-  stopPlayback();
-  const gen = ++generation;
-  const plan = playbackPlan(drill.phrase, speed);
-  if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
-  audio.playbackRate = plan.rate;
+  const { gen, plan } = loadPlan(drill.phrase);
   await playRange(0, endOf(drill.phrase, plan.track), gen);
 }
 
@@ -772,6 +791,9 @@ function openPresent() {
   $('#present-rom').textContent = spokenRom(current);
   $('#present').hidden = false;
   document.body.style.overflow = 'hidden';
+  // Its own history entry, so the Back gesture puts the phone's screen back
+  // the way it was rather than closing the phrase underneath too.
+  history.pushState({ present: true }, '');
 }
 
 function closePresent() {
@@ -780,7 +802,7 @@ function closePresent() {
 }
 
 $('#show-btn').addEventListener('click', openPresent);
-$('#present-close').addEventListener('click', closePresent);
+$('#present-close').addEventListener('click', () => history.back());
 $('#present-play').addEventListener('click', () => current && play(current));
 $('#present-flip').addEventListener('click', e => {
   const on = $('#present').classList.toggle('flipped');
@@ -897,12 +919,8 @@ function setLiveSaying(on) {
 async function livePlay() {
   const phrase = liveCurrent();
   if (!phrase) return;
-  stopPlayback();
+  const { gen, plan } = loadPlan(phrase);
   noteUsed(phrase.id);
-  const gen = ++generation;
-  const plan = playbackPlan(phrase, speed);
-  if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
-  audio.playbackRate = plan.rate;
   setMediaSession(phrase);
   setLiveSaying(true);
   const stop = endOf(phrase, plan.track);
@@ -969,15 +987,15 @@ $('#live-show').addEventListener('click', () => {
   openPresent();
 });
 
-/* Dim is for the phone lying face-up on the table. The first tap anywhere
-   brings the screen back rather than firing whatever was under the finger --
-   otherwise the gesture that says "let me look" also says "say it now". */
 // The card itself plays on tap, so the script can't be long-pressed to select.
 $('#live-copy').addEventListener('click', () => {
   const phrase = liveCurrent();
   if (phrase) copyText(phrase.my);
 });
 
+/* Dim is for the phone lying face-up on the table. The first tap anywhere
+   brings the screen back rather than firing whatever was under the finger --
+   otherwise the gesture that says "let me look" also says "say it now". */
 $('#live-dim').addEventListener('click', e => {
   e.stopPropagation();
   const on = $('#live').classList.toggle('dimmed');
@@ -1190,12 +1208,8 @@ async function playComparison(includeNative) {
       const plan = playbackPlan(current, speed);
       if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
       audio.playbackRate = plan.rate;
-      const timing = current.timing[plan.track];
-      const ok = await playRange(0, endOf(current, plan.track), gen, t => {
-        let idx = -1;
-        for (let i = 0; i < timing.length; i++) if (t >= timing[i].t - 0.02) idx = i;
-        highlight(idx);
-      });
+      const ok = await playRange(0, endOf(current, plan.track), gen,
+                                 followAlong(current.timing[plan.track]));
       highlight(-1);
       if (!ok) return;
       if (!(await sleep(450, gen))) return;
@@ -1302,12 +1316,24 @@ function bytes(n) {
   return n > 1e9 ? (n / 1e9).toFixed(1) + ' GB' : Math.max(1, Math.round(n / 1e6)) + ' MB';
 }
 
+/** Every clip the current phrase list can play, as the paths the page requests. */
+const clipUrls = () => DATA.phrases.flatMap(p =>
+  Object.keys(DATA.tracks).map(t => `audio/${p.id}.${t}.mp3`));
+
+/** Which of those are already in the offline cache. Only current clips are
+ *  counted: the cache also holds clips of phrases that have since been renamed
+ *  or removed, and counting those would report "all saved" too early. */
+async function cachedClips(cache) {
+  const have = new Set((await cache.keys()).map(r => new URL(r.url).pathname));
+  return new Set(clipUrls().filter(u => have.has(new URL(u, location.href).pathname)));
+}
+
 async function refreshStorage() {
   const sub = $('#offline-sub');
-  const total = DATA.phrases.length * Object.keys(DATA.tracks).length;
+  const total = clipUrls().length;
   try {
     const cache = await caches.open('sib-audio');
-    const saved = (await cache.keys()).length;
+    const saved = (await cachedClips(cache)).size;
     if (saved >= total) {
       sub.textContent = `All ${total} clips saved`;
       $('#offline-pill').textContent = 'Saved';
@@ -1367,18 +1393,36 @@ $('#offline-btn').addEventListener('click', async e => {
   const sub = $('#offline-sub');
   if (pill.dataset.state === 'busy') return;
 
-  const urls = [];
-  for (const p of DATA.phrases) for (const t of Object.keys(DATA.tracks)) urls.push(`audio/${p.id}.${t}.mp3`);
-
   pill.dataset.state = 'busy';
   pill.textContent = '0%';
-  let done = 0, failed = 0;
-  for (const u of urls) {
-    try { const r = await fetch(u); if (!r.ok) failed++; } catch { failed++; }
-    done++;
-    pill.textContent = Math.round((done / urls.length) * 100) + '%';
-    sub.textContent = `Saving ${done} of ${urls.length}…`;
+
+  // Skip what's already saved, and fetch a few at a time: one-by-one takes
+  // minutes for the full library. Each clip is written to the cache from here
+  // rather than left to the service worker, which stores responses only after
+  // handing them back (so the count would lag) and isn't in control at all on
+  // a first visit (so nothing would be saved).
+  let urls = clipUrls();
+  let cache;
+  try {
+    cache = await caches.open('sib-audio');
+    const have = await cachedClips(cache);
+    urls = urls.filter(u => !have.has(u));
+  } catch {
+    delete pill.dataset.state;
+    return toast("This browser can't save audio offline");
   }
+  let done = 0, failed = 0, next = 0;
+  const worker = async () => {
+    while (next < urls.length) {
+      const u = urls[next++];
+      try { await cache.add(u); } catch { failed++; }
+      done++;
+      pill.textContent = Math.round((done / urls.length) * 100) + '%';
+      sub.textContent = `Saving ${done} of ${urls.length}…`;
+    }
+  };
+  await Promise.all(Array.from({ length: 6 }, worker));
+  delete pill.dataset.state;
   await refreshStorage();
   toast(failed ? `Saved, but ${failed} clip${failed === 1 ? '' : 's'} failed` : 'All audio available offline');
 });
@@ -1393,8 +1437,13 @@ $('#clear-favs-btn').addEventListener('click', () => {
   if (!favs.size) return;
   favs.clear();
   store.set('favs', []);
+  // The Favourites chip only exists while there are favourites, so a view
+  // filtered to it would otherwise be left pointing at nothing.
+  if (filter === 'fav') { filter = 'start'; store.set('filter', filter); }
   refreshFavsRow();
+  renderChips();
   renderList();
+  renderQuickbar();
   toast('Favourites cleared');
 });
 
@@ -1476,13 +1525,6 @@ async function checkForUpdate(manual) {
 function initServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
 
-  // Whether a worker controlled this page *at load* is what distinguishes an
-  // update from a first install. It can't be read later: the initial worker's
-  // clients.claim() sets a controller mid-install, which would make a brand new
-  // visitor's first load look like an update and prompt them to update to the
-  // version they just downloaded.
-  const hadController = !!navigator.serviceWorker.controller;
-
   navigator.serviceWorker.addEventListener('controllerchange', () => {
     // Only reload for an update the user actually asked for; the very first
     // registration also fires this when it claims the page.
@@ -1494,7 +1536,7 @@ function initServiceWorker() {
   navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' })
     .then(reg => {
       swReg = reg;
-      if (reg.waiting && hadController) showUpdatePrompt();
+      if (reg.waiting) showUpdatePrompt();
 
       reg.addEventListener('updatefound', () => {
         const nw = reg.installing;
@@ -1502,7 +1544,7 @@ function initServiceWorker() {
         nw.addEventListener('statechange', () => {
           // A worker reaching `installed` when one already controlled the page
           // means this is an update, not a first install.
-          if (nw.state === 'installed' && hadController) showUpdatePrompt();
+          if (nw.state === 'installed') showUpdatePrompt();
         });
       });
 
