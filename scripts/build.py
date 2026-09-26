@@ -87,6 +87,38 @@ def tone_of(syllable: str) -> int:
     return TONE_SUFFIX.get(syllable[-1:], 1) if syllable else 1
 
 
+# The script does encode tone, just across several mechanisms, and for most
+# syllables it can be read back unambiguously. That makes a useful cross-check
+# on the hand-written transcription: a tone mark that contradicts the spelling
+# is a typo that would colour the syllable wrong and drill the wrong answer in
+# ear training. Only the unambiguous cases are checked; a bare consonant
+# (inherent vowel) is skipped because reduced syllables like the အ prefix are
+# conventionally written in the low tone.
+
+STOP_FINALS = "ကစတပ"
+
+
+def script_tone(chunk: str) -> int | None:
+    """The tone a written syllable's spelling implies, or None if it's ambiguous."""
+    if VIRAMA in chunk:
+        return None                      # stacked cluster: two spoken syllables
+    if chunk.endswith("း"):
+        return 2
+    if DOT_BELOW in chunk:
+        return 3
+    if chunk.endswith(ASAT):
+        return 4 if len(chunk) >= 2 and chunk[-2] in STOP_FINALS else 1
+    if chunk.endswith("ံ") or chunk.endswith("ို"):
+        return 1
+    if chunk.endswith(("ော", "ေါ", "ဲ")):
+        return 2
+    if chunk.endswith(("ိ", "ု")):
+        return 3
+    if chunk[-1] in "ီူောါ":
+        return 1
+    return None
+
+
 # ── Juncture voicing ─────────────────────────────────────────────────────
 #
 # Burmese softens the consonant at the front of a syllable when it runs on from
@@ -110,6 +142,9 @@ VOICING = [
 
 def voice_onset(rom: str) -> str | None:
     """Soften a syllable's initial consonant. None if nothing there voices."""
+    # ရှ is written "sh" and never voices; without this it would match "s".
+    if rom.startswith("sh"):
+        return None
     for hard, soft in VOICING:
         if rom.startswith(hard):
             return soft + rom[len(hard):]
@@ -163,11 +198,39 @@ def build_syllables(phrase: dict) -> list[dict]:
         {"my": c, "rom": r, "tone": tone_of(r), "say": s}
         for c, r, s in zip(chars, roms, phons)
     ]
+    for i, syl in enumerate(syllables):
+        expected = script_tone(syl["my"])
+        if expected is not None and "-" not in syl["rom"] and expected != syl["tone"]:
+            raise ValueError(
+                f"[{phrase['id']}] syllable {i} {syl['my']} is written with tone {expected} "
+                f"but transcribed {syl['rom']!r} (tone {syl['tone']})"
+            )
     apply_voicing(syllables, phrase.get("voiced", []), phrase["id"])
     return syllables
 
 
+RETRIES = 4
+
+
 async def render(text: str, voice: str, rate: str, out_path: Path) -> list[dict]:
+    """Synthesize to MP3, retrying transient failures with backoff.
+
+    The TTS endpoint drops the occasional connection when a few hundred clips
+    are rendered back to back, and one dropped clip would otherwise abort the
+    whole build and throw away the work of every clip still in flight."""
+    for attempt in range(1, RETRIES + 1):
+        try:
+            return await render_once(text, voice, rate, out_path)
+        except Exception as e:  # network errors surface as several types
+            if attempt == RETRIES:
+                raise
+            wait = 2 ** attempt
+            print(f"  ! {out_path.name}: {e!r} -- retrying in {wait}s", flush=True)
+            await asyncio.sleep(wait)
+    raise AssertionError("unreachable")
+
+
+async def render_once(text: str, voice: str, rate: str, out_path: Path) -> list[dict]:
     """Synthesize to MP3, returning word-level timings in seconds."""
     comm = edge_tts.Communicate(text, voice, rate=rate, boundary="WordBoundary")
     audio = bytearray()
@@ -329,17 +392,8 @@ async def process(phrase: dict, cfg: dict, force: bool, sem: asyncio.Semaphore) 
     return out
 
 
-async def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--force", action="store_true", help="re-render existing audio")
-    ap.add_argument("--check", action="store_true", help="validate only, no network")
-    args = ap.parse_args()
-
-    cfg = json.loads(SRC.read_text())
-    AUDIO_DIR.mkdir(parents=True, exist_ok=True)
-    OUT_JS.parent.mkdir(parents=True, exist_ok=True)
-
-    # Validate every phrase up front so a typo fails fast, before any network work.
+def validate(cfg: dict) -> list[str]:
+    """Every problem with the source data, as human-readable lines."""
     errors = []
     seen = set()
     cat_ids = {c["id"] for c in cfg["categories"]}
@@ -353,9 +407,38 @@ async def main() -> int:
         seen.add(p["id"])
         if p["cat"] not in cat_ids:
             errors.append(f"[{p['id']}] unknown category {p['cat']!r}")
+        # The id names the audio files, which are split on the first dot.
+        if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", p["id"]):
+            errors.append(f"[{p['id']}] ids must be lowercase words joined by hyphens")
     starters = sorted(p["starter"] for p in cfg["phrases"] if p.get("starter") is not None)
     if starters != list(range(1, len(starters) + 1)):
         errors.append(f"starter numbers must run 1..n with no gaps or repeats, got {starters}")
+    return errors
+
+
+def orphaned_audio(ids: set[str]) -> list[Path]:
+    """Rendered files whose phrase has been renamed or removed. They would
+    otherwise ship with every deploy forever, and nothing would ever play them."""
+    return sorted(
+        f for f in AUDIO_DIR.glob("*.*")
+        if f.suffix in {".mp3", ".json"} and f.name.split(".", 1)[0] not in ids
+    )
+
+
+async def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--force", action="store_true", help="re-render existing audio")
+    ap.add_argument("--check", action="store_true", help="validate only, no network")
+    ap.add_argument("--prune", action="store_true",
+                    help="delete audio for phrases no longer in the source")
+    args = ap.parse_args()
+
+    cfg = json.loads(SRC.read_text())
+    AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+    OUT_JS.parent.mkdir(parents=True, exist_ok=True)
+
+    # Validate every phrase up front so a typo fails fast, before any network work.
+    errors = validate(cfg)
     if errors:
         print("Validation failed:\n" + "\n".join(errors), file=sys.stderr)
         return 1
@@ -369,12 +452,6 @@ async def main() -> int:
     for en, ids in by_en.items():
         if len(ids) > 1:
             print(f"warning: {', '.join(ids)} share the English label {en!r}", file=sys.stderr)
-    # Clips left behind by a renamed or deleted phrase still ship with the site.
-    ids = {p["id"] for p in cfg["phrases"]}
-    orphans = sorted(f.name for f in AUDIO_DIR.glob("*.*") if f.name.split(".")[0] not in ids)
-    if orphans:
-        print(f"warning: {len(orphans)} audio files belong to no phrase: "
-              + ", ".join(orphans[:6]) + (" ..." if len(orphans) > 6 else ""), file=sys.stderr)
     if args.check:
         print(f"OK — {len(cfg['phrases'])} phrases, "
               f"{sum(len(build_syllables(p)) for p in cfg['phrases'])} syllables aligned.")
@@ -393,6 +470,15 @@ async def main() -> int:
         "categories": cfg["categories"],
         "phrases": list(phrases),
     }
+    orphans = orphaned_audio({p["id"] for p in cfg["phrases"]})
+    if orphans and args.prune:
+        for f in orphans:
+            f.unlink()
+        print(f"Pruned {len(orphans)} orphaned audio files.")
+    elif orphans:
+        print(f"{len(orphans)} audio files belong to no phrase "
+              f"(e.g. {orphans[0].name}) -- run with --prune to delete them.")
+
     OUT_JS.write_text(
         "// Generated by scripts/build.py -- do not edit by hand.\n"
         "window.PHRASE_DATA = "

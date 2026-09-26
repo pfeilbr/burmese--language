@@ -27,9 +27,9 @@ route — so the app just tells you where to tap.)
 ## What it does
 
 - **Live mode** — the one built for actually being in front of her. See below.
-- **267 phrases** across affection, sweet talk, dating and flirting, getting
+- **303 phrases** across affection, sweet talk, dating and flirting, getting
   serious, comforting her, texts and voice notes, meeting the family, occasions
-  and blessings, the tea shop, meals, coming and going, checking in, chores,
+  and blessings, the tea shop, eating out, meals, coming and going, checking in, chores,
   needs and the body ("I have to pee"), yes/no and everyday basics, getting
   around, shopping, time and plans, feelings, and the "I'm still learning, say
   it slower" repair kit.
@@ -185,7 +185,7 @@ The app checks for a new version on launch and offers it rather than applying it
 silently: you get an **Update available** prompt with *Update* and *Later*. You
 can also check by hand from **☰ menu → Updates**. Accepting swaps in the new
 version and reloads; the downloaded audio is kept, so an update never costs you
-the 8.9 MB again.
+the 10.1 MB again.
 
 The mechanics are worth knowing if you change the deploy:
 
@@ -233,17 +233,13 @@ must survive any speed change.
    ./scripts/build.py          # renders only what's missing
    ./scripts/build.py --force  # re-renders everything
    ./scripts/build.py --check  # validates the data, no network
+   ./scripts/build.py --prune  # also deletes audio for removed/renamed phrases
    ```
 
-3. Commit. Pushing to the default branch redeploys the site.
+3. Run the tests (below), then commit. Pushing to the default branch redeploys
+   the site — but only once the same tests pass in CI.
 
-The build also warns, without failing, when two phrases share an English label
-or when `web/audio/` holds clips for a phrase that no longer exists.
-
-Every push and pull request runs the **Check** workflow
-(`.github/workflows/check.yml`): `--check`, a test that `web/data/phrases.js`
-and the audio match `data/phrases.json`, and a syntax check of the JavaScript.
-A phrase added to the JSON without re-running the build fails it.
+The build also warns, without failing, when two phrases share an English label.
 
 An entry looks like this:
 
@@ -273,7 +269,10 @@ you to say something wrong without ever noticing.
 - `rom` — the transcription, one space-separated chunk per written syllable, in
   **citation** form: write each syllable as it is on its own and let `voiced`
   handle the softening. Tone is carried by the trailing mark: `:` high, `.`
-  creaky, `q` checked, nothing for low.
+  creaky, `q` checked, nothing for low. The build cross-checks this against
+  the Burmese spelling wherever the spelling is unambiguous (a final း is
+  always high, ့ always creaky, a stop final always checked, bare ော high…),
+  so a mistyped tone mark fails the build rather than drilling the wrong tone.
 - `phon` — the English respelling, and the line the app shows biggest, because
   it's the one that gets read out loud. One chunk per syllable, written as
   actually **spoken** (softening included). Capitalise the syllable that takes
@@ -295,6 +294,29 @@ asat in canonical order — so မုန့် is `မ ု န ့ ်` and a na
 character an asat?" test sees the dot, misses the asat, and splits one syllable
 into two.
 
+## Tests
+
+```sh
+uv run --with edge-tts --with miniaudio --with pytest pytest -q tests
+```
+
+- `tests/test_build.py` covers the pipeline's logic: segmentation (including
+  the dot-below, kinzi and stacked-consonant traps), tone marks and the
+  script cross-check, voicing, timing, and validation of the whole dataset.
+- `tests/test_artifacts.py` checks that the committed output matches the
+  source: `web/data/phrases.js` is not stale, every phrase has both clips, and
+  no clip is left over from a deleted phrase.
+
+CI runs `build.py --check` and the tests on every push to any branch, and the
+deploy job waits for them.
+
+To try the app locally, serve `web/` over HTTP (the service worker and
+clipboard need a real origin, not `file://`):
+
+```sh
+python3 -m http.server 8000 -d web
+```
+
 ## Deploying your own copy
 
 The site is static and pre-built, so the deploy just uploads `web/` as-is.
@@ -311,7 +333,8 @@ Two things need doing once on a fresh repository:
 
 ```
 data/phrases.json      source of truth — the only file you edit to add phrases
-scripts/build.py       renders MP3s + timings, emits web/data/phrases.js
+scripts/build.py       validates, renders MP3s + timings, emits web/data/phrases.js
+tests/                 pytest suite for the build and its committed output
 scripts/make_icons.py  regenerates the PWA icons
 web/                   the deployed site (static, no build step, no dependencies)
   audio/               pre-rendered clips, two rates per phrase
