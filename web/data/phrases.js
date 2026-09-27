@@ -486,7 +486,7 @@ window.PHRASE_DATA = {
   {
    "id": "sweetheart",
    "cat": "affection",
-   "en": "My sweetheart",
+   "en": "Sweetheart",
    "my": "ချစ်သူ",
    "rom": "chiq thu",
    "phon": "chit THOO",
@@ -23382,6 +23382,471 @@ window.PHRASE_DATA = {
    "end": {
     "natural": 1.922,
     "slow": 3.411
+   }
+  },
+  {
+   "id": "text-me-back",
+   "cat": "messages",
+   "en": "Text me back",
+   "my": "စာပြန်ပါဦး",
+   "rom": "sa pyan pa u:",
+   "phon": "sah PYAN bah oo",
+   "syllables": [
+    {
+     "my": "စာ",
+     "rom": "sa",
+     "tone": 1,
+     "say": "sah"
+    },
+    {
+     "my": "ပြန်",
+     "rom": "pyan",
+     "tone": 1,
+     "say": "PYAN"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    },
+    {
+     "my": "ဦး",
+     "rom": "u:",
+     "tone": 2,
+     "say": "oo"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.219,
+      "d": 0.257,
+      "word": 0
+     },
+     {
+      "t": 0.476,
+      "d": 0.257,
+      "word": 0
+     },
+     {
+      "t": 0.733,
+      "d": 0.257,
+      "word": 0
+     },
+     {
+      "t": 0.99,
+      "d": 0.257,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.374,
+      "d": 0.449,
+      "word": 0
+     },
+     {
+      "t": 0.823,
+      "d": 0.449,
+      "word": 0
+     },
+     {
+      "t": 1.272,
+      "d": 0.449,
+      "word": 0
+     },
+     {
+      "t": 1.721,
+      "d": 0.449,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.247,
+    "slow": 2.17
+   },
+   "note": "ဦး on the end makes it a soft nudge rather than an order."
+  },
+  {
+   "id": "send-photo",
+   "cat": "messages",
+   "en": "Send me a photo",
+   "my": "ဓာတ်ပုံပို့ပါဦး",
+   "rom": "daq poun po. pa u:",
+   "phon": "dat pohn PÓH bah oo",
+   "syllables": [
+    {
+     "my": "ဓာတ်",
+     "rom": "daq",
+     "tone": 4,
+     "say": "dat"
+    },
+    {
+     "my": "ပုံ",
+     "rom": "poun",
+     "tone": 1,
+     "say": "pohn"
+    },
+    {
+     "my": "ပို့",
+     "rom": "po.",
+     "tone": 3,
+     "say": "PÓH"
+    },
+    {
+     "my": "ပါ",
+     "rom": "pa",
+     "tone": 1,
+     "say": "bah",
+     "say_rom": "ba",
+     "voiced": true
+    },
+    {
+     "my": "ဦး",
+     "rom": "u:",
+     "tone": 2,
+     "say": "oo"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.193,
+      "d": 0.202,
+      "word": 0
+     },
+     {
+      "t": 0.395,
+      "d": 0.202,
+      "word": 0
+     },
+     {
+      "t": 0.598,
+      "d": 0.202,
+      "word": 0
+     },
+     {
+      "t": 0.8,
+      "d": 0.202,
+      "word": 0
+     },
+     {
+      "t": 1.003,
+      "d": 0.202,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.311,
+      "d": 0.359,
+      "word": 0
+     },
+     {
+      "t": 0.67,
+      "d": 0.359,
+      "word": 0
+     },
+     {
+      "t": 1.03,
+      "d": 0.359,
+      "word": 0
+     },
+     {
+      "t": 1.389,
+      "d": 0.359,
+      "word": 0
+     },
+     {
+      "t": 1.749,
+      "d": 0.359,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.205,
+    "slow": 2.108
+   }
+  },
+  {
+   "id": "are-you-asleep",
+   "cat": "messages",
+   "en": "Are you asleep?",
+   "my": "အိပ်နေပြီလား",
+   "rom": "eiq ne pyi la:",
+   "phon": "ate nay byee LAH",
+   "syllables": [
+    {
+     "my": "အိပ်",
+     "rom": "eiq",
+     "tone": 4,
+     "say": "ate"
+    },
+    {
+     "my": "နေ",
+     "rom": "ne",
+     "tone": 1,
+     "say": "nay"
+    },
+    {
+     "my": "ပြီ",
+     "rom": "pyi",
+     "tone": 1,
+     "say": "byee",
+     "say_rom": "byi",
+     "voiced": true
+    },
+    {
+     "my": "လား",
+     "rom": "la:",
+     "tone": 2,
+     "say": "LAH"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.203,
+      "d": 0.238,
+      "word": 0
+     },
+     {
+      "t": 0.441,
+      "d": 0.238,
+      "word": 0
+     },
+     {
+      "t": 0.679,
+      "d": 0.238,
+      "word": 0
+     },
+     {
+      "t": 0.918,
+      "d": 0.238,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.333,
+      "d": 0.421,
+      "word": 0
+     },
+     {
+      "t": 0.754,
+      "d": 0.421,
+      "word": 0
+     },
+     {
+      "t": 1.175,
+      "d": 0.421,
+      "word": 0
+     },
+     {
+      "t": 1.597,
+      "d": 0.421,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.156,
+    "slow": 2.017
+   },
+   "note": "The late-night check before you send anything longer."
+  },
+  {
+   "id": "sleep-well-text",
+   "cat": "messages",
+   "en": "Sleep well, okay?",
+   "my": "ကောင်းကောင်းအိပ်နော်",
+   "rom": "kaun: kaun: eiq naw",
+   "phon": "kaun GAUN ate naw",
+   "syllables": [
+    {
+     "my": "ကောင်း",
+     "rom": "kaun:",
+     "tone": 2,
+     "say": "kaun"
+    },
+    {
+     "my": "ကောင်း",
+     "rom": "kaun:",
+     "tone": 2,
+     "say": "GAUN",
+     "say_rom": "gaun:",
+     "voiced": true
+    },
+    {
+     "my": "အိပ်",
+     "rom": "eiq",
+     "tone": 4,
+     "say": "ate"
+    },
+    {
+     "my": "နော်",
+     "rom": "naw",
+     "tone": 1,
+     "say": "naw"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.216,
+      "d": 0.238,
+      "word": 0
+     },
+     {
+      "t": 0.454,
+      "d": 0.238,
+      "word": 0
+     },
+     {
+      "t": 0.692,
+      "d": 0.238,
+      "word": 0
+     },
+     {
+      "t": 0.929,
+      "d": 0.238,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.353,
+      "d": 0.42,
+      "word": 0
+     },
+     {
+      "t": 0.773,
+      "d": 0.42,
+      "word": 0
+     },
+     {
+      "t": 1.193,
+      "d": 0.42,
+      "word": 0
+     },
+     {
+      "t": 1.613,
+      "d": 0.42,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.167,
+    "slow": 2.034
+   },
+   "note": "နော် on the end is the warm \"okay?\" that turns an instruction into care."
+  },
+  {
+   "id": "call-when-free",
+   "cat": "messages",
+   "en": "Call me when you're free",
+   "my": "အားရင်ဖုန်းဆက်နော်",
+   "rom": "a: yin hpoun: hseq naw",
+   "phon": "ah yin phohn ZET naw",
+   "syllables": [
+    {
+     "my": "အား",
+     "rom": "a:",
+     "tone": 2,
+     "say": "ah"
+    },
+    {
+     "my": "ရင်",
+     "rom": "yin",
+     "tone": 1,
+     "say": "yin"
+    },
+    {
+     "my": "ဖုန်း",
+     "rom": "hpoun:",
+     "tone": 2,
+     "say": "phohn"
+    },
+    {
+     "my": "ဆက်",
+     "rom": "hseq",
+     "tone": 4,
+     "say": "ZET",
+     "say_rom": "zeq",
+     "voiced": true
+    },
+    {
+     "my": "နော်",
+     "rom": "naw",
+     "tone": 1,
+     "say": "naw"
+    }
+   ],
+   "timing": {
+    "natural": [
+     {
+      "t": 0.195,
+      "d": 0.243,
+      "word": 0
+     },
+     {
+      "t": 0.438,
+      "d": 0.243,
+      "word": 0
+     },
+     {
+      "t": 0.681,
+      "d": 0.243,
+      "word": 0
+     },
+     {
+      "t": 0.924,
+      "d": 0.243,
+      "word": 0
+     },
+     {
+      "t": 1.167,
+      "d": 0.243,
+      "word": 0
+     }
+    ],
+    "slow": [
+     {
+      "t": 0.315,
+      "d": 0.433,
+      "word": 0
+     },
+     {
+      "t": 0.748,
+      "d": 0.433,
+      "word": 0
+     },
+     {
+      "t": 1.18,
+      "d": 0.433,
+      "word": 0
+     },
+     {
+      "t": 1.613,
+      "d": 0.433,
+      "word": 0
+     },
+     {
+      "t": 2.045,
+      "d": 0.433,
+      "word": 0
+     }
+    ]
+   },
+   "end": {
+    "natural": 1.41,
+    "slow": 2.478
    }
   },
   {

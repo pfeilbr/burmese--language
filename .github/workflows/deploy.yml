@@ -25,6 +25,10 @@ jobs:
         run: uv run --with edge-tts --with miniaudio scripts/build.py --check
       - name: Unit and artifact tests
         run: uv run --with edge-tts --with miniaudio --with pytest pytest -q tests
+      - name: JavaScript parses
+        run: |
+          node --check web/app.js
+          node --check web/sw.js
 
   deploy:
     needs: test

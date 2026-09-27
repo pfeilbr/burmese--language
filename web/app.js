@@ -92,8 +92,7 @@ function playbackPlan(phrase, targetPct) {
  *  playback generation. Every way of playing something goes through here, so
  *  each one cancels whatever was playing before it. */
 function loadPlan(phrase) {
-  stopPlayback();
-  const gen = ++generation;
+  const gen = beginSequence();
   const plan = playbackPlan(phrase, speed);
   if (!audio.src.endsWith(plan.src)) audio.src = plan.src;
   audio.playbackRate = plan.rate;
@@ -110,6 +109,36 @@ const followAlong = timing => t => {
 const sleep = (ms, gen) => new Promise(res => setTimeout(() => res(gen === generation), ms));
 
 let cancelActive = null;   // aborts the clip currently in flight
+
+/* The generation of the sequence currently running, or 0. The audio element
+   alone can't answer "is something playing?": between loop passes, in the
+   shadow gap and between syllables it is paused while the sequence is very
+   much alive, and a stop button that reads it restarts instead of stopping. */
+let busyGen = 0;
+const isPlaying = () => busyGen !== 0 && busyGen === generation;
+
+/* Tell the OS whether we're playing, so the lock screen shows the right button
+   and an AirPods squeeze maps to the action the listener expects. */
+function setPlaybackState(state) {
+  try { if ('mediaSession' in navigator) navigator.mediaSession.playbackState = state; } catch {}
+}
+
+/** Cancel whatever is running and claim a new generation for a sequence. */
+function beginSequence() {
+  stopPlayback();
+  const gen = ++generation;
+  busyGen = gen;
+  setPlaybackState('playing');
+  return gen;
+}
+
+/** Mark a sequence finished, unless something newer has already taken over. */
+function endSequence(gen) {
+  if (gen !== generation) return false;
+  busyGen = 0;
+  setPlaybackState('paused');
+  return true;
+}
 
 /** Surface a playback failure instead of failing silently. Defined here and
  *  assigned below, once the toast helper exists. */
@@ -160,7 +189,9 @@ function playRange(from, to, gen, onTick) {
     };
 
     function onLoadFail() {
-      playbackFailed('That clip could not be loaded');
+      playbackFailed(navigator.onLine === false
+        ? "You're offline and this clip isn't saved — ☰ → Save all audio"
+        : 'That clip could not be loaded');
       finish(false);
     }
 
@@ -198,6 +229,8 @@ function playRange(from, to, gen, onTick) {
 
 function stopPlayback() {
   generation++;
+  busyGen = 0;
+  setPlaybackState('paused');
   if (cancelActive) cancelActive(false);
   if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
   audio.pause();
@@ -248,7 +281,7 @@ async function play(phrase) {
     // Covers every exit: finished, cancelled, or play() rejected (autoplay
     // blocked, missing file). Without this the button stays stuck on "stop"
     // with nothing playing. Skipped if a newer playback already took over.
-    if (gen === generation) {
+    if (endSequence(gen)) {
       setPlayingUI(false);
       highlight(-1);
     }
@@ -263,7 +296,7 @@ async function playSyllable(phrase, index) {
   highlight(index);
   setPlayingUI(true);
   await playRange(t.t, t.t + t.d, gen);
-  if (gen === generation) { highlight(-1); setPlayingUI(false); }
+  if (endSequence(gen)) { highlight(-1); setPlayingUI(false); }
 }
 
 /* AirPods stem-squeeze and lock-screen controls map onto play/pause, which is
@@ -359,6 +392,8 @@ const PLAY_ICON = '<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>'
 const COPY_ICON = '<svg viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/></svg>';
 const STAR_ICON = '<svg class="card-fav" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8L3.5 9.7l5.9-.9z"/></svg>';
 
+const STARTER_COUNT = DATA.phrases.filter(p => p.starter != null).length;
+
 const VIRTUAL_FILTERS = {
   all:    () => true,
   start:  p => p.starter != null,
@@ -418,7 +453,7 @@ function renderList() {
   if (filter === 'recent') hits.sort((a, b) => recent.indexOf(a.id) - recent.indexOf(b.id));
 
   const intro = (filter === 'start' && !query)
-    ? `<p class="list-intro">Twelve to learn first — the ones you'll use nearly every day.
+    ? `<p class="list-intro">${STARTER_COUNT} to learn first — the ones you'll use nearly every day.
        Once these feel easy, work through the categories.</p>`
     : '';
 
@@ -435,18 +470,38 @@ function renderList() {
   }
 }
 
-function renderChips() {
-  const all = [
+/** The chips on offer right now. Recent and Favourites only appear once
+ *  there's something in them. */
+function chipList() {
+  return [
     { id: 'start', name: 'Start here', emoji: '🌱' },
     { id: 'all', name: 'All', emoji: '' },
-    // Only worth offering once there's something in them.
     ...(recent.length ? [{ id: 'recent', name: 'Recent', emoji: '🕘' }] : []),
     ...(favs.size ? [{ id: 'fav', name: 'Favourites', emoji: '★' }] : []),
     ...DATA.categories,
   ];
-  el.chips.innerHTML = all.map(c =>
+}
+
+/** Fall back to the starter set if the selected filter no longer exists --
+ *  a category removed in an update, or Favourites after they were cleared.
+ *  Otherwise the list comes up empty with no chip selected to explain why. */
+function ensureFilter() {
+  if (chipList().some(c => c.id === filter)) return;
+  filter = 'start';
+  store.set('filter', filter);
+}
+
+function renderChips() {
+  el.chips.innerHTML = chipList().map(c =>
     `<button class="chip" data-cat="${c.id}" aria-pressed="${filter === c.id}">${c.emoji} ${esc(c.name)}</button>`
   ).join('');
+}
+
+/** Scroll the chip strip so the selected chip is on screen -- a filter
+ *  restored from last time may be well off to the right. */
+function revealActiveChip() {
+  const chip = el.chips.querySelector('[aria-pressed="true"]');
+  if (chip) el.chips.scrollLeft = chip.offsetLeft - (el.chips.clientWidth - chip.offsetWidth) / 2;
 }
 
 function highlight(index) {
@@ -500,7 +555,7 @@ function hideSheet() {
   const wasDetail = activeSheet === el.sheet;
   const wasLive = activeSheet === $('#live');
   if (wasDrill) { stopPlayback(); drill = null; }
-  if (wasLive) { stopPlayback(); live = null; releaseWakeLock(); }
+  if (wasLive) { stopPlayback(); live = null; releaseWakeLock(); renderList(); }
   activeSheet.hidden = true;
   activeSheet = null;
   document.body.style.overflow = '';
@@ -580,7 +635,7 @@ el.list.addEventListener('click', e => {
   if (playNode) {
     e.stopPropagation();
     const p = BY_ID.get(playNode.dataset.play);
-    if (current && current.id === p.id && !audio.paused) stopPlayback();
+    if (current && current.id === p.id && isPlaying()) stopPlayback();
     else { current = p; play(p); }
     return;
   }
@@ -603,6 +658,15 @@ el.search.addEventListener('input', () => {
   renderList();
 });
 
+// Escape empties the search box, the way it does in any native search field.
+el.search.addEventListener('keydown', e => {
+  if (e.key !== 'Escape' || !el.search.value) return;
+  e.stopPropagation();
+  el.search.value = '';
+  query = '';
+  renderList();
+});
+
 $('#copy-btn').addEventListener('click', () => {
   if (current) copyText(current.my);
 });
@@ -614,7 +678,7 @@ el.dScript.addEventListener('click', e => {
 
 el.playBtn.addEventListener('click', () => {
   if (!current) return;
-  if (!audio.paused || rafId) stopPlayback();
+  if (isPlaying()) stopPlayback();
   else play(current);
 });
 
@@ -625,7 +689,7 @@ el.speed.addEventListener('input', () => {
 el.speed.addEventListener('change', () => {
   store.set('speed', speed);
   // Re-start at the new speed so the change is immediately audible.
-  if (current && (!audio.paused || rafId)) play(current);
+  if (current && isPlaying()) play(current);
 });
 
 for (const m of ['step', 'loop', 'shadow']) {
@@ -636,7 +700,7 @@ for (const m of ['step', 'loop', 'shadow']) {
     if (m === 'shadow' && modes.shadow) modes.loop = false;
     store.set('modes', modes);
     updateModeUI();
-    if (current && (!audio.paused || rafId)) play(current);
+    if (current && isPlaying()) play(current);
   });
 }
 
@@ -664,7 +728,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && activeSheet) history.back();
   if (e.key === ' ' && current && activeSheet === el.sheet && e.target === document.body) {
     e.preventDefault();
-    (!audio.paused || rafId) ? stopPlayback() : play(current);
+    isPlaying() ? stopPlayback() : play(current);
   }
 });
 
@@ -700,8 +764,11 @@ const drillable = p => p.syllables
   .map((s, i) => ({ s, i }))
   .filter(({ s }) => s.tone >= 1 && s.tone <= 4 && !s.say.includes('-'));
 
+const DRILL_POOL = DATA.phrases.filter(p => drillable(p).length);
+
 function nextQuestion() {
-  const pool = DATA.phrases.filter(p => drillable(p).length);
+  const prev = drill && drill.phrase;
+  const pool = DRILL_POOL.length > 1 ? DRILL_POOL.filter(p => p !== prev) : DRILL_POOL;
   const phrase = pool[Math.floor(Math.random() * pool.length)];
   const opts = drillable(phrase);
   const pick = opts[Math.floor(Math.random() * opts.length)];
@@ -735,6 +802,7 @@ async function playDrillPhrase() {
   if (!drill) return;
   const { gen, plan } = loadPlan(drill.phrase);
   await playRange(0, endOf(drill.phrase, plan.track), gen);
+  endSequence(gen);
 }
 
 function answerDrill(tone) {
@@ -933,7 +1001,7 @@ async function livePlay() {
       await playRange(0, stop, gen);
     }
   } finally {
-    if (gen === generation) setLiveSaying(false);
+    if (endSequence(gen)) setLiveSaying(false);
   }
 }
 
@@ -960,7 +1028,7 @@ $('#live-btn').addEventListener('click', () => openLive());
 $('#live-prev').addEventListener('click', () => liveGo(-1));
 $('#live-next').addEventListener('click', () => liveGo(1));
 $('#live-say-btn').addEventListener('click', () => {
-  if (!audio.paused || rafId) stopPlayback(); else livePlay();
+  if (isPlaying()) stopPlayback(); else livePlay();
 });
 $('#live-decks').addEventListener('click', e => {
   const btn = e.target.closest('[data-deck]');
@@ -1066,7 +1134,7 @@ $('#quick-tiles').addEventListener('click', e => {
   const node = e.target.closest('[data-quick]');
   if (!node) return;
   const p = BY_ID.get(node.dataset.quick);
-  if (current && current.id === p.id && !audio.paused) return stopPlayback();
+  if (current && current.id === p.id && isPlaying()) return stopPlayback();
   current = p;
   play(p);
 });
@@ -1122,12 +1190,19 @@ function refreshCompareUI() {
 }
 
 async function startRecording() {
+  if (!current) return;
   stopPlayback();
+  // Taken before the permission prompt: the sheet can be closed while it's up.
+  const phraseId = current.id;
   let stream;
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   } catch {
     return toast('Microphone access is needed to record');
+  }
+  if (!current || current.id !== phraseId) {
+    stream.getTracks().forEach(t => t.stop());
+    return;
   }
 
   const chunks = [];
@@ -1139,7 +1214,6 @@ async function startRecording() {
     return toast("This browser can't record audio");
   }
 
-  const phraseId = current.id;
   mediaRecorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
   mediaRecorder.onstop = () => {
     // Releasing the mic matters on iOS, which otherwise keeps showing the
@@ -1199,8 +1273,7 @@ function playBlob(url, gen) {
 async function playComparison(includeNative) {
   const rec = current && recordings.get(current.id);
   if (!rec) return;
-  stopPlayback();
-  const gen = ++generation;
+  const gen = beginSequence();
   setPlayingUI(true);
 
   try {
@@ -1216,7 +1289,7 @@ async function playComparison(includeNative) {
     }
     await playBlob(rec.url, gen);
   } finally {
-    if (gen === generation) { setPlayingUI(false); highlight(-1); }
+    if (endSequence(gen)) { setPlayingUI(false); highlight(-1); }
   }
 }
 
@@ -1441,6 +1514,7 @@ $('#clear-favs-btn').addEventListener('click', () => {
   // filtered to it would otherwise be left pointing at nothing.
   if (filter === 'fav') { filter = 'start'; store.set('filter', filter); }
   refreshFavsRow();
+  ensureFilter();
   renderChips();
   renderList();
   renderQuickbar();
@@ -1559,6 +1633,7 @@ function initServiceWorker() {
 playbackFailed = msg => { stopPlayback(); toast(msg); };
 
 applyPrefs();
+ensureFilter();
 renderChips();
 renderList();
 updateSpeedUI();
@@ -1566,6 +1641,7 @@ updateModeUI();
 refreshInstallSection();
 renderQuickbar();
 applyDeepLink();
+revealActiveChip();
 
 window.addEventListener('load', initServiceWorker);
 

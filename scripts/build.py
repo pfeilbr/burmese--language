@@ -442,6 +442,16 @@ async def main() -> int:
     if errors:
         print("Validation failed:\n" + "\n".join(errors), file=sys.stderr)
         return 1
+
+    # Warnings: not wrong enough to stop a build, but worth fixing.
+    # Two cards with the same English look like a mistake in the list, and the
+    # user has no way to tell which one they want.
+    by_en = {}
+    for p in cfg["phrases"]:
+        by_en.setdefault(p["en"].strip().lower(), []).append(p["id"])
+    for en, ids in by_en.items():
+        if len(ids) > 1:
+            print(f"warning: {', '.join(ids)} share the English label {en!r}", file=sys.stderr)
     if args.check:
         print(f"OK — {len(cfg['phrases'])} phrases, "
               f"{sum(len(build_syllables(p)) for p in cfg['phrases'])} syllables aligned.")
