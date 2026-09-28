@@ -130,3 +130,21 @@ def test_service_worker_serves_audio_ranges(page):
     assert result["partStatus"] == 206 and result["partLen"] == 2
     assert result["partRange"] == f"bytes 0-1/{result['size']}"
     assert result["tailStatus"] == 206 and result["tailLen"] == result["size"] - 10
+
+
+def test_send_hands_burmese_to_share_sheet(browser, base_url):
+    ctx = browser.new_context(base_url=base_url)
+    # Desktop Chromium has no share sheet; stand one in to see what it's given.
+    ctx.add_init_script("navigator.share = async d => { window.__shared = d; };")
+    pg = ctx.new_page()
+    pg.goto("./")
+    pg.click(".card-open >> nth=0")
+    burmese = pg.inner_text("#d-my")
+    pg.click("#share-btn")
+    assert pg.evaluate("window.__shared") == {"text": burmese}
+    ctx.close()
+
+
+def test_send_hidden_without_share_sheet(page):
+    page.click(".card-open >> nth=0")
+    assert not page.locator("#share-btn").is_visible()

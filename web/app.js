@@ -622,6 +622,22 @@ async function copyText(text) {
   toast(`Copied ${text}`);
 }
 
+/** Hand the Burmese straight to the share sheet, so it lands in Viber or
+ *  Messenger in one step rather than copy, switch app, paste. Only the script
+ *  goes: it's what she reads, and a respelling in a text would look odd.
+ *  Where there's no share sheet (most desktops) the button stays hidden and
+ *  Copy does the job. */
+const canShare = typeof navigator.share === 'function';
+
+async function shareText(text) {
+  try {
+    await navigator.share({ text });
+  } catch (err) {
+    // Closing the sheet is a normal way out, not a failure.
+    if (err && err.name !== 'AbortError') copyText(text);
+  }
+}
+
 /* ── Events ──────────────────────────────────────────────────────────── */
 
 el.list.addEventListener('click', e => {
@@ -669,6 +685,10 @@ el.search.addEventListener('keydown', e => {
 
 $('#copy-btn').addEventListener('click', () => {
   if (current) copyText(current.my);
+});
+$('#share-btn').hidden = !canShare;
+$('#share-btn').addEventListener('click', () => {
+  if (current) shareText(current.my);
 });
 
 el.dScript.addEventListener('click', e => {
@@ -1059,6 +1079,11 @@ $('#live-show').addEventListener('click', () => {
 $('#live-copy').addEventListener('click', () => {
   const phrase = liveCurrent();
   if (phrase) copyText(phrase.my);
+});
+$('#live-share').hidden = !canShare;
+$('#live-share').addEventListener('click', () => {
+  const phrase = liveCurrent();
+  if (phrase) shareText(phrase.my);
 });
 
 /* Dim is for the phone lying face-up on the table. The first tap anywhere
