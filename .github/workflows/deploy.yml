@@ -29,6 +29,12 @@ jobs:
         run: |
           node --check web/app.js
           node --check web/sw.js
+      # The app driven in a real browser: search, playback, favourites, live
+      # mode, and the service worker's handling of audio range requests.
+      - name: Install Chromium
+        run: uv run --with playwright==1.56.0 playwright install --with-deps chromium
+      - name: Browser tests
+        run: uv run --with pytest --with playwright==1.56.0 pytest -q e2e
 
   deploy:
     needs: test

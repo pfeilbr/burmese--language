@@ -76,6 +76,53 @@ const cachePut = (cacheName, req, res) => {
   return res;
 };
 
+/* Safari fetches media with a Range header (it opens with bytes=0-1) and will
+   not play a clip answered with a plain 200 from a service worker -- which is
+   what a cache hit is. So offline audio on an iPhone, the one place it has to
+   work, needs the range served as a real 206. And on a miss the whole file is
+   fetched rather than the range, because a 206 can't be cached: forwarding the
+   range as-is would mean nothing played on Safari ever got saved. */
+async function audioResponse(req) {
+  const key = req.url;
+  let full = await caches.match(key);
+  if (!full) {
+    const res = await fetch(key);
+    if (!res.ok) return res;
+    await caches.open(AUDIO_CACHE).then(c => c.put(key, res.clone()));
+    full = res;
+  }
+  const range = req.headers.get('range');
+  if (!range) return full;
+  return sliceRange(full, range);
+}
+
+async function sliceRange(res, header) {
+  const buf = await res.arrayBuffer();
+  const size = buf.byteLength;
+  const m = /^bytes=(\d*)-(\d*)$/.exec(header.trim());
+  let start, end;
+  if (m && m[1] !== '') {
+    start = Number(m[1]);
+    end = m[2] !== '' ? Math.min(Number(m[2]), size - 1) : size - 1;
+  } else if (m && m[2] !== '') {
+    // bytes=-N: the last N bytes.
+    start = Math.max(0, size - Number(m[2]));
+    end = size - 1;
+  }
+  if (start === undefined || start >= size || start > end) {
+    return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${size}` } });
+  }
+  return new Response(buf.slice(start, end + 1), {
+    status: 206,
+    headers: {
+      'Content-Type': res.headers.get('Content-Type') || 'audio/mpeg',
+      'Content-Range': `bytes ${start}-${end}/${size}`,
+      'Content-Length': String(end - start + 1),
+      'Accept-Ranges': 'bytes',
+    },
+  });
+}
+
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
@@ -84,11 +131,7 @@ self.addEventListener('fetch', e => {
   if (url.origin !== self.location.origin) return;
 
   if (url.pathname.endsWith('.mp3')) {
-    e.respondWith(
-      caches.match(req).then(hit =>
-        hit || fetch(req).then(res => cachePut(AUDIO_CACHE, req, res))
-      )
-    );
+    e.respondWith(audioResponse(req));
     return;
   }
 
