@@ -148,3 +148,38 @@ def test_send_hands_burmese_to_share_sheet(browser, base_url):
 def test_send_hidden_without_share_sheet(page):
     page.click(".card-open >> nth=0")
     assert not page.locator("#share-btn").is_visible()
+
+
+def test_review_page_marks_and_reports(browser, base_url):
+    ctx = browser.new_context(base_url=base_url)
+    errors = []
+    pg = ctx.new_page()
+    pg.on("pageerror", lambda e: errors.append(str(e)))
+    pg.goto("./")
+    pg.click("#menu-btn")
+    pg.click("#review-link")
+    pg.wait_for_selector(".item")
+    total = pg.locator(".item").count()
+    assert pg.inner_text("#count").startswith(f"0 of {total} checked")
+
+    first, second = pg.locator(".item").nth(0), pg.locator(".item").nth(1)
+    first.locator('[data-v="ok"]').click()
+    second.locator('[data-v="fix"]').click()
+    second.locator(".fix-note").fill("should be X")
+    assert pg.inner_text("#count").startswith(f"2 of {total} checked · 1 to fix")
+
+    # Survives a reload, and "only unchecked" hides what's done.
+    pg.reload()
+    assert pg.inner_text("#count").startswith(f"2 of {total} checked")
+    pg.check("#only-todo")
+    assert pg.locator(".item").count() == total - 2
+
+    ctx.add_init_script("navigator.share = async d => { window.__shared = d; };")
+    pg.reload()
+    pg.click("#send-report")
+    text = pg.evaluate("window.__shared.text")
+    second_id = pg.evaluate("Object.entries(JSON.parse(localStorage.getItem('sib.review'))).find(([,m]) => m.v === 'fix')[0]")
+    assert f"[{second_id}]" in text and "fix: should be X" in text
+    assert "2 of" in text and "1 to fix" in text
+    ctx.close()
+    assert not errors, errors

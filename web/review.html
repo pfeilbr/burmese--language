@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Check the phrases — Say It In Burmese</title>
+<meta name="theme-color" content="#0e1116">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css?v=__BUILD__">
+<style>
+  /* A page for a Burmese speaker to go through every phrase and say which ones
+     are wrong. Everything here is layout; colours and the Burmese font come
+     from the app's stylesheet. */
+  body { padding: calc(16px + var(--safe-t)) 16px calc(120px + var(--safe-b)); max-width: 640px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; letter-spacing: -.02em; }
+  .lead { color: var(--text-dim); font-size: 15px; line-height: 1.5; margin: 8px 0 0; }
+  .lead-my { font-family: var(--my-font); color: var(--text); font-size: 17px; line-height: 1.7; margin: 10px 0 0; }
+  .tools { display: flex; gap: 8px; align-items: center; margin: 16px 0 4px; flex-wrap: wrap; }
+  .tools label { color: var(--text-dim); font-size: 14px; display: flex; gap: 6px; align-items: center; }
+  .cat { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+         color: var(--text-faint); margin: 28px 0 8px; }
+  .item { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 14px;
+          padding: 14px; margin: 0 0 10px; }
+  .item[data-state="ok"]  { border-color: #2c5a3e; }
+  .item[data-state="fix"] { border-color: #7a3434; }
+  .item-top { display: flex; gap: 12px; align-items: flex-start; }
+  .item-text { flex: 1; min-width: 0; }
+  .en { font-size: 15px; color: var(--text-dim); margin: 0; }
+  .my { font-family: var(--my-font); font-size: 24px; line-height: 1.6; margin: 2px 0 0; }
+  .say { font-size: 13px; color: var(--text-faint); margin: 2px 0 0; }
+  .note { font-size: 13px; color: var(--text-faint); margin: 6px 0 0; line-height: 1.45; }
+  .play { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0;
+          background: var(--accent); color: #1a1205; font-size: 16px; }
+  .play.playing { background: var(--text); }
+  .verdict { display: flex; gap: 8px; margin-top: 12px; }
+  .verdict button { flex: 1; padding: 10px; border-radius: 10px; font-size: 15px; font-weight: 600;
+                    background: transparent; color: var(--text-dim); border: 1px solid var(--line); }
+  .verdict [data-v="ok"][aria-pressed="true"]  { background: #1f4a31; color: #d8f5e3; border-color: #2c5a3e; }
+  .verdict [data-v="fix"][aria-pressed="true"] { background: #5a2424; color: #ffe0e0; border-color: #7a3434; }
+  .fix-note { width: 100%; margin-top: 10px; min-height: 64px; padding: 10px; border-radius: 10px;
+              background: var(--bg); color: var(--text); border: 1px solid var(--line);
+              font: inherit; font-size: 16px; resize: vertical; }
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 16px calc(12px + var(--safe-b));
+         background: rgba(14,17,22,.96); border-top: 1px solid var(--line);
+         display: flex; gap: 8px; align-items: center; justify-content: center; }
+  .bar .count { color: var(--text-dim); font-size: 14px; margin-right: auto; max-width: 640px; }
+  .bar button { padding: 10px 14px; border-radius: 10px; font-size: 15px; font-weight: 700; white-space: nowrap;
+                border: 1px solid var(--line); background: var(--bg-raised); color: var(--text); }
+  .bar button.primary { background: var(--accent); color: #1a1205; border-color: var(--accent); }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- Installed to the home screen there's no browser back button, so the way
+     out has to be on the page. -->
+<p><a href="./">← Back to the app</a></p>
+<h1>Check the phrases</h1>
+<p class="lead-my" lang="my">ဒီစာကြောင်းတွေ မှန်လား။ မှားနေတာရှိရင် ပြင်ပေးပါ။</p>
+<p class="lead">
+  For a Burmese speaker. Play each phrase, then mark it <b>OK</b> or <b>Fix</b>.
+  For anything that needs fixing, write what a person would actually say — in Burmese
+  or English, whichever is easier. When you're done (or want to stop), tap <b>Send report</b>
+  and send it back. Your answers are kept on this phone, so you can stop and carry on later.
+</p>
+
+<div class="tools">
+  <label><input type="checkbox" id="only-todo"> Only show phrases not checked yet</label>
+</div>
+
+<main id="items"></main>
+
+<div class="bar">
+  <span class="count" id="count"></span>
+  <button id="copy-report">Copy</button>
+  <button id="send-report" class="primary">Send report</button>
+</div>
+
+<div id="toast" class="toast" hidden role="status" aria-live="polite"></div>
+
+<script src="data/phrases.js?v=__BUILD__"></script>
+<script src="review.js?v=__BUILD__"></script>
+</body>
+</html>
