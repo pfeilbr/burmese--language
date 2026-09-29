@@ -243,3 +243,17 @@ def test_works_offline_after_first_visit(browser):
     pg.goto("./review.html")
     pg.wait_for_selector(".item", timeout=5000)
     ctx.close()
+
+
+def test_search_covers_everything_from_start_here(page):
+    """The app opens on Start here; a search from there must still find a
+    phrase outside the starter set."""
+    assert page.locator('.chip[aria-pressed="true"]').get_attribute("data-cat") == "start"
+    page.fill("#search", "send me a photo")
+    assert page.locator(".card-en").all_inner_texts() == ["Send me a photo"]
+    assert "searching" in page.get_attribute("#chips", "class")
+    # Choosing a chip clears the search and browses that category.
+    page.click('.chip[data-cat="food"]')
+    assert page.input_value("#search") == ""
+    assert "searching" not in (page.get_attribute("#chips", "class") or "")
+    assert page.locator(".card").count() > 0

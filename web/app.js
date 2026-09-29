@@ -413,10 +413,16 @@ const fold = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase
 const HAYSTACK = new Map(DATA.phrases.map(p =>
   [p.id, fold(`${p.en} ${p.rom} ${p.my} ${p.phon} ${spokenRom(p)} ${p.note || ''}`)]));
 
+/* A search covers every phrase, whichever chip is selected. Scoped to the
+   chip, typing a phrase you know is in the app from "Start here" -- where
+   the app opens -- finds nothing, and the empty list reads as "not in the
+   app". The chip dims while a search is active, and applies again once the
+   box is cleared. */
 function matches(p) {
-  const virtual = VIRTUAL_FILTERS[filter];
-  if (virtual ? !virtual(p) : p.cat !== filter) return false;
-  if (!query) return true;
+  if (!query) {
+    const virtual = VIRTUAL_FILTERS[filter];
+    return virtual ? virtual(p) : p.cat === filter;
+  }
   const hay = HAYSTACK.get(p.id);
   return query.split(/\s+/).every(w => hay.includes(w));
 }
@@ -448,11 +454,14 @@ function cardHtml(p) {
 }
 
 function renderList() {
+  el.chips.classList.toggle('searching', !!query);
   let hits = DATA.phrases.filter(matches);
   el.empty.hidden = hits.length > 0;
 
-  if (filter === 'start') hits.sort((a, b) => a.starter - b.starter);
-  if (filter === 'recent') hits.sort((a, b) => recent.indexOf(a.id) - recent.indexOf(b.id));
+  // The chip's own order applies only while browsing it; a search spans
+  // phrases that have no starter number or recent position.
+  if (!query && filter === 'start') hits.sort((a, b) => a.starter - b.starter);
+  if (!query && filter === 'recent') hits.sort((a, b) => recent.indexOf(a.id) - recent.indexOf(b.id));
 
   const intro = (filter === 'start' && !query)
     ? `<p class="list-intro">${STARTER_COUNT} to learn first — the ones you'll use nearly every day.
@@ -664,6 +673,9 @@ el.list.addEventListener('click', e => {
 el.chips.addEventListener('click', e => {
   const chip = e.target.closest('[data-cat]');
   if (!chip) return;
+  // Picking a category means browsing it, so a search in progress gives way.
+  el.search.value = '';
+  query = '';
   filter = chip.dataset.cat;
   store.set('filter', filter);
   renderChips();
