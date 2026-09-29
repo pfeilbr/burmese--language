@@ -695,6 +695,7 @@ el.chips.addEventListener('click', e => {
   // Picking a category means browsing it, so a search in progress gives way.
   el.search.value = '';
   query = '';
+  $('#search-clear').hidden = true;
   filter = chip.dataset.cat;
   store.set('filter', filter);
   renderChips();
@@ -702,8 +703,16 @@ el.chips.addEventListener('click', e => {
   el.list.scrollIntoView({ block: 'start' });
 });
 
+function clearSearch() {
+  el.search.value = '';
+  query = '';
+  $('#search-clear').hidden = true;
+  renderList();
+}
+
 el.search.addEventListener('input', () => {
   query = fold(el.search.value.trim());
+  $('#search-clear').hidden = !el.search.value;
   renderList();
 });
 
@@ -711,9 +720,12 @@ el.search.addEventListener('input', () => {
 el.search.addEventListener('keydown', e => {
   if (e.key !== 'Escape' || !el.search.value) return;
   e.stopPropagation();
-  el.search.value = '';
-  query = '';
-  renderList();
+  clearSearch();
+});
+
+$('#search-clear').addEventListener('click', () => {
+  clearSearch();
+  el.search.focus();
 });
 
 $('#copy-btn').addEventListener('click', () => {

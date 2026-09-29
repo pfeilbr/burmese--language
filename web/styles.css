@@ -123,6 +123,16 @@ svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; 
   -webkit-appearance: none;
 }
 #search::placeholder { color: var(--text-faint); }
+/* iOS only draws its own clear button while the field has focus, and it is
+   tiny; ours is always there once something's typed, and thumb-sized. */
+#search::-webkit-search-cancel-button { -webkit-appearance: none; display: none; }
+#search { padding-right: 44px; }
+.search-clear {
+  position: absolute; right: 2px; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; padding: 0; border: 0; background: none;
+  color: var(--text-faint); display: grid; place-items: center;
+}
+.search-clear svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
 #search:focus { outline: none; border-color: var(--accent); }
 
 .chips {

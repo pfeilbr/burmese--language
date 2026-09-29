@@ -333,3 +333,12 @@ def test_pages_declare_dark_scheme(page):
     assert page.evaluate("getComputedStyle(document.documentElement).colorScheme") == "dark"
     page.goto("./review.html")
     assert page.evaluate("getComputedStyle(document.documentElement).colorScheme") == "dark"
+
+
+def test_search_clear_button(page):
+    assert not page.locator("#search-clear").is_visible()
+    page.fill("#search", "hello")
+    page.click("#search-clear")
+    assert page.input_value("#search") == ""
+    assert not page.locator("#search-clear").is_visible()
+    assert page.locator(".list-intro").count() == 1     # back on Start here
