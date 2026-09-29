@@ -37,6 +37,10 @@ const SHELL = [
   `styles.css?v=${BUILD}`,
   `app.js?v=${BUILD}`,
   `data/phrases.js?v=${BUILD}`,
+  // The review page is often opened on someone else's phone, somewhere
+  // without signal; it shouldn't depend on having been visited first.
+  'review.html',
+  `review.js?v=${BUILD}`,
   'fonts/NotoSansMyanmar-subset.woff2',
   'manifest.webmanifest',
   'icons/icon-192.png',

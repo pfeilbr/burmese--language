@@ -209,3 +209,37 @@ def test_manifest_shortcuts_open_where_they_say(browser, base_url):
     pg.goto("./?cat=fav")
     assert pg.locator('.chip[aria-pressed="true"]').get_attribute("data-cat") == "start"
     ctx.close()
+
+
+def test_works_offline_after_first_visit(browser):
+    """The point of the service worker: once installed, no network needed --
+    the app, the review page, and any clip already played.
+
+    Offline is simulated by stopping the server. Playwright's set_offline()
+    doesn't cover requests the service worker itself makes, so it would let
+    a missing precache slip through."""
+    import functools, http.server, threading
+    from conftest import WEB, _Quiet
+    server = http.server.ThreadingHTTPServer(
+        ("127.0.0.1", 0), functools.partial(_Quiet, directory=str(WEB)))
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    url = f"http://127.0.0.1:{server.server_address[1]}/"
+
+    ctx = browser.new_context(base_url=url)
+    pg = ctx.new_page()
+    pg.goto("./")
+    pg.wait_for_function("navigator.serviceWorker.ready.then(() => true)")
+    pg.reload()
+    pg.wait_for_function("!!navigator.serviceWorker.controller", timeout=15000)
+    pg.evaluate("fetch('audio/hello.natural.mp3').then(r => r.arrayBuffer())")
+
+    server.shutdown()
+    server.server_close()
+
+    pg.reload()
+    assert pg.locator(".card").count() > 0
+    assert pg.evaluate("fetch('audio/hello.natural.mp3').then(r => r.ok)")
+    # Never visited while online: only there if it was precached.
+    pg.goto("./review.html")
+    pg.wait_for_selector(".item", timeout=5000)
+    ctx.close()
