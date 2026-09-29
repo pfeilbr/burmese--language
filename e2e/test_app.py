@@ -298,3 +298,13 @@ def test_nothing_overflows_a_phone_screen(browser, base_url):
     pg.wait_for_selector(".item")
     check("review")
     ctx.close()
+
+
+def test_search_ranks_english_matches_first(page):
+    page.fill("#search", "miss")
+    titles = page.locator(".card-en").all_inner_texts()
+    in_english = [t for t in titles if "miss" in t.lower()]
+    # Every English hit comes before any phrase matched only via its note.
+    assert titles[:len(in_english)] == in_english
+    page.fill("#search", "thank you")
+    assert page.locator(".card-en").first.inner_text() == "Thank you"

@@ -453,6 +453,24 @@ function cardHtml(p) {
   </div>`;
 }
 
+/** Search results, best first. A hit on the English beats one found only in
+ *  a note, and the English starting with the query beats it appearing
+ *  mid-sentence -- so "miss" puts "I miss you"-type phrases ahead of every
+ *  note that happens to mention missing. Stable within each rank. */
+function rankHits(hits) {
+  const score = p => {
+    const en = fold(p.en);
+    if (en === query) return 0;
+    if (en.startsWith(query)) return 1;
+    if (new RegExp(`\\b${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`).test(en)) return 2;
+    if (en.includes(query)) return 3;
+    return 4;
+  };
+  return hits.map((p, i) => ({ p, i, s: score(p) }))
+    .sort((a, b) => a.s - b.s || a.i - b.i)
+    .map(x => x.p);
+}
+
 function renderList() {
   el.chips.classList.toggle('searching', !!query);
   let hits = DATA.phrases.filter(matches);
@@ -462,6 +480,7 @@ function renderList() {
   // phrases that have no starter number or recent position.
   if (!query && filter === 'start') hits.sort((a, b) => a.starter - b.starter);
   if (!query && filter === 'recent') hits.sort((a, b) => recent.indexOf(a.id) - recent.indexOf(b.id));
+  if (query) hits = rankHits(hits);
 
   const intro = (filter === 'start' && !query)
     ? `<p class="list-intro">${STARTER_COUNT} to learn first — the ones you'll use nearly every day.
