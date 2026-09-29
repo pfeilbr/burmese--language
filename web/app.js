@@ -1572,6 +1572,21 @@ async function cachedClips(cache) {
   return new Set(clipUrls().filter(u => have.has(new URL(u, location.href).pathname)));
 }
 
+/** Drop cached clips no current phrase uses. The audio cache deliberately
+ *  survives updates, so without this every renamed or removed phrase leaves
+ *  its clips on the phone for good. Runs once per launch, off the critical
+ *  path; failures are harmless and ignored. */
+async function pruneAudioCache() {
+  try {
+    if (!('caches' in window)) return;
+    const cache = await caches.open('sib-audio');
+    const wanted = new Set(clipUrls().map(u => new URL(u, location.href).pathname));
+    for (const req of await cache.keys()) {
+      if (!wanted.has(new URL(req.url).pathname)) await cache.delete(req);
+    }
+  } catch {}
+}
+
 async function refreshStorage() {
   const sub = $('#offline-sub');
   const total = clipUrls().length;
@@ -1815,5 +1830,6 @@ applyDeepLink();
 revealActiveChip();
 
 window.addEventListener('load', initServiceWorker);
+window.addEventListener('load', () => setTimeout(pruneAudioCache, 3000));
 
 })();

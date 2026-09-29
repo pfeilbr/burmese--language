@@ -379,3 +379,19 @@ def test_data_load_failure_says_so(browser, base_url):
     assert "didn't load" in pg.inner_text("#list")
     assert pg.locator(".load-failed button").is_visible()
     ctx.close()
+
+
+def test_prunes_audio_of_removed_phrases(page):
+    page.evaluate("""async () => {
+        const c = await caches.open('sib-audio');
+        await c.put(new URL('audio/no-such-phrase.natural.mp3', location.href).href,
+                    new Response('x'));
+        await c.put(new URL('audio/hello.natural.mp3', location.href).href,
+                    new Response('y'));
+    }""")
+    page.reload()
+    page.wait_for_function("""caches.open('sib-audio').then(c => c.keys())
+        .then(k => !k.some(r => r.url.includes('no-such-phrase')))""", timeout=10000)
+    kept = page.evaluate("""caches.open('sib-audio').then(c => c.keys())
+        .then(k => k.some(r => r.url.includes('hello.natural')))""")
+    assert kept
