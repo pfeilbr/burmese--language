@@ -46,6 +46,9 @@ route — so the app just tells you where to tap.)
   button — on the list card, the phrase page, and in Live mode — so you can paste it
   straight into Messenger or Viber. This line stays on even with the
   per-syllable script switched off.
+- **Send** hands the Burmese straight to the phone's share sheet — one tap into
+  Viber or Messenger instead of copy, switch app, paste. (Shown only where
+  there is a share sheet; Copy covers everywhere else.)
 - **Tone colouring and contour marks** on every syllable, riding on the English
   respelling so they work with both scripts hidden.
 - **Softened consonants are marked.** Where a syllable's opening consonant
@@ -57,9 +60,16 @@ route — so the app just tells you where to tap.)
   then plays it again — indefinitely. This is the one to use with AirPods in.
 - **Lock-screen and AirPods controls.** Squeeze the stem to replay without taking
   your phone out.
-- **Favourites** and search across English, the transcription, and the Burmese.
+- **Favourites**, and **search** across every phrase whatever category is
+  selected — the English, the respelling, the transcription, the Burmese, and
+  the notes. The notes carry the chat spellings (*"Nan chin tel"*), so pasting
+  what she texted finds the phrase. English matches are listed first.
 - **Settings** (☰): install, updates, offline audio and storage, and display
   toggles.
+- **A review page for a Burmese speaker** — see
+  [A note on the phrase content](#a-note-on-the-phrase-content).
+- **Home-screen shortcuts.** Long-press the installed icon for Live mode, Live
+  on the texting deck, or your saved phrases.
 
 ## Live mode
 
@@ -78,6 +88,8 @@ that using it doesn't read as using it.
   your first.
 - **Decks** are the queue: your saved phrases, your recent ones, or any
   category. Switching deck is one tap.
+- **Shuffle** plays the deck in random order, so it stops being a sequence
+  you can recite by position. It reorders around the line on screen.
 - **Dim** takes the screen to almost nothing, for when the phone is face-up on
   the table between you. The first tap brings it back rather than firing
   whatever was under your finger.
@@ -88,7 +100,9 @@ that using it doesn't read as using it.
   find your next line is the tell.
 
 `?live=1` opens it directly, and `&deck=dating` picks the deck — which is what
-makes it bindable to Back Tap or the Action Button through a Shortcut.
+makes it bindable to Back Tap or the Action Button through a Shortcut. The
+other deep links: `?p=<phrase id>` opens a phrase (add `&present=1` to go
+straight to Show her), and `?cat=<category id>` opens the list on a category.
 
 ## The four tones
 
