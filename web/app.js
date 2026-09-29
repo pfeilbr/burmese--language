@@ -408,8 +408,10 @@ const VIRTUAL_FILTERS = {
 const fold = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
 // Built once: the phrase list never changes while the page is open.
+// Notes are included for the chat spellings they carry ("Written in chat as
+// \"Nan chin tel\""): paste what she texted and the phrase comes up.
 const HAYSTACK = new Map(DATA.phrases.map(p =>
-  [p.id, fold(`${p.en} ${p.rom} ${p.my} ${p.phon} ${spokenRom(p)}`)]));
+  [p.id, fold(`${p.en} ${p.rom} ${p.my} ${p.phon} ${spokenRom(p)} ${p.note || ''}`)]));
 
 function matches(p) {
   const virtual = VIRTUAL_FILTERS[filter];

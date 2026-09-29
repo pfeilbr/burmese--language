@@ -183,3 +183,10 @@ def test_review_page_marks_and_reports(browser, base_url):
     assert "2 of" in text and "1 to fix" in text
     ctx.close()
     assert not errors, errors
+
+
+def test_search_finds_chat_spelling(page):
+    """Chat romanisations live in the notes; pasting one should find the phrase."""
+    page.click('.chip[data-cat="all"]')
+    page.fill("#search", "nan chin tel")
+    assert page.locator(".card-en").all_inner_texts() == ["I want to kiss you"]
