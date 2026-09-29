@@ -1178,6 +1178,9 @@ function applyDeepLink() {
   const cat = q.get('cat');
   if (cat && (CATS.has(cat) || VIRTUAL_FILTERS[cat])) {
     filter = cat;
+    // ?cat=fav with nothing saved yet (the Saved shortcut on a fresh
+    // install) falls back rather than showing an empty, unexplained list.
+    ensureFilter();
     renderChips();
     renderList();
   }

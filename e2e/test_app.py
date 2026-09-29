@@ -190,3 +190,22 @@ def test_search_finds_chat_spelling(page):
     page.click('.chip[data-cat="all"]')
     page.fill("#search", "nan chin tel")
     assert page.locator(".card-en").all_inner_texts() == ["I want to kiss you"]
+
+
+def test_manifest_shortcuts_open_where_they_say(browser, base_url):
+    """Each home-screen shortcut is a deep link; it has to land somewhere real."""
+    import json, urllib.request
+    manifest = json.load(urllib.request.urlopen(base_url + "manifest.webmanifest"))
+    assert manifest["shortcuts"]
+    ctx = browser.new_context(base_url=base_url)
+    pg = ctx.new_page()
+    pg.goto("./?live=1&deck=messages")
+    assert pg.locator("#live").is_visible()
+    assert pg.inner_text("#live-deck-name") == "Texts & Voice Notes"
+    for s in manifest["shortcuts"]:
+        pg.goto(s["url"])
+        pg.wait_for_selector("#chips .chip")
+    # Saved, with nothing saved: falls back to the starter set, not an empty list.
+    pg.goto("./?cat=fav")
+    assert pg.locator('.chip[aria-pressed="true"]').get_attribute("data-cat") == "start"
+    ctx.close()
