@@ -257,3 +257,44 @@ def test_search_covers_everything_from_start_here(page):
     assert page.input_value("#search") == ""
     assert "searching" not in (page.get_attribute("#chips", "class") or "")
     assert page.locator(".card").count() > 0
+
+
+def test_nothing_overflows_a_phone_screen(browser, base_url):
+    """At 375px (iPhone SE / mini width) no screen may scroll sideways, and no
+    button's label may be clipped -- the six-chip row in live mode once ran
+    off the edge."""
+    ctx = browser.new_context(base_url=base_url, viewport={"width": 375, "height": 740},
+                              is_mobile=True, has_touch=True)
+    ctx.add_init_script("navigator.share = async () => {};")   # show Send, as on a phone
+    pg = ctx.new_page()
+
+    def check(where):
+        wide = pg.evaluate("document.documentElement.scrollWidth")
+        assert wide <= 375, f"{where}: page is {wide}px wide"
+        clipped = pg.evaluate("""() => [...document.querySelectorAll('button')]
+            .filter(b => b.offsetParent && !b.closest('.chips, .live-decks, .quick-tiles'))
+            .filter(b => { const r = b.getBoundingClientRect();
+                           return r.right > innerWidth + 1 || b.scrollWidth > b.clientWidth + 1; })
+            .map(b => (b.id || b.className) + ': ' + b.textContent.trim().slice(0, 30))""")
+        assert not clipped, f"{where}: clipped or off-screen buttons: {clipped}"
+
+    pg.goto("./")
+    check("list")
+    pg.click(".card-open >> nth=0")
+    check("phrase")
+    pg.click("#show-btn")
+    check("show her")
+    pg.go_back()
+    pg.go_back()
+    pg.click("#live-btn")
+    check("live")
+    pg.go_back()
+    pg.click("#menu-btn")
+    check("settings")
+    pg.go_back()
+    pg.click("#ear-btn")
+    check("ear drill")
+    pg.goto("./review.html")
+    pg.wait_for_selector(".item")
+    check("review")
+    ctx.close()
