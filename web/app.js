@@ -840,9 +840,39 @@ const drillable = p => p.syllables
 
 const DRILL_POOL = DATA.phrases.filter(p => drillable(p).length);
 
+/* Which phrases the drill draws from. Training the ear on the lines you
+   actually say -- your saved or recent ones -- pays off faster than on the
+   whole library, most of which you may never use. */
+let drillFrom = store.get('drillFrom', 'all');
+const DRILL_SOURCES = {
+  all:    () => DRILL_POOL,
+  fav:    () => DRILL_POOL.filter(p => favs.has(p.id)),
+  recent: () => DRILL_POOL.filter(p => recent.includes(p.id)),
+};
+
+function drillPool() {
+  const pool = (DRILL_SOURCES[drillFrom] || DRILL_SOURCES.all)();
+  return pool.length ? pool : DRILL_POOL;
+}
+
+function renderDrillSources() {
+  const opts = [
+    { id: 'all', name: 'All phrases' },
+    ...(favs.size ? [{ id: 'fav', name: '★ Saved' }] : []),
+    ...(recent.length ? [{ id: 'recent', name: 'Recent' }] : []),
+  ];
+  if (!opts.some(o => o.id === drillFrom)) drillFrom = 'all';
+  // Only worth showing once there is something other than everything.
+  $('#drill-from').hidden = opts.length < 2;
+  $('#drill-from').innerHTML = opts.map(o =>
+    `<button class="chip" data-from="${o.id}" aria-pressed="${o.id === drillFrom}">${esc(o.name)}</button>`
+  ).join('');
+}
+
 function nextQuestion() {
   const prev = drill && drill.phrase;
-  const pool = DRILL_POOL.length > 1 ? DRILL_POOL.filter(p => p !== prev) : DRILL_POOL;
+  const all = drillPool();
+  const pool = all.length > 1 ? all.filter(p => p !== prev) : all;
   const phrase = pool[Math.floor(Math.random() * pool.length)];
   const opts = drillable(phrase);
   const pick = opts[Math.floor(Math.random() * opts.length)];
@@ -910,7 +940,17 @@ function answerDrill(tone) {
 
 $('#ear-btn').addEventListener('click', () => {
   drillScore = { right: 0, asked: 0 };
+  renderDrillSources();
   showSheet($('#drill'));
+  nextQuestion();
+});
+$('#drill-from').addEventListener('click', e => {
+  const btn = e.target.closest('[data-from]');
+  if (!btn || btn.dataset.from === drillFrom) return;
+  drillFrom = btn.dataset.from;
+  store.set('drillFrom', drillFrom);
+  drillScore = { right: 0, asked: 0 };
+  renderDrillSources();
   nextQuestion();
 });
 $('#drill-choices').addEventListener('click', e => {

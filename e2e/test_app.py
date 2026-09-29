@@ -349,3 +349,23 @@ def test_slash_focuses_search(page):
     assert page.evaluate("document.activeElement.id") == "search"
     page.keyboard.type("hello")
     assert page.input_value("#search") == "hello"      # the "/" itself isn't typed
+
+
+def test_ear_drill_on_saved_phrases(page):
+    page.click('.chip[data-cat="all"]')
+    page.fill("#search", "text me back")
+    page.click(".card-open >> nth=0")
+    page.click("#fav-btn")
+    page.go_back()
+    page.click("#ear-btn")
+    page.click('#drill-from [data-from="fav"]')
+    # With one saved phrase, every question comes from it.
+    for _ in range(3):
+        assert page.inner_text("#drill-meaning") == "Text me back"
+        page.click(".drill-choice >> nth=0")
+        page.click("#drill-next")
+
+
+def test_ear_drill_source_hidden_with_nothing_saved(page):
+    page.click("#ear-btn")
+    assert not page.locator("#drill-from").is_visible()

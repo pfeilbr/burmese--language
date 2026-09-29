@@ -142,6 +142,8 @@ svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; 
 }
 .chips::-webkit-scrollbar { display: none; }
 
+.drill-from { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+
 .chip {
   flex: none;
   padding: 8px 14px;
