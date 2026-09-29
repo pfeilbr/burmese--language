@@ -723,6 +723,15 @@ el.search.addEventListener('keydown', e => {
   clearSearch();
 });
 
+// "/" jumps to search from anywhere on the list, as on most sites -- for the
+// times this is open on a laptop next to a chat window.
+document.addEventListener('keydown', e => {
+  if (e.key !== '/' || activeSheet || !$('#present').hidden) return;
+  if (e.target.closest && e.target.closest('input, textarea, [contenteditable]')) return;
+  e.preventDefault();
+  el.search.focus();
+});
+
 $('#search-clear').addEventListener('click', () => {
   clearSearch();
   el.search.focus();

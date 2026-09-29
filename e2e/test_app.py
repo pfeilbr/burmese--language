@@ -342,3 +342,10 @@ def test_search_clear_button(page):
     assert page.input_value("#search") == ""
     assert not page.locator("#search-clear").is_visible()
     assert page.locator(".list-intro").count() == 1     # back on Start here
+
+
+def test_slash_focuses_search(page):
+    page.keyboard.press("/")
+    assert page.evaluate("document.activeElement.id") == "search"
+    page.keyboard.type("hello")
+    assert page.input_value("#search") == "hello"      # the "/" itself isn't typed
