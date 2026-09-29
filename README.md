@@ -146,6 +146,12 @@ cross-check against, and the app is confident-looking in a way that the content
 has not earned. Getting a Burmese speaker to read the list out loud is the
 single highest-value change available to this project.
 
+The app has a page for exactly that: **☰ menu → About → Have a Burmese speaker
+check the phrases** (`review.html`). Hand them the phone; they play each
+phrase and mark it OK or Fix with a note, and **Send report** produces plain
+text listing every fix against its phrase id in `data/phrases.json`. Progress
+is saved on the device, so it can be done in sittings.
+
 Specific things worth confirming before you lean on them:
 
 - **Register.** Burmese marks politeness heavily, and the line between warm and
@@ -307,8 +313,17 @@ uv run --with edge-tts --with miniaudio --with pytest pytest -q tests
   source: `web/data/phrases.js` is not stale, every phrase has both clips, and
   no clip is left over from a deleted phrase.
 
-CI runs `build.py --check` and the tests on every push to any branch, and the
-deploy job waits for them.
+Browser tests drive the real site in Chromium — search, playback, stopping
+mid-shadow, favourites, Show her, live mode, the ear drill, Send, the review
+page, and the service worker's audio range handling:
+
+```sh
+uv run --with playwright==1.56.0 playwright install chromium   # once
+uv run --with pytest --with playwright==1.56.0 pytest -q e2e
+```
+
+CI runs `build.py --check`, both test suites and a JS syntax check on every
+push to any branch, and the deploy job waits for them.
 
 To try the app locally, serve `web/` over HTTP (the service worker and
 clipboard need a real origin, not `file://`):
@@ -335,6 +350,7 @@ Two things need doing once on a fresh repository:
 data/phrases.json      source of truth — the only file you edit to add phrases
 scripts/build.py       validates, renders MP3s + timings, emits web/data/phrases.js
 tests/                 pytest suite for the build and its committed output
+e2e/                   browser tests against web/, served as deployed
 scripts/make_icons.py  regenerates the PWA icons
 web/                   the deployed site (static, no build step, no dependencies)
   audio/               pre-rendered clips, two rates per phrase
