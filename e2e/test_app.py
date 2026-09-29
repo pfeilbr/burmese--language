@@ -369,3 +369,13 @@ def test_ear_drill_on_saved_phrases(page):
 def test_ear_drill_source_hidden_with_nothing_saved(page):
     page.click("#ear-btn")
     assert not page.locator("#drill-from").is_visible()
+
+
+def test_data_load_failure_says_so(browser, base_url):
+    ctx = browser.new_context(base_url=base_url)
+    ctx.route("**/data/phrases.js*", lambda route: route.abort())
+    pg = ctx.new_page()
+    pg.goto("./")
+    assert "didn't load" in pg.inner_text("#list")
+    assert pg.locator(".load-failed button").is_visible()
+    ctx.close()

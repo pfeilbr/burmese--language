@@ -874,3 +874,8 @@ body.has-quickbar .list { padding-bottom: calc(var(--safe-b) + 104px); }
 @media (max-height: 600px) {
   .live-note, .live-decks { display: none; }
 }
+
+/* Shown in place of the list if the phrase data fails to load. */
+.load-failed { padding: 40px 8px; text-align: center; color: var(--text-dim); line-height: 1.5; }
+.load-failed b { color: var(--text); }
+.load-failed .primary-btn { margin-top: 12px; }

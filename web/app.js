@@ -4,6 +4,23 @@
 'use strict';
 
 const DATA = window.PHRASE_DATA;
+
+/* phrases.js failing to load -- a dropped connection on the very first
+   visit, before anything is cached -- used to leave a blank page with the
+   error only in the console. Say what happened and offer the retry. */
+if (!DATA || !Array.isArray(DATA.phrases)) {
+  const list = document.getElementById('list');
+  if (list) {
+    list.innerHTML = `<div class="load-failed">
+      <p><b>The phrases didn't load.</b></p>
+      <p>Check your connection and try again. Once it has loaded once, the app
+         works with no signal at all.</p>
+      <button class="primary-btn" onclick="location.reload()">Reload</button>
+    </div>`;
+  }
+  return;
+}
+
 const BY_ID = new Map(DATA.phrases.map(p => [p.id, p]));
 const CATS  = new Map(DATA.categories.map(c => [c.id, c]));
 
