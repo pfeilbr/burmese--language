@@ -950,6 +950,20 @@ $('#present-flip').addEventListener('click', e => {
 let live = null;              // { deck, ids, i }
 let wakeLock = null;
 let liveRehearse = store.get('liveRehearse', true);
+let liveShuffle = store.get('liveShuffle', false);
+
+/** A deck's ids in play order. Shuffled, the same deck stops being a fixed
+ *  sequence you can recite by position -- which is recall, not memory of
+ *  what came next. */
+function playOrder(ids) {
+  if (!liveShuffle) return ids;
+  const a = ids.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 const liveCurrent = () => (live ? BY_ID.get(live.ids[live.i]) : null);
 
@@ -992,7 +1006,7 @@ function openLive(deckId) {
   let deck = wanted;
   let ids = deckIds(deck).filter(id => BY_ID.has(id));
   if (!ids.length) { deck = 'start'; ids = deckIds('start'); }
-  live = { deck, ids, i: 0 };
+  live = { deck, ids: playOrder(ids), i: 0 };
   store.set('liveDeck', deck);
   renderLive();
   showSheet($('#live'));
@@ -1012,6 +1026,7 @@ function renderLive() {
   $('#live-fav').setAttribute('aria-pressed', String(favs.has(phrase.id)));
   $('#live-fav').textContent = favs.has(phrase.id) ? 'Saved' : 'Save';
   $('#live-rehearse').setAttribute('aria-pressed', String(liveRehearse));
+  $('#live-shuffle').setAttribute('aria-pressed', String(liveShuffle));
 
   // A dot per phrase while that stays readable; past ten or so it turns into
   // a grey smear, and the counter is already carrying that information.
@@ -1071,7 +1086,7 @@ function setLiveDeck(deckId) {
   if (!ids.length) return toast('Nothing in that deck yet');
   stopPlayback();
   live.deck = deckId;
-  live.ids = ids;
+  live.ids = playOrder(ids);
   live.i = 0;
   store.set('liveDeck', deckId);
   renderLive();
@@ -1092,6 +1107,23 @@ $('#live-rehearse').addEventListener('click', () => {
   store.set('liveRehearse', liveRehearse);
   renderLive();
   toast(liveRehearse ? 'Plays twice, with a beat to say it back' : 'Plays once');
+});
+$('#live-shuffle').addEventListener('click', () => {
+  liveShuffle = !liveShuffle;
+  store.set('liveShuffle', liveShuffle);
+  // Reorder around the current line, so turning it on doesn't jump away
+  // from what's on screen.
+  const here = live.ids[live.i];
+  const all = deckIds(live.deck).filter(id => BY_ID.has(id));
+  if (liveShuffle) {
+    live.ids = [here, ...playOrder(all.filter(id => id !== here))];
+    live.i = 0;
+  } else {
+    live.ids = all;
+    live.i = Math.max(0, all.indexOf(here));
+  }
+  renderLive();
+  toast(liveShuffle ? 'Shuffled' : 'In order');
 });
 $('#live-fav').addEventListener('click', () => {
   const phrase = liveCurrent();

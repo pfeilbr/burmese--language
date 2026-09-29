@@ -814,9 +814,9 @@ body.has-quickbar .list { padding-bottom: calc(var(--safe-b) + 104px); }
 .live-say-btn:not(.playing) .i-stop { display: none; }
 .live-say-btn.playing .i-play { display: none; }
 
-/* Three to a row: six chips in one line overflow a 375px phone, and the last
-   one ends up half off the screen. */
-.live-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
+/* Four to a row: seven chips in one line overflow a 375px phone, and the
+   last ones end up off the screen. */
+.live-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
 
 .live-chip {
   flex: 1;

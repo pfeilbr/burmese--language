@@ -308,3 +308,20 @@ def test_search_ranks_english_matches_first(page):
     assert titles[:len(in_english)] == in_english
     page.fill("#search", "thank you")
     assert page.locator(".card-en").first.inner_text() == "Thank you"
+
+
+def test_live_shuffle_keeps_current_line(page):
+    page.click("#live-btn")
+    page.click('.live-deck[data-deck="messages"]')
+    first = page.inner_text("#live-en")
+    page.click("#live-shuffle")
+    assert page.get_attribute("#live-shuffle", "aria-pressed") == "true"
+    assert page.inner_text("#live-en") == first
+    seen = {first}
+    total = int(page.inner_text("#live-count").split("/")[1])
+    for _ in range(total - 1):
+        page.click("#live-next")
+        seen.add(page.inner_text("#live-en"))
+    assert len(seen) == total          # a permutation: every line once
+    page.click("#live-shuffle")
+    assert page.get_attribute("#live-shuffle", "aria-pressed") == "false"
