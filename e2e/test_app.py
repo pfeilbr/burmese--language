@@ -325,3 +325,11 @@ def test_live_shuffle_keeps_current_line(page):
     assert len(seen) == total          # a permutation: every line once
     page.click("#live-shuffle")
     assert page.get_attribute("#live-shuffle", "aria-pressed") == "false"
+
+
+def test_pages_declare_dark_scheme(page):
+    """So native controls (checkboxes, the search clear button, the iOS
+    keyboard) match the dark page instead of coming up light."""
+    assert page.evaluate("getComputedStyle(document.documentElement).colorScheme") == "dark"
+    page.goto("./review.html")
+    assert page.evaluate("getComputedStyle(document.documentElement).colorScheme") == "dark"
